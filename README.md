@@ -5,6 +5,8 @@ This repository contains three different spring boot project
 3. restaurant-service: http://localhost:8090
 
 
+Put the "configurations" folder in "/home/summer/workspace/configurations" this location.
 
+__ need more corrections though___
 
 
