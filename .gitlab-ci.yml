@@ -14,6 +14,6 @@ maven-build:
  artifacts:
   paths:
     - target/*.jar
-image: mongo:3.6.3-jessie
+image: mongodb:latest
 services: 
- - mongodb
+ - mongo
