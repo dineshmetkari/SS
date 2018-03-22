@@ -1,6 +1,5 @@
 image: java:8-jdk
-services: 
- - mongodb
+
 stages:
  - test
  - build
@@ -15,4 +14,6 @@ maven-build:
  artifacts:
   paths:
     - target/*.jar
-
+image: mongo:3.6.3-jessie
+services: 
+ - mongodb
