@@ -1,5 +1,6 @@
 image: java:8-jdk
-services: mongodb
+services: 
+ - mongodb
 stages:
  - test
  - build
