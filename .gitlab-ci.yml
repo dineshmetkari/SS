@@ -13,3 +13,4 @@ maven-build:
  artifacts:
   paths:
     - target/*.jar
+services: mongodb
