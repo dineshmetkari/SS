@@ -16,10 +16,10 @@
 		<module>config-server</module>
 		<module>eureka-server</module>		
 		<module>api-gateway</module>
-		<module>code-crawler-service</module>
-		<module>imageCrawlerService</module>
-		<module>content-crawler</module>
-		<module>demo</module>
+		<module>Code-Crawler-Service</module>
+		<module>ImageCrawlerService</module>
+		<module>Content-Crawler-Service</module>
+		<module>VideoCrawlerFinal</module>
 		<module>search</module>
 	</modules>
 </project>
