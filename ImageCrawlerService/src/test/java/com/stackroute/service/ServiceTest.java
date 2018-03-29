@@ -53,7 +53,7 @@ public class ServiceTest {
 		urls.add("https://www.javatpoint.com");
 		List<JSONObject> objList = new ArrayList<JSONObject>();
 		JSONObject obj = new JSONObject();
-		obj.put("ImgCount",127 );
+		obj.put("ImgCount",129 );
 		obj.put("url","https://www.javatpoint.com");
 		objList.add(obj);
 		domain.setUrls(urls);

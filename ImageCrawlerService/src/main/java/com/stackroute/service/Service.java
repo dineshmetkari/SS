@@ -12,6 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +42,7 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
 		  JSONObject jsonObj = new JSONObject();
 	 Document doc;
 	try {
-		doc = Jsoup.connect(urlList.get(i)).userAgent("Mozilla 5.0").get();
+		doc = Jsoup.connect(urlList.get(i)).userAgent("Mozilla").get();
 		Elements images = doc.getElementsByTag("img");
 	     for (Element image : images) { 
 	    	 count++; 
@@ -65,10 +66,32 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
 			
 	}catch (IOException e1) {
  		// TODO Auto-generated catch block
- 		System.out.println("Page Not Found");
+		System.out.println("Page Not Found");
  		logger.warn("Page not found");
- 	}
+		JSONObject errorObj = new JSONObject();
+		try {
+			errorObj.put("ImgCount", -1);
+			errorObj.put("url", urlList.get(i));
+			errorObj.put("concept",incomingMessage.getConcept());
+			errorObj.put("domain",incomingMessage.getDomain());
+			 obj.put("ImgCount",count);
+	    	 obj.put("url", urlList.get(i));
+	    	 objList.add(obj);
+			 producer.produceMsg(errorObj);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		catch (AmqpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 	
+		}
+ 	}
 	
 	return objList;
 		}

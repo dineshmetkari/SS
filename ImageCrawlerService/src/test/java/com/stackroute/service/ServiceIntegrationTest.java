@@ -9,8 +9,12 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stackroute.domain.Domain;
+import com.stackroute.messaging.Producer;
 import com.stackroute.messaging.Receiver;
 
 @RunWith(SpringRunner.class)
@@ -31,6 +36,15 @@ public class ServiceIntegrationTest {
 	@Autowired
 	private Service service;
 	
+	@Mock
+	private Producer producer;
+	
+	@Before
+	public void setupMock() throws AmqpException, IOException {
+		MockitoAnnotations.initMocks(this);
+		service.setProducer(producer);
+	}
+	
 	@Test
 	public void  testImageCount() throws IOException{
 //		Arrange
@@ -42,7 +56,7 @@ public class ServiceIntegrationTest {
 			
 		JSONObject obj = new JSONObject();
 		try {
-			obj.put("ImgCount",127 );
+			obj.put("ImgCount",129 );
 			obj.put("url","https://www.javatpoint.com");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
