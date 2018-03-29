@@ -37,10 +37,7 @@ public class CodeService {
 			List<String> urls = result.getUrls();
 			for(String url : urls){
 				JSONObject json = new JSONObject();
-				if(getCount(url)!=-1)
-					json.put("codecount", getCount(url));
-				else 
-					continue;
+				json.put("codecount", getCount(url));
 				json.put("url", url);	
 				json.put("concept", result.getConcept());
 				json.put("domain", result.getDomain());	
@@ -51,7 +48,6 @@ public class CodeService {
 		}  
 		catch (JSONException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
 		}
 		
 		return jsonList;
@@ -59,28 +55,31 @@ public class CodeService {
 	}
 	
 	public int getCount(String url){	
-		try {
-			Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
-			Elements codes = doc.select("code");
-			Elements pres = doc.select("pre");
-			int preCount = 0;
-			for(Element pre : pres){
-				preCount++;
+
+		int preCount = 0;
+			try {
+				Elements img;
+				Document doc;
+				doc = Jsoup.connect(url).userAgent("Mozilla").get();
+				if (doc.select("pre").select("code").size() > 0){
+					img = doc.select("pre").select("code");
+				}
+				else{
+					img = doc.select("pre,code");
+					
+				}
+				for(Element pres : img){
+					preCount++;
+				}
+				return preCount;
+				
+			} catch (IOException e) {
+				System.out.println("Page Not Found");
 			}
-			int codeCount = 0;
-			for(Element code : codes){
-				codeCount++;
-			}
-			return preCount+codeCount;
 			
-		} 
-		catch (IOException e) {
-			System.err.println("Page Not Found");
-			logger.error(e.getMessage());
-		}
+			
+			
 		return -1;
-		
-		//return 0;
 		
 	}
 	
