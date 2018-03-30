@@ -26,12 +26,10 @@ public class Publisher {
 		try {
 			amqpTemplate.convertAndSend(CodeCrawlerServiceApplication.PUBLISH_QUEUE, String.valueOf(json.toString()));
 			logger.info(json.get("url")+" "+json.get("codecount"));
-			System.out.println(json.get("url")+" "+json.get("codecount"));
 			return "Published Successfully";
 		} 
 		catch (JSONException e) {
 			e.printStackTrace();
-			logger.error(e.getMessage());
 		}
 		return " ";
 	}

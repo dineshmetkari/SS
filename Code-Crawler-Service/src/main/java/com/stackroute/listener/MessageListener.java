@@ -37,7 +37,6 @@ public class MessageListener {
         Type type = new TypeToken<Result>() {}.getType();
         Result result = gson.fromJson(message, type);
         logger.info("Message received"+message.toString());
-    	System.out.println("Message received"+message.toString());
     	codeService.getCodeSnippetCount(result);
 		
     }
