@@ -138,6 +138,14 @@ public class TextCrawlerService {
 			} 
 		catch (IOException e) {
 			System.out.println("Page Not Found");
+			for(String term: terms){
+				json.put(term, 0);
+			}
+			jsonOutput.put("url", url);
+			jsonOutput.put("domain", result.getDomain());
+			jsonOutput.put("concept", result.getConcept());
+			jsonOutput.put("terms", json);
+			publisher.produceMsg(jsonOutput);
 		} 
 		
 		}
