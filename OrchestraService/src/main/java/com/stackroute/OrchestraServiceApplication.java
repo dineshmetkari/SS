@@ -5,12 +5,13 @@ import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 
 import com.stackroute.messaging.Receiver;
 
-
+@EnableDiscoveryClient
 @SpringBootApplication
 public class OrchestraServiceApplication {
 	public final static String queueName = "crawler-service-queue";

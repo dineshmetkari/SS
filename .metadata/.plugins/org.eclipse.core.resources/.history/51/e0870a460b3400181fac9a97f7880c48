@@ -1,0 +1,5 @@
+spring.application.name= imageCrawlerService
+spring.config.uri = 172.23.238.182:8888
+management.security.enabled = false
+security.basic.enable : false
+

@@ -4,19 +4,23 @@ package com.stackroute;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 import com.stackroute.messaging.Receiver;
 
-
-
+@EnableDiscoveryClient
 @SpringBootApplication
 public class ImageCrawlerServiceApplication {
 	
-	public final static String queueName = "image-service-queue";
-	public final static String publishQueue="crawler-service-queue";
+	@Value("${queueName}")
+	public  String queueName ;
+	
+	@Value("${publishQueue}")
+	public  String publishQueue ;
 //    public static final String topicExchangeName = "jsa.yaash";
 
    

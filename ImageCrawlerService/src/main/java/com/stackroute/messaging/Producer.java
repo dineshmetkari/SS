@@ -17,8 +17,10 @@ import com.stackroute.service.Service;
 public class Producer {
 	
 	
+	
 	  AmqpTemplate amqpTemplate;
-	 ImageCrawlerServiceApplication mainApplication = new ImageCrawlerServiceApplication();
+	  @Autowired
+	 ImageCrawlerServiceApplication mainApplication;
 	    
 	    @Autowired    
 	    public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
