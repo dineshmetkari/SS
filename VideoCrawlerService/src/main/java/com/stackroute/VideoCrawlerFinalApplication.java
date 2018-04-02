@@ -36,6 +36,8 @@ public class VideoCrawlerFinalApplication {
      return new MessageListenerAdapter(receiver, "receiveMessage");
  
     }
+    
+    
     @Bean
     Queue queue() {
         return new Queue(publishQueue, false);

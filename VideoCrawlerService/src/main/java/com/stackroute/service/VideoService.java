@@ -55,19 +55,34 @@ public class VideoService {
 	        jsonObj.put("domain",incomingMessage.getDomain());
 	        obj.put("VideoCount",count+count1);
 	        obj.put("url", url.get(i));
+	        objList.add(obj);
+	        producer.produceMsg(jsonObj);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("Page not found");
+		    try {
+				jsonObj.put("VideoCount", -1);
+		        jsonObj.put("url", url.get(i));
+		        jsonObj.put("concept",incomingMessage.getConcept());
+		        jsonObj.put("domain",incomingMessage.getDomain());
+		        obj.put("VideoCount",count+count1);
+		        obj.put("url", url.get(i));
+		        objList.add(obj);
+		        producer.produceMsg(jsonObj);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			//e1.printStackTrace();
 		}  
 		catch (JSONException e) {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
-	       
-	    producer.produceMsg(jsonObj);
+	    
 	    }
-	         objList.add(obj);
+	        
 	        
 	    return objList;
 	        }  

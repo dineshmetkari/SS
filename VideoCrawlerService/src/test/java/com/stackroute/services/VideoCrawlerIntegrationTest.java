@@ -9,14 +9,19 @@ import java.util.Arrays;
 import java.util.List;import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stackroute.domain.Domain;
+import com.stackroute.listener.Producer;
 import com.stackroute.listener.Receiver;
 import com.stackroute.service.VideoService;
 
@@ -32,6 +37,15 @@ public class VideoCrawlerIntegrationTest {
     @Autowired
     private VideoService videoService;
     
+    @Mock
+    private Producer producer;
+    
+	@Before
+	public void setupMock() throws AmqpException, IOException {
+		MockitoAnnotations.initMocks(this);
+		videoService.setProducer(producer);
+	}
+	
     @Test
     public void  testVideoCount() throws IOException{
 //        Arrange
@@ -57,7 +71,7 @@ public class VideoCrawlerIntegrationTest {
         String expected=objExpected.get(0).toString();
     
 //        Assert
-        assertEquals(expected,actual);
+        assertEquals(expected.toString(),actual.toString());
         
         
         

@@ -53,11 +53,10 @@ public class VideoServiceTest {
 	       domain.setConcept("2");
 	       domain.setDomain("Java");
 	       domain.setDate(null);
-		urls.add("https://angularfirebase.com/lessons/installable-angular-progressive-web-app/");
 	}
 	
 	@Test
-	public void imgCountTest() throws IOException {
+	public void videoCountTest() throws IOException {
 		//Arrange
 		List<JSONObject> objList = new ArrayList<JSONObject>();
 		JSONObject obj = new JSONObject();
