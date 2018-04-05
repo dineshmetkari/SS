@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +38,6 @@ public class Service {
 
 
 	public  ArrayList<JSONObject> integration(JSONObject fetchedObj){
-System.out.println(uniqueList.size()+" "+uniqueList.toString());
 
 		try {
 			String domain = fetchedObj.getString("domain");
@@ -95,14 +97,24 @@ System.out.println(uniqueList.size()+" "+uniqueList.toString());
 
 				Model finalModel =modelMap.get(unique);
 				JSONObject jo = new JSONObject();
-				System.out.println("abc"+uniqueList.get(unique));
 				jo.put("concept",finalModel.getConcept());
 				jo.put("domain", finalModel.getDomain());
 				jo.put("url", finalModel.getUrl());
 				jo.put("terms", finalModel.getTerms());
 				jo.put("imgCount", finalModel.getImgCount());
 				jo.put("codeCount",finalModel.getCodecount());
-				jo.put("videoCount", finalModel.getVideoCount());
+				jo.put("videoCount", finalModel.getVideoCount()); 
+				Document doc = Jsoup.connect(finalModel.getUrl()).userAgent("Mozilla").get();
+					Elements title = doc.getElementsByTag("title");
+					Elements meta =doc.select("meta[name=description]");
+					String titleUrl = title.text();
+					String metaUrl = "no description";
+					if(meta.size()!=0){
+						metaUrl=meta.get(0).attr("content");
+					}
+					jo.put("titleUrl",titleUrl );
+					jo.put("metaUrl",metaUrl );
+					
 				joList.add(jo);
 				String json = jo.toString();
 

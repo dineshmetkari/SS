@@ -95,6 +95,9 @@ public class ServiceTest {
 			expected.put("codeCount", 5);
 			expected.put("videoCount", 2);
 			expected.put("terms", terms);
+			expected.put("titleUrl","Tutorials - Javatpoint");
+			expected.put("metaUrl","Tutorials, Free Online Tutorials, Javatpoint provides tutorials and interview questions of all technology like java tutorial, android, java frameworks, javascript, ajax, core java, sql, python, php, c language etc. for beginners and professionals.");
+			
 			
 			
 			String expectedString = expected.toString();
