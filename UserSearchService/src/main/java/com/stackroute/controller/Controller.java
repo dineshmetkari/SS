@@ -2,6 +2,7 @@ package com.stackroute.controller;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -47,8 +48,9 @@ public class Controller {
 		String Query = "Match(n:url)-[x:" + userInput.getIntent() + "]->(c:concept{name:\"" + userInput.getConcept()
 		+ "\""
 		+ "})return n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, x.confidenceScore as confidenceScore";
+		System.out.println(Query);
 		final ArrayList<FetchUrl> fetchedUrls = fetchService.fetchedUrl(Query);
-
+System.out.println(fetchedUrls.toString());
 		return new ResponseEntity<ArrayList<FetchUrl>>(fetchedUrls, HttpStatus.CREATED);
 
 	}

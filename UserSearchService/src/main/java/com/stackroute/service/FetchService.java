@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
@@ -26,9 +29,9 @@ public class FetchService implements AutoCloseable {
 	private  Driver driver;
 
 	@Value("${uri}")
-	String uri="bolt://172.23.238.165";;
-	@Value("${user}")
-	String user= "neo4j";
+	String uri="bolt://172.23.238.152";
+	@Value("${username}")
+	String user="neo4j";
 	@Value("${password}")
 	String password="password";
 
@@ -38,8 +41,9 @@ public class FetchService implements AutoCloseable {
 		driver.close();
 	}
 	public ArrayList<FetchUrl> fetchedUrl(String Query){
-		
 		driver = GraphDatabase.driver(uri,AuthTokens.basic(user, password));
+		JSONObject searchObject =new JSONObject();
+		JSONArray joArray = new JSONArray();
 		ArrayList<FetchUrl> fetchList = new ArrayList<>();
 		Session session = driver.session();
 		String Greeting= session.writeTransaction(new TransactionWork<String>()
@@ -51,17 +55,10 @@ public class FetchService implements AutoCloseable {
 				{
 					FetchUrl fetchUrl = new FetchUrl();
 					Record record= result.next();
-//					System.out.println(result.next().toString());
 					Gson gson = new Gson();
 					JsonElement jsonElement = gson.toJsonTree(record.asMap());
 					fetchUrl = gson.fromJson(jsonElement, FetchUrl.class);
 					fetchList.add(fetchUrl);
-
-					//fetchUrl = gson.fromJson(x, type);
-
-
-					//					fetchUrl.setCodeCount(result.);
-					//					System.out.println(fetchUrl);
 				}
 				return "Working";
 			}
@@ -70,10 +67,30 @@ public class FetchService implements AutoCloseable {
 		fetchList.sort(Comparator.comparing(FetchUrl::getConfidenceScore, (s1, s2) -> {
 			return s2.compareTo(s1);
 		}));
-		for(int i=0; i<fetchList.size();i++){
-//			System.out.println(fetchList.get(i).getConfidenceScore());
-		}
-		System.out.println(Greeting);
+//		try {
+//			for(int i=0; i<fetchList.size();i++){
+//				System.out.println(fetchList.get(i).getUrl());
+//				JSONObject jo = new JSONObject();
+//				jo.put("url",fetchList.get(i).getUrl());
+//				jo.put("imgCount",fetchList.get(i).getImgCount());
+//				jo.put("videoCount",fetchList.get(i).getVideoCount());
+//				jo.put("codeCount",fetchList.get(i).getCodeCount());
+//				jo.put("counterIndicator",fetchList.get(i).getCounterIndicator());
+//				jo.put("confidenceScore",fetchList.get(i).getConfidenceScore());
+//				//				jo.put("titleUrl",fetchList.get(i).getTitleUrl());
+//				//				jo.put("metaUrl",fetchList.get(i).getMetaUrl());
+//				joArray.put(jo);
+//
+//			} 
+//			searchObject.put("Results", joArray);
+//			System.out.println(searchObject.toString());
+			System.out.println(Greeting);
+
+
+//		}catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return fetchList;
 
 	}

@@ -10,8 +10,7 @@ public class FetchUrl {
 	private int videoCount;
 	private int codeCount;
 	private double confidenceScore;
-	
-	private int counterIndiactor;
+	private int counterIndicator;
 //	private String titleUrl;
 //	private String metaUrl;
 	
@@ -29,14 +28,15 @@ public class FetchUrl {
 //	public void setMetaUrl(String metaUrl) {
 //		this.metaUrl = metaUrl;
 //	}
-	public int getCounterIndiactor() {
-		return counterIndiactor;
-	}
-	public void setCounterIndiactor(int counterIndiactor) {
-		this.counterIndiactor = counterIndiactor;
-	}
+	
 	public String getUrl() {
 		return url;
+	}
+	public int getCounterIndicator() {
+		return counterIndicator;
+	}
+	public void setCounterIndicator(int counterIndicator) {
+		this.counterIndicator = counterIndicator;
 	}
 	public void setUrl(String url) {
 		this.url = url;
