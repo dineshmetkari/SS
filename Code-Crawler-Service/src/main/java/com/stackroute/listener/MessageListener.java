@@ -22,7 +22,7 @@ public class MessageListener {
 	CodeOccuranceCounterService codeOccuranceCounterService;
 	
 	@Autowired
-	public void setCodeService(CodeOccuranceCounterService codeOccuranceCounterService) {
+	public void setCodeOccuranceCounterService(CodeOccuranceCounterService codeOccuranceCounterService) {
 		this.codeOccuranceCounterService = codeOccuranceCounterService;
 	}
 
@@ -41,3 +41,4 @@ public class MessageListener {
 		
     }
 }
+
