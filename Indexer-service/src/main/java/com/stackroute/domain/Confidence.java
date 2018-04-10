@@ -10,6 +10,8 @@ public class Confidence {
 	private int codeCount;
 	private int counterIndicator;
 	private double confidenceScore;
+	private String titleUrl;
+	private String metaUrl;
 
 	public String getIntent() {
 		return intent;
@@ -82,4 +84,26 @@ public class Confidence {
 	public void setImageCount(int imageCount) {
 		this.imageCount = imageCount;
 	}
+
+	public void setTitleUrl(String titleUrl) {
+		this.titleUrl = titleUrl;
+	}
+
+	public void setMetaUrl(String metaUrl) {
+		this.metaUrl = metaUrl;
+	}
+
+	public String getTitleUrl() {
+		return titleUrl;
+	}
+
+	public String getMetaUrl() {
+		return metaUrl;
+	}
+
+	
+
+
+
+
 }

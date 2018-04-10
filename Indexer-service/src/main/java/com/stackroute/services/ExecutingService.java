@@ -28,17 +28,17 @@ public class ExecutingService implements AutoCloseable {
 			String greeting = session.writeTransaction(new TransactionWork<String>() {
 				@Override
 				public String execute(Transaction tx) {
-					StatementResult st = tx.run("MATCH (c:Concept{name:\"" + confidence.getConceptName()
-							+ "\"})-[:ConceptOf]->(v) \n" + "RETURN count(c) > 0 as c");
+			/*		StatementResult st = tx.run("MATCH (c:Concept{name:\"" + confidence.getConceptName()
+							+ "\"})-[:SubConceptOf*]->(v) \n" + "RETURN count(c) > 0 as c");
 					if (st.single().get(0).isFalse())
 						tx.run("MATCH(domain:Domain {name:\"" + confidence.getDomainName()
 								+ "\"}) MERGE (i1:concept{name:\"" + confidence.getConceptName()
-								+ "\"})-[:SubConceptOf]->(domain)");
+								+ "\"})-[:SubConceptOf]->(domain)");*/
 					tx.run("MATCH(concept:concept{name:\"" + confidence.getConceptName()
 							+ "\"})-[:SubConceptOf*]->(:Domain{name:\"" + confidence.getDomainName()
-							+ "\"})MERGE (i1:url{url:\"" + confidence.getUrl() + "\",imgCount:"
+							+ "\"}) MERGE(i1:url{url:\"" + confidence.getUrl() + "\",imgCount:"
 							+ confidence.getImageCount() + ",videoCount:" + confidence.getVideoCount() + ",codeCount:"
-							+ confidence.getCodeCount() + ",counterIndicator:" + confidence.getCounterIndicator()
+							+ confidence.getCodeCount() + ",titleUrl:\""+confidence.getTitleUrl()+"\",metaUrl:\""+confidence.getMetaUrl()+"\",counterIndicator:" + confidence.getCounterIndicator()
 							+ "})-[:" + confidence.getIntent() + "{" + "confidenceScore:"
 							+ confidence.getConfidenceScore() + "}" + "]->(concept)");
 					// tx.run("abc");
