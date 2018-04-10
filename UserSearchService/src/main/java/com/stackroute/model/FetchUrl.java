@@ -11,23 +11,29 @@ public class FetchUrl {
 	private int codeCount;
 	private double confidenceScore;
 	private int counterIndicator;
-//	private String titleUrl;
-//	private String metaUrl;
+	private String titleUrl;
+	private String metaUrl;
 	
 
 	
-//	public String getTitleUrl() {
-//		return titleUrl;
-//	}
-//	public void setTitleUrl(String titleUrl) {
-//		this.titleUrl = titleUrl;
-//	}
-//	public String getMetaUrl() {
-//		return metaUrl;
-//	}
-//	public void setMetaUrl(String metaUrl) {
-//		this.metaUrl = metaUrl;
-//	}
+	@Override
+	public String toString() {
+		return "FetchUrl [url=" + url + ", imgCount=" + imgCount + ", videoCount=" + videoCount + ", codeCount="
+				+ codeCount + ", confidenceScore=" + confidenceScore + ", counterIndicator=" + counterIndicator
+				+ ", titleUrl=" + titleUrl + ", metaUrl=" + metaUrl + "]";
+	}
+	public String getTitleUrl() {
+		return titleUrl;
+	}
+	public void setTitleUrl(String titleUrl) {
+		this.titleUrl = titleUrl;
+	}
+	public String getMetaUrl() {
+		return metaUrl;
+	}
+	public void setMetaUrl(String metaUrl) {
+		this.metaUrl = metaUrl;
+	}
 	
 	public String getUrl() {
 		return url;

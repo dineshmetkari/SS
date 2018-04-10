@@ -1,6 +1,10 @@
 package com.stackroute;
 
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
@@ -21,7 +25,7 @@ public class ImageCrawlerServiceApplication {
 	
 	@Value("${publishQueue}")
 	public  String publishQueue ;
-//    public static final String topicExchangeName = "jsa.yaash";
+    public static final String topicExchangeName = "integration.exchange";
 
    
     @Bean
@@ -39,20 +43,20 @@ public class ImageCrawlerServiceApplication {
      return new MessageListenerAdapter(receiver, "receiveMessage");
  
     }
-//    @Bean
-//    Queue queue() {
-//        return new Queue(publishQueue, false);
-//    }
-//
-//    @Bean
-//    TopicExchange exchange() {
-//        return new TopicExchange(topicExchangeName);
-//    }
-//
-//    @Bean
-//    Binding binding(Queue queue, TopicExchange exchange) {
-//        return BindingBuilder.bind(queue).to(exchange).with(publishQueue);
-//    }
+    @Bean
+    Queue queue() {
+        return new Queue(publishQueue, false);
+    }
+
+    @Bean
+    TopicExchange exchange() {
+        return new TopicExchange(topicExchangeName);
+    }
+
+    @Bean
+    Binding binding(Queue queue, TopicExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(publishQueue);
+    }
    
 
 	public static void main(String[] args) {

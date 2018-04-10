@@ -21,6 +21,7 @@
 		<module>Content-Crawler-Service</module>
 		<module>VideoCrawlerFinal</module>
 		<module>search</module>
+		<module>UserSearchService</module>
 	</modules>
 </project>
 

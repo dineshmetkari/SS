@@ -1,0 +1,21 @@
+version: '2.0'
+
+services:
+
+  image-crawler-service:
+    restart: always
+    build: ./ImageCrawlerService
+    ports:
+      - 8090:8090
+
+  orchestra-service:
+    restart: always
+    build: ./OrchestraService
+    ports:
+      - 8890:8890
+
+  user-search-service:
+    restart: always
+    build: ./UserSearchService
+    ports:
+      - 8080:8080

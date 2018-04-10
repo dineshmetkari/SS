@@ -5,7 +5,91 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2018-04-06T10:35:27Z</updated>
+  <updated>2018-04-10T01:51:47Z</updated>
+  <entry>
+    <title>Spring Boot 1.5.12 available now</title>
+    <link rel="alternate" href="https://spring.io/blog/2018/04/10/spring-boot-1-5-12-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Phil Webb</name>
+    </author>
+    <id>tag:spring.io,2018-04-10:3241</id>
+    <updated>2018-04-10T01:51:47Z</updated>
+    <content type="html">&lt;p&gt;CVE-2018-1270 &lt;a href="https://spring.io/blog/2018/04/05/multiple-cve-reports-published-for-the-spring-framework"&gt;reported last week&lt;/a&gt; was unfortunately not fully addressed in the 4.3.x branch of the Spring Framework. Spring Framework &lt;a href="https://spring.io/blog/2018/04/09/cve-2018-1275-address-partial-fix-for-cve-2018-1270"&gt;4.3.16 has been released&lt;/a&gt; today, so we&amp;rsquo;ve decided to also release Spring Boot 1.5.12 to help people upgrade easily.&lt;/p&gt;
+&lt;p&gt;This release includes just &lt;a href="https://github.com/spring-projects/spring-boot/milestone/108?closed=1"&gt;3 fixed issues&lt;/a&gt;, but should be considered a priority upgrade for all existing Spring Boot 1.5 users.&lt;/p&gt;
+&lt;p&gt;Spring Boot 2.0 users are not affected and should use the existing 2.0.1 release.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.5.12.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>CVE-2018-1275: address partial fix for CVE-2018-1270</title>
+    <link rel="alternate" href="https://spring.io/blog/2018/04/09/cve-2018-1275-address-partial-fix-for-cve-2018-1270" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rossen Stoyanchev</name>
+    </author>
+    <id>tag:spring.io,2018-04-09:3240</id>
+    <updated>2018-04-09T18:44:00Z</updated>
+    <content type="html">&lt;p&gt;CVE-2018-1270 was &lt;a href="https://spring.io/blog/2018/04/05/multiple-cve-reports-published-for-the-spring-framework"&gt;reported last week&lt;/a&gt;, and unfortunately, was not fully addressed in the 4.3.x branch of the Spring Framework.&lt;/p&gt;
+&lt;p&gt;A follow-up 4.3.16 version was created and released to Maven Central, and a new &lt;a href="https://pivotal.io/security/cve-2018-1275"&gt;CVE-2018-1275&lt;/a&gt; report was published. Please upgrade to 4.3.16 immediately!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spring Boot 1.5.x Instructions:&lt;/strong&gt; if impacted by this issue, please upgrade to &lt;a href="https://spring.io/blog/2018/04/10/spring-boot-1-5-12-available-now"&gt;Spring Boot 1.5.12&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring IO Platform Cairo-RELEASE</title>
+    <link rel="alternate" href="https://spring.io/blog/2018/04/09/spring-io-platform-cairo-release" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Andy Wilkinson</name>
+    </author>
+    <id>tag:spring.io,2018-04-09:3239</id>
+    <updated>2018-04-09T09:56:00Z</updated>
+    <content type="html">&lt;p&gt;It&amp;rsquo;s my pleasure to announce that Spring IO Platform Cairo-RELEASE is now available from the &lt;a href="http://repo.spring.io/release/"&gt;Spring release repository&lt;/a&gt; and Maven Central. The Cairo generation of the Platform builds on top of Spring Framework 5.0 and Spring Boot 2.0 and requires Java 8.&lt;/p&gt;&lt;h2&gt;&lt;a href="#what-has-changed" class="anchor" name="what-has-changed"&gt;&lt;/a&gt;What has changed&lt;/h2&gt;
+&lt;p&gt;Cairo upgrades the versions of a number of projects:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Reactor Bismuth&lt;/li&gt;
+  &lt;li&gt;Spring AMQP 2.0&lt;/li&gt;
+  &lt;li&gt;Spring Batch 4.0&lt;/li&gt;
+  &lt;li&gt;Spring Boot 2.0&lt;/li&gt;
+  &lt;li&gt;Spring Cloud Connectors 2.0&lt;/li&gt;
+  &lt;li&gt;Spring Data Kay&lt;/li&gt;
+  &lt;li&gt;Spring Framework 5.0&lt;/li&gt;
+  &lt;li&gt;Spring Integration 5.0&lt;/li&gt;
+  &lt;li&gt;Spring Kafka 2.1&lt;/li&gt;
+  &lt;li&gt;Spring REST Docs 2.0&lt;/li&gt;
+  &lt;li&gt;Spring Security 5.0&lt;/li&gt;
+  &lt;li&gt;Spring Security OAuth 2.2&lt;/li&gt;
+  &lt;li&gt;Spring Session 2.0&lt;/li&gt;
+  &lt;li&gt;Spring Web Flow 2.5&lt;/li&gt;
+  &lt;li&gt;Spring Web Services 3.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cairo removes the following projects from the Platform:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Integration Flow&lt;/li&gt;
+  &lt;li&gt;Spring Integration Java DSL (now part of Spring Integration)&lt;/li&gt;
+  &lt;li&gt;Spring Integration Kafka&lt;/li&gt;
+  &lt;li&gt;Spring Integration Splunk&lt;/li&gt;
+  &lt;li&gt;Spring Mobile&lt;/li&gt;
+  &lt;li&gt;Spring Social Facebook&lt;/li&gt;
+  &lt;li&gt;Spring Social LinkedIn&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more information about dependency management that has been removed or replaced, please refer to the &lt;a href="https://docs.spring.io/platform/docs/Cairo-RELEASE/reference/htmlsingle/#upgrading-dependency-management"&gt;relevant section&lt;/a&gt; of the reference documentation.&lt;/p&gt;
+&lt;p&gt;The versions of numerous third-party dependencies have also been updated. For more information about the versions of the managed dependencies, please refer to the &lt;a href="https://docs.spring.io/platform/docs/Cairo-RELEASE/reference/htmlsingle/#appendix-dependency-versions"&gt;relevant section&lt;/a&gt; of the reference documentation.&lt;/p&gt;&lt;h2&gt;&lt;a href="#what-is-next" class="anchor" name="what-is-next"&gt;&lt;/a&gt;What is next&lt;/h2&gt;
+&lt;p&gt;Cairo will be the last generation of the Platform. Please see the &lt;a href="https://spring.io/blog/2018/04/09/spring-io-platform-end-of-life-announcement"&gt;end-of-life announcement&lt;/a&gt; for further information. Thank you to everyone who has used and contributed to the Platform over the past four years.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/Cairo-RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring IO Platform end-of-life announcement</title>
+    <link rel="alternate" href="https://spring.io/blog/2018/04/09/spring-io-platform-end-of-life-announcement" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Andy Wilkinson</name>
+    </author>
+    <id>tag:spring.io,2018-04-06:3237</id>
+    <updated>2018-04-09T09:55:53Z</updated>
+    <content type="html">&lt;p&gt;Maintenance of the &lt;a href="https://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; will end twelve months from today, 9 April 2019, and the project will be moved to the attic. Maintenance releases of both the Brussels and Cairo lines will continue to be published up until that time.&lt;/p&gt;
+&lt;p&gt;When the Platform was first &lt;a href="https://spring.io/blog/2014/06/26/introducing-the-spring-io-platform"&gt;introduced almost four years ago&lt;/a&gt; it provided dependency management for a number of projects that were not managed by Spring Boot. In recent releases that number has decreased and would have continued to do so in the future as the Spring portfolio continues to evolve. &lt;/p&gt;
+&lt;p&gt;The decreasing difference between Spring Boot&amp;rsquo;s dependency management and the Platform&amp;rsquo;s dependency management means that offering the Platform as a separate choice no longer makes sense. All users of the Platform are encouraged to start using Spring Boot&amp;rsquo;s dependency management directly, either by using &lt;code&gt;spring-boot-starter-parent&lt;/code&gt; as their Maven project&amp;rsquo;s parent, or by importing the &lt;code&gt;spring-boot-dependencies&lt;/code&gt; bom.&lt;/p&gt;
+&lt;p&gt;Thank you to everyone who has contributed to the Platform over the past four years.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring IO Platform Brussels SR8</title>
     <link rel="alternate" href="https://spring.io/blog/2018/04/06/spring-io-platform-brussels-sr8" />
@@ -40,14 +124,15 @@
       <name>Rossen Stoyanchev</name>
     </author>
     <id>tag:spring.io,2018-04-04:3228</id>
-    <updated>2018-04-05T15:43:22Z</updated>
-    <content type="html">&lt;p&gt;Spring Framework 5.0.5 and 4.3.15, &lt;a href="https://spring.io/blog/2018/04/03/spring-framework-5-0-5-and-4-3-15-available-now"&gt;released earlier&lt;/a&gt; this week, include fixes for the following vulnerabilities:&lt;/p&gt;
+    <updated>2018-04-05T15:43:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;UPDATE 2018-04-09:&lt;/strong&gt; see follow-up &lt;a href="https://spring.io/blog/2018/04/09/cve-2018-1275-address-partial-fix-for-cve-2018-1270"&gt;announcement&lt;/a&gt; for 4.3.x branch.&lt;/p&gt;
+&lt;p&gt;Spring Framework 5.0.5 and 4.3.15 (superseded by 4.3.16 with CVE-2018-1275), &lt;a href="https://spring.io/blog/2018/04/03/spring-framework-5-0-5-and-4-3-15-available-now"&gt;released earlier&lt;/a&gt; this week, include fixes for the following vulnerabilities:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1270"&gt;https://pivotal.io/security/cve-2018-1270&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1271"&gt;https://pivotal.io/security/cve-2018-1271&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1272"&gt;https://pivotal.io/security/cve-2018-1272&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1270"&gt;CVE-2018-1270&lt;/a&gt; &amp;ndash;&amp;gt; &lt;a href="https://pivotal.io/security/cve-2018-1275"&gt;CVE-2018-1275&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1271"&gt;CVE-2018-1271&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://pivotal.io/security/cve-2018-1272"&gt;CVE-2018-1272&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Spring Boot 2.0.1 and 1.5.11, that match the above Spring Framework versions, were &lt;a href="https://spring.io/blog/2018/04/05/spring-boot-2-0-1-available-now"&gt;released today&lt;/a&gt;, and are now also available for use.&lt;/p&gt;
+&lt;p&gt;Spring Boot 2.0.1 and 1.5.11 (superseded by 1.5.12 with CVE-2018-1275), that match the above Spring Framework versions, were &lt;a href="https://spring.io/blog/2018/04/05/spring-boot-2-0-1-available-now"&gt;released today&lt;/a&gt;, and are now also available for use.&lt;/p&gt;
 &lt;p&gt;Please, review the information in the CVE reports and upgrade immediately. &lt;/p&gt;</content>
   </entry>
   <entry>
@@ -684,281 +769,5 @@ dependencies {&#xD;
     ...&#xD;
 }
 &lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - March 27th, 2018</title>
-    <link rel="alternate" href="https://spring.io/blog/2018/03/27/this-week-in-spring-march-27th-2018" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2018-03-27:3219</id>
-    <updated>2018-03-27T08:43:10Z</updated>
-    <content type="html">&lt;p&gt;Hi Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;m hanging out in sunny San Francisco talking to local customers and working on more installments of the next season of &lt;em&gt;Spring Tips&lt;/em&gt;. &lt;/p&gt;
-&lt;p&gt;As usual, we&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it!&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Check this Pivotal showcase on &lt;a href="https://content.pivotal.io/pivotal-blog/real-time-object-detection-with-spring-cloud-stream"&gt;object detection with Spring Cloud Stream.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Security SAML DSL lead Filip Hanik has &lt;a href="https://spring.io/blog/2018/03/26/spring-security-saml-dsl-1-0-5-release"&gt;just announced the 1.0.5.RELEASE of our SAML DSL project&lt;/a&gt;. This release works against Spring Security SAML 1.0.4.RELEASE. This release adds a simple Java configuration option to your existing Spring Boot applications.&lt;/li&gt;
-  &lt;li&gt;Ryan Baxter has just &lt;a href="https://spring.io/blog/2018/03/23/spring-cloud-finchley-m9-has-been-released"&gt;announced Spring Cloud Finchley.M9&lt;/a&gt;. This new release includes some nice features in Spring Cloud Gateway including support for rolling deployments and route refresh from service discovery heartbeats.&lt;/li&gt;
-  &lt;li&gt;Spring Tool Suite lead Martin Lippert has &lt;a href="https://spring.io/blog/2018/03/22/spring-tool-suite-3-9-3-released"&gt;just announced Spring Tool Suite 3.9.3&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Erdem Günay shares the journey of &lt;a href="https://www.infoq.com/presentations/turkcell-spring-boot-cloud"&gt;re-platforming Turkcell TV service to Cloud Native within a few months using Spring Boot and Spring Cloud.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Ryan Dawson looks at application reconfiguration &lt;a href="https://dzone.com/articles/spring-cloud-config-server-for-the-impatient"&gt;with Spring Cloud Config Server&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The &lt;em&gt;Java Dev Journal&lt;/em&gt; has a simple &lt;a href="https://www.javadevjournal.com/spring-boot/spring-boot-standalone-application/"&gt;walkthrough introducing Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Shubham Aggarwal has a &lt;a href="https://www.javacodegeeks.com/2018/03/spring-data-jpa-example-with-spring-boot.html"&gt;nice post demonstrating Spring Data JPA with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The Baeldung has a nice post on &lt;a href="http://www.baeldung.com/properties-with-spring"&gt;property configuration with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Devoxx founder Stephan Janssen &lt;a href="https://www.linkedin.com/pulse/new-voxxed-websites-journey-stephan-janssen"&gt;details the use of Spring Boot and Spring Cloud&lt;/a&gt; (via JHipster) to revamp a few different Voxxed web properties. Good job Stephan!&lt;/li&gt;
-  &lt;li&gt;The &lt;em&gt;Sourced Blog&lt;/em&gt; has a nice post on implementing the &amp;ldquo;REST Bucks&amp;rdquo; example &lt;a href="https://blog.sourced-bvba.be//article/2018/02/25/tackling-restbucks-clean-architecture/"&gt;from the canonical tome &lt;em&gt;REST in Practice&lt;/em&gt; using Spring.&lt;/a&gt; Note, this is not &lt;em&gt;that&lt;/em&gt; &lt;a href="https://github.com/olivergierke/spring-restbucks"&gt;&amp;ldquo;REST Bucks&amp;rdquo; example&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/ScaCap/spring-auto-restdocs/releases/tag/v2.0.0"&gt;Spring Auto REST Docs 2.0.0 is out&lt;/a&gt;. It is based on Spring REST Docs 2.0.0 and comes with support for Kotlin&amp;rsquo;s KDoc.&lt;/li&gt;
-  &lt;li&gt;The Java Code Geeks have a nice post &lt;a href="https://www.javacodegeeks.com/2017/02/configure-jenkins-continuous-delivery-spring-boot-application.html"&gt;on continuously delivering Spring Boot applications with Jenkins&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Check out &lt;a href="https://projectriff.io/blog/announcing-riff-0-0-5/"&gt;the 0.0.5 release of Pivotal&amp;rsquo;s function-as-a-service offering, Project Riff&lt;/a&gt;. The new release includes a Go function invoker that provides support for functions built as Go plugins, support for improved Python support, HTTP header whitelisting, and so much more.&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security SAML DSL 1.0.5.RELEASE</title>
-    <link rel="alternate" href="https://spring.io/blog/2018/03/26/spring-security-saml-dsl-1-0-5-release" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Filip Hanik</name>
-    </author>
-    <id>tag:spring.io,2018-03-26:3217</id>
-    <updated>2018-03-26T10:14:00Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;The Spring Security team is proud to announce our latest 1.0.5.RELEASE of our SAML DSL project. This release works against Spring Security SAML 1.0.4.RELEASE.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;This release adds a simple &lt;a href="https://github.com/spring-projects/spring-security-saml-dsl/blob/929b94b349e894f17a7ff89375446b48f1c7f637/samples/spring-security-saml-dsl-sample/src/main/java/com/example/SecurityConfiguration.java#L21-L41"&gt;Java configuration option&lt;/a&gt; to your existing Spring Boot applications&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;This release requires an additional &lt;a href="http://repository.mulesoft.org/releases/"&gt;Maven repository&lt;/a&gt; to download the latest version of the not-yet-commons-ssl dependency.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Available on &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-saml-dsl-core%22"&gt;Maven Central&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Feedback and contributions are always appreciated. Stay tuned.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security-saml/"&gt;Project Site&lt;/a&gt; |
-&lt;a href="https://docs.spring.io/spring-security-saml/docs/current/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-security"&gt;Help&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Finchley.M9 Has Been Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2018/03/23/spring-cloud-finchley-m9-has-been-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Ryan Baxter</name>
-    </author>
-    <id>tag:spring.io,2018-03-23:3216</id>
-    <updated>2018-03-23T15:11:13Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the community, I am pleased to announce that the Milestone 9 (M9) of the &lt;a href="https://cloud.spring.io"&gt;Spring Cloud Finchley&lt;/a&gt; Release Train is available today. The release can be found in &lt;a href="https://repo.spring.io/milestone/"&gt;Spring Milestone&lt;/a&gt; repository. You can check out the Finchley &lt;a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Finchley-Release-Notes"&gt;release notes for more information&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#notable-changes-in-the-finchley-release-train" class="anchor" name="notable-changes-in-the-finchley-release-train"&gt;&lt;/a&gt;Notable Changes in the Finchley Release Train&lt;/h2&gt;&lt;h3&gt;&lt;a href="#spring-cloud-gateway" class="anchor" name="spring-cloud-gateway"&gt;&lt;/a&gt;Spring Cloud Gateway&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-  &lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-gateway/issues/67"&gt;Support Rolling Deployments&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;
-  &lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-gateway/issues/236"&gt;Refresh routes from service discovery heart beat&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-netflix" class="anchor" name="spring-cloud-netflix"&gt;&lt;/a&gt;Spring Cloud Netflix&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Upgraded to Eureka &lt;code&gt;1.8.7&lt;/code&gt; to address thread pool issue when Eureka health check is enabled&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-sleuth" class="anchor" name="spring-cloud-sleuth"&gt;&lt;/a&gt;Spring Cloud Sleuth&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Bug Fixes&lt;/li&gt;
-  &lt;li&gt;Further Alignment With Brave&lt;/li&gt;
-  &lt;li&gt;Fixed interop with Spring Cloud Gateway&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-contract" class="anchor" name="spring-cloud-contract"&gt;&lt;/a&gt;Spring Cloud Contract&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Added byte array for DSL&lt;/li&gt;
-  &lt;li&gt;Better support for RestDocs parametrized names&lt;/li&gt;
-  &lt;li&gt;Added exposure of multiple versions of the same artifact in the same test&lt;/li&gt;
-  &lt;li&gt;Added verbose messages for collection assertions in the generated tests&lt;/li&gt;
-  &lt;li&gt;Allows to keep unpacked stubs after the stubs got downloaded and test finished&lt;/li&gt;
-  &lt;li&gt;Added new overview sections to documentation&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-commons" class="anchor" name="spring-cloud-commons"&gt;&lt;/a&gt;Spring Cloud Commons&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Refactored APIs related to &lt;a href="https://github.com/spring-cloud/spring-cloud-commons/pull/331"&gt;configuring Spring Retry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-config" class="anchor" name="spring-cloud-config"&gt;&lt;/a&gt;Spring Cloud Config&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-  &lt;p&gt;Adds ability to &lt;a href="http://cloud.spring.io/spring-cloud-static/Finchley.M9/single/spring-cloud.html#_deleting_untracked_branches_in_git_repositories"&gt;remove untracked local branches&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;
-  &lt;p&gt;Support &lt;a href="https://github.com/spring-cloud/spring-cloud-config/issues/616"&gt;YAML configuration for composite repos&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#spring-cloud-stream" class="anchor" name="spring-cloud-stream"&gt;&lt;/a&gt;Spring Cloud Stream&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;See Spring Cloud Stream &lt;a href="https://github.com/spring-cloud/spring-cloud-stream-starters/releases/tag/vElmhurst.RC3"&gt;release notes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following modules were updated as part of Finchley.M9:&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Module &lt;/th&gt;
-      &lt;th&gt;Version &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Consul &lt;/td&gt;
-      &lt;td&gt;2.0.0.M7 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Zookeeper &lt;/td&gt;
-      &lt;td&gt;2.0.0.M7 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Gateway &lt;/td&gt;
-      &lt;td&gt;2.0.0.M9 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Build &lt;/td&gt;
-      &lt;td&gt;2.0.0.RC2 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Boot &lt;/td&gt;
-      &lt;td&gt;2.0.0.RELEASE &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Aws &lt;/td&gt;
-      &lt;td&gt;2.0.0.M4 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Bus &lt;/td&gt;
-      &lt;td&gt;2.0.0.M7 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Netflix &lt;/td&gt;
-      &lt;td&gt;2.0.0.M8 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Sleuth &lt;/td&gt;
-      &lt;td&gt;2.0.0.M9 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Contract &lt;/td&gt;
-      &lt;td&gt;2.0.0.M8 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Cloudfoundry &lt;/td&gt;
-      &lt;td&gt;2.0.0.M3 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Security &lt;/td&gt;
-      &lt;td&gt;2.0.0.M3 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Commons &lt;/td&gt;
-      &lt;td&gt;2.0.0.M9 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Config &lt;/td&gt;
-      &lt;td&gt;2.0.0.M9 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Task &lt;/td&gt;
-      &lt;td&gt;2.0.0.M3 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Stream &lt;/td&gt;
-      &lt;td&gt;Elmhurst.RC3 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Boot Starter &lt;/td&gt;
-      &lt;td&gt;2.0.0.RELEASE &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Openfeign &lt;/td&gt;
-      &lt;td&gt;2.0.0.M2 &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spring Cloud Vault &lt;/td&gt;
-      &lt;td&gt;2.0.0.M6 &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;As always, we welcome feedback on &lt;a href="https://github.com/spring-cloud/"&gt;GitHub&lt;/a&gt;, on &lt;a href="https://gitter.im/spring-cloud/spring-cloud"&gt;Gitter&lt;/a&gt;, on &lt;a href="http://stackoverflow.com/questions/tagged/spring-cloud"&gt;Stack Overflow&lt;/a&gt;, or on &lt;a href="https://twitter.com/SpringCloud"&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To get started with Maven with a BOM (dependency management only):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;repositories&amp;gt;&#xD;
-    &amp;lt;repository&amp;gt;&#xD;
-        &amp;lt;id&amp;gt;spring-milestones&amp;lt;/id&amp;gt;&#xD;
-        &amp;lt;name&amp;gt;Spring Milestones&amp;lt;/name&amp;gt;&#xD;
-        &amp;lt;url&amp;gt;http://repo.spring.io/milestone&amp;lt;/url&amp;gt;&#xD;
-        &amp;lt;snapshots&amp;gt;&#xD;
-            &amp;lt;enabled&amp;gt;false&amp;lt;/enabled&amp;gt;&#xD;
-        &amp;lt;/snapshots&amp;gt;&#xD;
-    &amp;lt;/repository&amp;gt;&#xD;
-&amp;lt;/repositories&amp;gt;&#xD;
-&amp;lt;dependencyManagement&amp;gt;&#xD;
-    &amp;lt;dependencies&amp;gt;&#xD;
-        &amp;lt;dependency&amp;gt;&#xD;
-            &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-            &amp;lt;artifactId&amp;gt;spring-cloud-dependencies&amp;lt;/artifactId&amp;gt;&#xD;
-            &amp;lt;version&amp;gt;Finchley.M9&amp;lt;/version&amp;gt;&#xD;
-            &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
-            &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
-        &amp;lt;/dependency&amp;gt;&#xD;
-    &amp;lt;/dependencies&amp;gt;&#xD;
-&amp;lt;/dependencyManagement&amp;gt;&#xD;
-&amp;lt;dependencies&amp;gt;&#xD;
-    &amp;lt;dependency&amp;gt;&#xD;
-        &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-        &amp;lt;artifactId&amp;gt;spring-cloud-starter-config&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;/dependency&amp;gt;&#xD;
-    &amp;lt;dependency&amp;gt;&#xD;
-        &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
-        &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-client&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;/dependency&amp;gt;&#xD;
-    ...&#xD;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or with Gradle:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;buildscript {&#xD;
-    dependencies {&#xD;
-        classpath &amp;quot;io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE&amp;quot;&#xD;
-    }&#xD;
-}&#xD;
-&#xD;
-repositories {&#xD;
-    maven {&#xD;
-        url &amp;#39;http://repo.spring.io/milestone&amp;#39;&#xD;
-    }&#xD;
-}&#xD;
-&#xD;
-apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;&#xD;
-&#xD;
-dependencyManagement {&#xD;
-    imports {&#xD;
-        mavenBom &amp;#39;org.springframework.cloud:spring-cloud-dependencies:Finchley.M9&amp;#39;&#xD;
-    }&#xD;
-}&#xD;
-&#xD;
-dependencies {&#xD;
-    compile &amp;#39;org.springframework.cloud:spring-cloud-starter-config&amp;#39;&#xD;
-    compile &amp;#39;org.springframework.cloud:spring-cloud-starter-netflix-eureka-client&amp;#39;&#xD;
-    ...&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Tool Suite 3.9.3 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2018/03/22/spring-tool-suite-3-9-3-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Martin Lippert</name>
-    </author>
-    <id>tag:spring.io,2018-03-22:3215</id>
-    <updated>2018-03-22T14:37:22Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;
-&lt;p&gt;I am happy to announce the 3.9.3 release of the Spring Tool Suite, our Eclipse-based tooling.&lt;/p&gt;
-&lt;p&gt;Highlights from this release include:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-&lt;li&gt;updated to Eclipse Oxygen.3 release (https://www.eclipse.org/oxygen/noteworthy/)&lt;/li&gt;&#xD;
-&lt;li&gt;Pivotal tc Server updated to 3.2.9&lt;/li&gt;&#xD;
-&lt;li&gt;updated to work with Spring 5 and Spring Boot 2&lt;/li&gt;&#xD;
-&lt;/ul&gt;
-&lt;p&gt;To download the distributions, please go visit:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-&lt;li&gt;Spring Tool Suite: &lt;a href="https://spring.io/tools/sts/all"&gt;https://spring.io/tools/sts/all&lt;/a&gt;&lt;/li&gt;&#xD;
-&lt;/ul&gt;
-&lt;p&gt;Detailed new and noteworthy notes can be found here: &lt;a href="http://docs.spring.io/sts/nan/v393/NewAndNoteworthy.html"&gt;STS 3.9.3 New &amp;amp; Noteworthy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;STS 3.9.4 is scheduled to be released on top of Eclipse Oxygen.3a (4.7.3a) in late April 2018.&lt;/p&gt;
-&lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
 </feed>

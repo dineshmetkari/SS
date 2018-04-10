@@ -1,0 +1,5 @@
+package com.stackroute.controller;
+
+public class ControllerIntegrationTest {
+
+}

@@ -104,11 +104,16 @@ public class Service {
 				jo.put("imgCount", finalModel.getImgCount());
 				jo.put("codeCount",finalModel.getCodecount());
 				jo.put("videoCount", finalModel.getVideoCount()); 
-				Document doc = Jsoup.connect(finalModel.getUrl()).userAgent("Mozilla").get();
+				Document doc;
+				try {
+					doc = Jsoup.connect(finalModel.getUrl()).userAgent("Mozilla").get();
 					Elements title = doc.getElementsByTag("title");
 					Elements meta =doc.select("meta[name=description]");
-					String titleUrl = title.text();
-					String metaUrl = "no description";
+					String titleUrl = "No Title";
+					if(title.hasText()){
+						 titleUrl = title.text();
+					}
+					String metaUrl = "No Description";
 					if(meta.size()!=0){
 						metaUrl=meta.get(0).attr("content");
 					}
@@ -121,6 +126,31 @@ public class Service {
 				modelMap.remove(unique);
 				uniqueList.remove(unique);
 				publish.publishMsg(json);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Page Not Found");
+					JSONObject errorObj = new JSONObject();
+					errorObj.put("concept",finalModel.getConcept());
+					errorObj.put("domain", finalModel.getDomain());
+					errorObj.put("url", finalModel.getUrl());
+					errorObj.put("terms", finalModel.getTerms());
+					errorObj.put("imgCount", finalModel.getImgCount());
+					errorObj.put("codeCount",finalModel.getCodecount());
+					errorObj.put("videoCount", finalModel.getVideoCount()); 
+					errorObj.put("titleUrl","Page Not Found" );
+					errorObj.put("metaUrl","Page Not Found" );
+					joList.add(errorObj);
+					String jsonError = errorObj.toString();
+					modelMap.remove(unique);
+					uniqueList.remove(unique);
+					try {
+						publish.publishMsg(jsonError);
+					} catch (AmqpException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
 
 			}
 			else{
@@ -150,9 +180,6 @@ public class Service {
 			}
 
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (AmqpException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

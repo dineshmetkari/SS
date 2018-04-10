@@ -1,5 +1,9 @@
 package com.stackroute;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
@@ -16,6 +20,7 @@ import com.stackroute.messaging.Receiver;
 public class OrchestraServiceApplication {
 	public final static String queueName = "crawler-service-queue";
 	public final static String publishQueue = "integration";
+	   public static final String topicExchangeName = "orchestra.exchange";
 
 	@Bean
 	SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
@@ -32,6 +37,21 @@ public class OrchestraServiceApplication {
 		return new MessageListenerAdapter(receiver, "receiveMessage");
 
 	}
+	 @Bean
+	    Queue queue() {
+	        return new Queue(publishQueue, false);
+	    }
+
+	    @Bean
+	    TopicExchange exchange() {
+	        return new TopicExchange(topicExchangeName);
+	    }
+
+	    @Bean
+	    Binding binding(Queue queue, TopicExchange exchange) {
+	        return BindingBuilder.bind(queue).to(exchange).with(publishQueue);
+	    }
+	   
 
 	//    @Bean
 	//    JedisConnectionFactory jedisConnectionFactory(){

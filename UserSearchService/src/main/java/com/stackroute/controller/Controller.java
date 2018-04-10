@@ -47,7 +47,7 @@ public class Controller {
 		userInput.setIntent(intent);
 		String Query = "Match(n:url)-[x:" + userInput.getIntent() + "]->(c:concept{name:\"" + userInput.getConcept()
 		+ "\""
-		+ "})return n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, x.confidenceScore as confidenceScore";
+		+ "})return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, x.confidenceScore as confidenceScore";
 		System.out.println(Query);
 		final ArrayList<FetchUrl> fetchedUrls = fetchService.fetchedUrl(Query);
 System.out.println(fetchedUrls.toString());
