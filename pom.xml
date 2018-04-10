@@ -19,7 +19,8 @@
 		<module>Code-Crawler-Service</module>
 		<module>ImageCrawlerService</module>
 		<module>Content-Crawler-Service</module>
-		<module>VideoCrawlerFinal</module>
+		<module>VideoCrawlerService</module>
+		<module>ConfidenceScoreCalculator</module>
 		<module>search</module>
 		<module>UserSearchService</module>
 	</modules>
