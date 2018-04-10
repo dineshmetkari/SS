@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stackroute.domain.Result;
-import com.stackroute.service.CodeService;
+import com.stackroute.service.CodeOccuranceCounterService;
 
 
 @Component
@@ -19,11 +19,11 @@ public class MessageListener {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private String message;
 	
-	CodeService codeService;
+	CodeOccuranceCounterService codeOccuranceCounterService;
 	
 	@Autowired
-	public void setCodeService(CodeService codeService) {
-		this.codeService = codeService;
+	public void setCodeService(CodeOccuranceCounterService codeOccuranceCounterService) {
+		this.codeOccuranceCounterService = codeOccuranceCounterService;
 	}
 
     public String getMessage() {
@@ -37,7 +37,7 @@ public class MessageListener {
         Type type = new TypeToken<Result>() {}.getType();
         Result result = gson.fromJson(message, type);
         logger.info("Message received"+message.toString());
-    	codeService.getCodeSnippetCount(result);
+        codeOccuranceCounterService.getCodeSnippetCount(result);
 		
     }
 }

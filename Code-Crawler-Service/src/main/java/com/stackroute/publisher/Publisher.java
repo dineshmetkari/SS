@@ -22,9 +22,12 @@ public class Publisher {
 		this.amqpTemplate = amqpTemplate;
 	}
 	
-	public String produceMsg(JSONObject json){
+	@Autowired
+	CodeCrawlerServiceApplication codeCrawlerServiceApplication;
+	
+	public String produceMsg(JSONObject json){ 
 		try {
-			amqpTemplate.convertAndSend(CodeCrawlerServiceApplication.PUBLISH_QUEUE, String.valueOf(json.toString()));
+			amqpTemplate.convertAndSend(codeCrawlerServiceApplication.PUBLISH_QUEUE, String.valueOf(json.toString()));
 			logger.info(json.get("url")+" "+json.get("codecount"));
 			return "Published Successfully";
 		} 
