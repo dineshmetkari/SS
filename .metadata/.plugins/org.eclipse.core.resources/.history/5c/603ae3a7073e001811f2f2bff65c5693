@@ -1,0 +1,137 @@
+package com.stackroute.service;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import org.neo4j.driver.v1.AuthTokens;
+import org.neo4j.driver.v1.Driver;
+import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.Record;
+import org.neo4j.driver.v1.Session;
+import org.neo4j.driver.v1.StatementResult;
+import org.neo4j.driver.v1.Transaction;
+import org.neo4j.driver.v1.TransactionWork;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.stackroute.model.RecommendUrl;
+import com.stackroute.model.UserInput;
+
+@Service
+public class RecommendService implements AutoCloseable {
+
+	@Autowired
+	UserInput userInput;
+	private  Driver driver;
+
+	@Value("${uri}")
+	String uri;
+	@Value("${username}")
+	String user;
+	@Value("${password}")
+	String password;
+	
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		driver.close();
+	}
+	public ArrayList<RecommendUrl> RecommendationSubConcept (String domain, String concept, String intent){
+		userInput.setConcept(concept);
+		userInput.setDomain(domain);
+		userInput.setIntent(intent);
+		
+		String Query1="Match(n:url)-[x:"+userInput.getIntent()+"]->(m:concept)-[:SubConceptOf]->(c:concept{name:\""+userInput.getConcept()
+		+ "\""
+		+"}),(d:Domain{name:\""+userInput.getDomain()
+		+ "\""
+		+"})return n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator,x.name as intentRecommend ,x.confidenceScore as confidenceScore,m.name as conceptRecommend,d.name as domainRecommend";
+		
+		driver = GraphDatabase.driver(uri,AuthTokens.basic(user, password));
+		
+		ArrayList<RecommendUrl> subconceptList = new ArrayList<>();
+		Session session = driver.session();
+		String Greeting= session.writeTransaction(new TransactionWork<String>()
+		{
+			public String execute(Transaction tx)
+			{
+				StatementResult result = tx.run(Query1);
+				while(result.hasNext())
+				{
+					RecommendUrl recommendUrl = new RecommendUrl();
+					Record record= result.next();
+					Gson gson = new Gson();
+					JsonElement jsonElement = gson.toJsonTree(record.asMap());
+					recommendUrl = gson.fromJson(jsonElement, RecommendUrl.class);
+					subconceptList.add(recommendUrl);
+				}
+				return "Working";
+			}
+		});
+		subconceptList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+			return s2.compareTo(s1);
+		}));
+		System.out.println(Greeting);
+		return subconceptList;
+
+		}
+	
+	public ArrayList<RecommendUrl> RecommendationRelated (String domain, String concept, String intent){
+		userInput.setConcept(concept);
+		userInput.setDomain(domain);
+		userInput.setIntent(intent);
+		
+		String Query2="Match(n:url)-[x:"+userInput.getIntent()+"]->(m:concept)-[:Related]->(c:concept{name:\""+userInput.getConcept()
+		+ "\""
+		+"}),(d:Domain{name:\""+userInput.getDomain()
+		+ "\""
+		+"})return n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator,x.name as intentRecommend ,x.confidenceScore as confidenceScore,m.name as conceptRecommend,d.name as domainRecommend";
+		
+driver = GraphDatabase.driver(uri,AuthTokens.basic(user, password));
+		
+		ArrayList<RecommendUrl> relatedList = new ArrayList<>();
+		Session session = driver.session();
+		String Greeting= session.writeTransaction(new TransactionWork<String>()
+		{
+			public String execute(Transaction tx)
+			{
+				StatementResult result = tx.run(Query2);
+				while(result.hasNext())
+				{
+					RecommendUrl recommendUrl = new RecommendUrl();
+					Record record= result.next();
+					Gson gson = new Gson();
+					JsonElement jsonElement = gson.toJsonTree(record.asMap());
+					recommendUrl = gson.fromJson(jsonElement, RecommendUrl.class);
+					relatedList.add(recommendUrl);
+				}
+				return "Working";
+			}
+		});
+		relatedList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+			return s2.compareTo(s1);
+		}));
+		System.out.println(Greeting);
+		return relatedList;
+	}
+//		String Query2="Match(n:url)-[x:"+userInput.getIntent()+"]->(m:concept)-[:Related]->(c:concept{name:\""+userInput.getConcept()
+//		+ "\""
+//		+"}),(d:Domain{name:\""+userInput.getDomain()
+//		+ "\""
+//		+"})return n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator,x.name as intentRecommend ,x.confidenceScore as confidenceScore,m.name as conceptRecommend,d.name as domainRecommend";
+//		if (userInput.getIntent()=="Beginner"){
+//			String Query3 = "Match(n:url)-[x:Intermediate]->(c:concept{name:\"" + userInput.getConcept()
+//			+ "\""
+//			+ "}),(d:Domain{name:\"" + userInput.getDomain()+ "\"" + "})return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, x.name as intentRecommend,x.confidenceScore as confidenceScore,c.name as conceptRecommend,d.name as domainRecommend";
+//		}else if((userInput.getIntent()=="Intermediate")){
+//			String Query3 = "Match(n:url)-[x:Advance]->(c:concept{name:\"" + userInput.getConcept()
+//			+ "\""
+//			+ "}),(d:Domain{name:\"" + userInput.getDomain()+ "\"" + "})return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, x.name as intentRecommend,x.confidenceScore as confidenceScore,c.name as conceptRecommend,d.name as domainRecommend";
+//		}else if((userInput.getIntent()=="Illustration")){
+//		}
+
+
+}

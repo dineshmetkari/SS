@@ -1,0 +1,8 @@
+package com.stackroute.service;
+
+@Service
+public class Service implements AutoCloseable {
+	
+	
+
+}

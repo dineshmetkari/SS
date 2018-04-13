@@ -1,0 +1,37 @@
+package com.stackroute.model;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class RecommendationModel {
+@Override
+	public String toString() {
+		return "RecommendationModel [intentRecommendations=" + intentRecommendations + ", subConceptRecommendations="
+				+ subConceptRecommendations + ", relatedconceptRecommendations=" + relatedConceptRecommendations + "]";
+	}
+private ArrayList<RecommendUrl> intentRecommendations;
+private ArrayList<RecommendUrl> subConceptRecommendations;
+private ArrayList<RecommendUrl> relatedConceptRecommendations;
+public ArrayList<RecommendUrl> getIntentRecommendations() {
+	return intentRecommendations;
+}
+public void setIntentRecommendations(ArrayList<RecommendUrl> intentRecommendations) {
+	this.intentRecommendations = intentRecommendations;
+}
+public ArrayList<RecommendUrl> getSubConceptRecommendations() {
+	return subConceptRecommendations;
+}
+public void setSubConceptRecommendations(ArrayList<RecommendUrl> subConceptRecommendations) {
+	this.subConceptRecommendations = subConceptRecommendations;
+}
+public ArrayList<RecommendUrl> getRelatedconceptRecommendations() {
+	return relatedConceptRecommendations;
+}
+public void setRelatedconceptRecommendations(ArrayList<RecommendUrl> relatedconceptRecommendations) {
+	this.relatedConceptRecommendations = relatedconceptRecommendations;
+}
+
+
+}

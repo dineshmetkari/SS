@@ -42,8 +42,6 @@ public class FetchService implements AutoCloseable {
 	}
 	public ArrayList<FetchUrl> fetchedUrl(String Query){
 		driver = GraphDatabase.driver(uri,AuthTokens.basic(user, password));
-		JSONObject searchObject =new JSONObject();
-		JSONArray joArray = new JSONArray();
 		ArrayList<FetchUrl> fetchList = new ArrayList<>();
 		Session session = driver.session();
 		String Greeting= session.writeTransaction(new TransactionWork<String>()
@@ -91,9 +89,7 @@ public class FetchService implements AutoCloseable {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-			for(int i=0; i<fetchList.size();i++){
-			System.out.println(fetchList.get(i).toString());
-			}
+			
 		return fetchList;
 
 	}

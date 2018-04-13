@@ -5,17 +5,21 @@ services:
   image-crawler-service:
     restart: always
     build: ./ImageCrawlerService
+    hostname: 172.23.238.151
     ports:
       - 8090:8090
 
   orchestra-service:
     restart: always
     build: ./OrchestraService
+    hostname: 172.23.238.151
     ports:
       - 8890:8890
 
   user-search-service:
     restart: always
     build: ./UserSearchService
+    hostname: 172.23.238.151
     ports:
-      - 8080:8080
+      - 8091:8091
+

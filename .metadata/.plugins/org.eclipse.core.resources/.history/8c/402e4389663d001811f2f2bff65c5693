@@ -1,0 +1,16 @@
+package com.stackroute.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class RecommendService implements AutoCloseable {
+
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

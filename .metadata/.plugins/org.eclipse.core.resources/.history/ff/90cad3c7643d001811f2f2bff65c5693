@@ -1,0 +1,14 @@
+package com.stackroute.service;
+
+@Service
+public class Service implements AutoCloseable {
+
+	@Override
+	public void close() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}
