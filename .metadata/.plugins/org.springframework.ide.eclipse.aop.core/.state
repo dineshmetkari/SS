@@ -2,6 +2,8 @@
 <aop-reference-model>
 <aop-project name="UserSearchService"/>
 <aop-project name="OrchestraService"/>
+<aop-project name="Redisson"/>
 <aop-project name="restaurant-service"/>
 <aop-project name="ImageCrawlerService"/>
+<aop-project name="RecommendationService"/>
 </aop-reference-model>

@@ -1,5 +1,0 @@
-
-#neo4j
-uri = bolt://172.23.238.152
-username = neo4j
-password = password

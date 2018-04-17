@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.model.FetchUrl;
-import com.stackroute.model.Neo4jModel;
+
 import com.stackroute.model.UserInput;
 import com.stackroute.service.FetchService;
-import com.stackroute.service.NeoListService;
+
 
 @CrossOrigin
 @RestController
@@ -25,16 +25,10 @@ import com.stackroute.service.NeoListService;
 public class Controller {
 	@Autowired
 	private FetchService fetchService;
-	@Autowired
-	private Neo4jModel neoList;
+	
 	@Autowired
 	UserInput userInput;
-	@Autowired
-	private NeoListService neoListService;
-	// FetchService fetchService=new FetchService("bolt://172.23.238.165",
-	// "neo4j", "password");;
 	
-
 //	@Value("${uri}")
 //	String uri;
 //	@Value("${user}")
@@ -58,14 +52,5 @@ System.out.println(fetchedUrls.toString());
 		return new ResponseEntity<ArrayList<FetchUrl>>(fetchedUrls, HttpStatus.CREATED);
 
 	}
-	@GetMapping(value="/neo4j", produces ="application/json")
-	public ResponseEntity<Neo4jModel> neoUser(){
-		String Query1 = "Match(n:concept) return n.name as concept";
-		String Query2 = "Match(n:Domain) return n.name as domain";
-		 neoList = neoListService.neo4jList(Query1, Query2);
-		 
-		return new ResponseEntity<Neo4jModel>(neoList,HttpStatus.CREATED);
 	
-	}
-
 }

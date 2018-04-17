@@ -5,21 +5,36 @@ services:
   image-crawler-service:
     restart: always
     build: ./ImageCrawlerService
-    hostname: 172.23.238.151
+    hostname: 172.23.238.178
     ports:
       - 8090:8090
 
   orchestra-service:
     restart: always
     build: ./OrchestraService
-    hostname: 172.23.238.151
+    hostname: 172.23.238.178
     ports:
       - 8890:8890
 
   user-search-service:
     restart: always
     build: ./UserSearchService
-    hostname: 172.23.238.151
+    hostname: 172.23.238.178
     ports:
       - 8091:8091
+	
+  recommendation-service:
+    restart: always
+    build: ./RecommendationService
+    hostname: 172.23.238.178
+    ports:
+      - 8092:8092
+
+  neo4jManager:
+    restart: always
+    build: ./Neo4jManager
+    hostname: 172.23.238.178
+    ports:
+      -8096:8096
+ 
 
