@@ -34,7 +34,7 @@ Thumbs.db
 .classpath
 .idea
 *.iml
-.git
+*.git
 atlassian-ide-plugin.xml
 target
 mvnw
