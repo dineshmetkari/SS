@@ -58,10 +58,10 @@ public class GoogleApiSearchService{
 			runningNumber++;
 			try {
 				String toSearch = searchURL + "key=" + apiKey + "&cx=" + customSearchEngineKey + "&q=";
-				toSearch += (domain+'+'+concept);
+				toSearch += (domain.trim().replaceAll("\\s+", "%20")+'+'+concept.trim().replaceAll("\\s+", "%20"));
 				toSearch += "&alt=json";
 				toSearch += "&start=" + startPoint;
-				toSearch += "&num=" + numberOfRuns;
+				toSearch += "&num=" + numberOfUrls;
 				
 				URL url = new URL(toSearch);
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();

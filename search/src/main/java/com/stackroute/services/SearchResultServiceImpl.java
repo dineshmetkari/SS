@@ -18,6 +18,8 @@ import com.stackroute.domain.SearchResult;
 import com.stackroute.exception.ResultAlreadyExistsException;
 import com.stackroute.repository.SearchRepository;
 
+import io.jsonwebtoken.Jwts;
+
 @Service
 /**
  * RestaurantServiceImpl class is implementing RestaurantService interface and
@@ -28,6 +30,10 @@ import com.stackroute.repository.SearchRepository;
  */
 public class SearchResultServiceImpl implements SearchResultService {
 
+	  static final long EXPIRATIONTIME = 864000; // 10 days
+	  static final String SECRET = "ThisIsASecret";
+	  static final String TOKEN_PREFIX = "Bearer";
+	  static final String HEADER_STRING = "Authorization";
 	@Value("${exchange}")
 	private String exchange;
 	
@@ -174,4 +180,39 @@ public class SearchResultServiceImpl implements SearchResultService {
 		}
 		return searchResults;
 	}
+
+	@Override
+	public String validateToken(String token) {
+		// TODO Auto-generated method stub
+		
+		String result="";
+	    if (token != null) {
+	        // parse the token.
+	        Date expiryDate = Jwts.parser()
+	            .setSigningKey(SECRET)
+	            .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+	            .getBody()
+	            .getExpiration();
+	        
+	        //System.out.println(date);
+	        
+	        //System.out.println(new Date(System.currentTimeMillis()));
+	        
+	        long currentTimeMs=System.currentTimeMillis();
+	        System.out.println(expiryDate);
+	        Date date=new Date(currentTimeMs);
+	        
+	        
+	        if(date.compareTo(expiryDate)>=0)
+	        {
+	      	   result="Failed";
+	        }
+	        else{
+	      	  result="Successful";
+	        }
+
+	      }
+		return result;
+	}
+
 }

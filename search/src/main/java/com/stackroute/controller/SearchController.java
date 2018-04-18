@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.domain.SearchQuery;
 import com.stackroute.domain.SearchResult;
+import com.stackroute.exception.TokenInvalidException;
 import com.stackroute.services.SearchResultService;
 
 //import io.swagger.annotations.Api;
@@ -60,10 +63,30 @@ public class SearchController {
 	 * @param SearchQuery
 	 * @return SearchResult
 	 */
-	public ResponseEntity<List<SearchResult>> takeQuery(@RequestBody final SearchQuery searchQuery) {
-		final List<SearchResult> processedResult = searchResultService.takeQuery(searchQuery);
-
-		return new ResponseEntity<List<SearchResult>>(processedResult, HttpStatus.CREATED);
+	public ResponseEntity<?> takeQuery(@RequestHeader("token") String token,@RequestBody final SearchQuery searchQuery) {
+	
+		String isValid = searchResultService.validateToken(token);
+		System.out.println(token);
+		boolean flag=false;
+		
+		System.out.println(isValid);
+		List<SearchResult> processedResult = null;
+		
+		//isValid="Failed";
+		
+		System.out.println(isValid);
+		if(isValid.equals("Failed"))
+		{
+			String message="Token is invalid";
+			return new ResponseEntity<String>(message, HttpStatus.CREATED);
+		}
+		
+		else
+		{
+			processedResult = searchResultService.takeQuery(searchQuery);
+			System.out.println(processedResult);
+			return new ResponseEntity<List<SearchResult>>(processedResult, HttpStatus.CREATED);
+		}
 
 	}
 

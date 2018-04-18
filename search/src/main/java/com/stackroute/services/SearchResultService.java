@@ -48,5 +48,8 @@ public interface SearchResultService {
 	 * @return
 	 */
 	SearchResult searchByDomainAndConcept(String domain, String concept);
+
+
+	String validateToken(String token);
 	
 }

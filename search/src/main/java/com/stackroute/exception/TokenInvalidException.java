@@ -4,14 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class ResultNotFoundException extends RuntimeException {
+public class TokenInvalidException extends RuntimeException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 
-	public ResultNotFoundException(String exception) {
+	public TokenInvalidException(String exception) {
 		super(exception);
 	}
 

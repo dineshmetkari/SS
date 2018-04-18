@@ -20,8 +20,8 @@ public class CustomException extends ResponseEntityExceptionHandler {
 	    return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	  }
 
-	  @ExceptionHandler(ResultNotFoundException.class)
-	  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(ResultNotFoundException ex, WebRequest request) {
+	  @ExceptionHandler(TokenInvalidException.class)
+	  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(TokenInvalidException ex, WebRequest request) {
 	    ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage(),
 	        request.getDescription(false));
 	    return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
