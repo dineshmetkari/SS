@@ -23,6 +23,7 @@
 		<module>ConfidenceScoreCalculator</module>
 		<module>search</module>
 		<module>UserSearchService</module>
+		<module>Ne04jManager</module>
 	</modules>
 </project>
 

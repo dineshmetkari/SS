@@ -13,14 +13,13 @@
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.test.context.junit4.SpringRunner;
 //
-//import com.stackroute.model.FetchUrl;
+//
 //import com.stackroute.model.UserInput;
 //
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
 //public class FetchServiceIntegrationTest {
 //
-//	private FetchService fetchService = new FetchService();
 //
 ////	@Before
 ////	public void setUpMock() {

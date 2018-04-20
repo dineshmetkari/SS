@@ -39,3 +39,4 @@ atlassian-ide-plugin.xml
 target
 mvnw
 mvnw.cmd
+docker-compose.yml

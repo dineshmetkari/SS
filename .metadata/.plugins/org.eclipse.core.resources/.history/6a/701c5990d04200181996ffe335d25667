@@ -1,0 +1,14 @@
+package com.stackroute.service;
+
+import org.redisson.config.Config;
+import org.springframework.stereotype.Service;
+
+@Service
+public class FetchNeoUrl {
+	
+	
+	public 
+	Config config = new Config();
+	config.useSingleServer().setAddress("redis://localhost:6379");
+
+}

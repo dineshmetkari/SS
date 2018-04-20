@@ -1,0 +1,19 @@
+package com.stackroute.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
+import com.stackroute.model.ApiTermModel;
+
+@Service
+public class WordApiService {
+	
+	
+	public ApiTermModel ApiResults(String term){
+	 String uri = "https://wordsapiv1.p.mashape.com/words/"+term +"/synonyms";
+	 RestTemplate restTemplate = new RestTemplate();
+	  ApiTermModel apiTermModel = restTemplate.getForObject(uri, ApiTermModel.class);
+		return apiTermModel;
+}
+}

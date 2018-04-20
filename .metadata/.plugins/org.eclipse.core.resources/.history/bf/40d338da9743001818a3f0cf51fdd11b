@@ -1,0 +1,5 @@
+package com.stackroute.redisson;
+
+public class Neo4jIntentModel {
+
+}

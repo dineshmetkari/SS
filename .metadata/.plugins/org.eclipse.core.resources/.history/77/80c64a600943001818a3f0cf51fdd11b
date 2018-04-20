@@ -1,0 +1,5 @@
+package com.stackroute.messaging;
+
+public class Publisher {
+
+}

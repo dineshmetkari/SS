@@ -1,0 +1,9 @@
+
+#neo4j
+server.port= 8091
+uri = bolt://172.23.238.152
+username = neo4j
+password = password
+#rabbitmq
+queueName = nlp=search-result-queue
+publishQueue = user-search-result-queue

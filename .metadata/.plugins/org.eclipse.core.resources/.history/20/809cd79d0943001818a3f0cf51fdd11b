@@ -1,0 +1,4 @@
+#server.port= 8092
+#uri = bolt://172.23.238.165
+#username = neo4j
+#password = password
