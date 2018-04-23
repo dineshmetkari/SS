@@ -9,6 +9,7 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.stackroute.redisson.IntentModel;
 import com.stackroute.redisson.Neo4jIntentModel;
+import com.stackroute.redisson.TermBankSynonyms;
 
 
 @Service
@@ -24,39 +26,55 @@ public class SynonymPopulation  implements ApplicationListener<ContextRefreshedE
 	@Autowired
 	WordApiService wordApiService ;
 
+	@Autowired
+	TermBankSynonyms termBank;
+	
+	@Autowired
+	IntentPopulation intentPopulation;
+	
+	private RBucket<TermBankSynonyms> bucket1;
+	
+
+	public RBucket<TermBankSynonyms> getBucket1() {
+		return bucket1;
+	}
+
+
+	public void setBucket1(RBucket<TermBankSynonyms> bucket1) {
+		this.bucket1 = bucket1;
+	}
+	
+	@Value("${redisHost}")
+	String redisHost;
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		Config config = new Config();
-		config.useSingleServer().setAddress("redis://localhost:6379");
+		config.useSingleServer().setAddress(redisHost);
 		RedissonClient redisson = Redisson.create(config);
+		bucket1 = redisson.getBucket("TermModel");
 		RBucket<Neo4jIntentModel> bucket = redisson.getBucket("intentModel");
 		ArrayList<IntentModel> termList = bucket.get().getIntentList();
-		
-		ArrayList<Map<String,ArrayList<String>>> intentTermList = new ArrayList<>();
-		Map<String,ArrayList<Map<String,ArrayList<String>>>> synonymMap = new HashMap<>();
-		
+	
+		Map<String,Map<IntentModel,ArrayList<String>>> synonymMap = new HashMap<>();
+		 Map<IntentModel,ArrayList<String>> termMap = new HashMap<>();
 		for(int i=0;i<termList.size();i++){
 			IntentModel intentModel = termList.get(i);
 			String intent=intentModel.getIntent();
 			String term = intentModel.getTerm();
 			 ArrayList<String> synonyms = wordApiService.ApiResults(term);
 			 System.out.println(synonyms.toString());
-			 Map<String,ArrayList<String>> termMap = new HashMap<>();
-			termMap.put(term, synonyms);
+			termMap.put(intentModel, synonyms);
 			if(synonymMap.containsKey(intent)){
-				ArrayList<Map<String,ArrayList<String>>> tempList = synonymMap.get(intent);
-				tempList.add(termMap);
-				synonymMap.put(intent, tempList);
+				synonymMap.put(intent, termMap);
 			}else{
-				ArrayList<Map<String,ArrayList<String>>> tempIntentList = new ArrayList<>();
-				tempIntentList.add(termMap);
-				synonymMap.put(intent, tempIntentList);
+				synonymMap.put(intent, termMap);
 			}
 		}
-		Gson gson = new Gson();
-		String json = gson.toJson(synonymMap);
-		System.out.println(json);
+		termBank.setSynoMap(synonymMap);
+		bucket1.set(termBank);
+		intentPopulation.neo4jPopulation(synonymMap);
 
 	}
 

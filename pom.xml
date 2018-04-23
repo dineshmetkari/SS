@@ -22,8 +22,9 @@
 		<module>VideoCrawlerService</module>
 		<module>ConfidenceScoreCalculator</module>
 		<module>search</module>
-		<module>UserSearchService</module>
+		<module>UserSearchService</moduler>
 		<module>Ne04jManager</module>
+		<module>TermBankService</module>
 	</modules>
 </project>
 

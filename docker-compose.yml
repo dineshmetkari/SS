@@ -1,7 +1,6 @@
 version: '2.0'
 
 services:
-
   image-crawler-service:
     restart: always
     build: ./ImageCrawlerService
@@ -22,7 +21,7 @@ services:
     hostname: 172.23.238.178
     ports:
       - 8091:8091
-	
+
   recommendation-service:
     restart: always
     build: ./RecommendationService
@@ -30,11 +29,18 @@ services:
     ports:
       - 8092:8092
 
-  neo4jManager:
+  neo4j-manager:
     restart: always
     build: ./Neo4jManager
     hostname: 172.23.238.178
     ports:
-      -8096:8096
- 
+      - 8096:8096
 
+  redis:
+    image: redis:latest
+    restart: always
+    hostname: 172.23.238.178
+    ports:
+      - 6379:6379
+    volumes:
+      - $HOME/redis/data:/data

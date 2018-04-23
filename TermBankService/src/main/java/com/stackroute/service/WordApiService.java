@@ -27,7 +27,7 @@ public class WordApiService {
 			 synList=gson.fromJson(json, java.util.ArrayList.class);
 			 for(int i =0;i<synList.size();i++){
 				 if(synList.get(i).contains(" ")){
-					 synList.remove(i);
+					 synList.remove(i--);
 				 }
 			 }
 		}
