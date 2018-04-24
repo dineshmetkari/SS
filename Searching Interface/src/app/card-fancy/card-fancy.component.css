@@ -1,0 +1,67 @@
+.example-card {
+  max-width: 960px;
+  align-self: center;
+  margin-bottom: 25px;
+}
+
+.example-header-image {
+
+  shape-outside: none;
+  width: 20px;
+  height: 20px;
+}
+app-card-fancy{
+
+}
+mat-card-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 100;
+}
+.material-icons{
+  flex-shrink: 0;
+width:40px;
+height: 20px;
+
+}
+
+ul{
+
+  list-style-type: none;
+
+}
+mat-chip{
+  padding-top: 100px;
+
+}
+.icons{
+  margin: auto;
+align-content: middle;
+text-align: middle;
+align-items: middle;
+align-self: center;
+
+
+
+}
+.mat-chip-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top:25px;
+}
+.mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
+    margin: 8px 0 0 2px;
+}
+.mat-chip{
+padding-left: 200px;
+}
+.l{
+  align-content: middle;
+text-align: middle;
+align-items: middle;
+align-self: center;
+
+
+  }

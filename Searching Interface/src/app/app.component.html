@@ -1,0 +1,61 @@
+<button type="button" name="button" (click) = 'toggleView()'>Toggle</button>
+<div [hidden] = 'chatInterface'>
+  <div style="text-align:center">
+    <h1 style="color: white">
+      Welcome to {{title}}!
+    </h1>
+    <div>
+
+      <div class="chat-container">
+        <!-- <textarea rows="6" cols="100" class="chat1" id="chat1"> -->
+
+            <!-- </textarea> -->
+        <div class="chat">
+          <!-- <mat-card class="cardType">
+          <mat-card-header>
+          <mat-card-title> Me </mat-card-title>
+          <mat-card-subtitle> Me </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        This is where message will come.
+      </mat-card-content>
+    </mat-card> -->
+  </div>
+</div>
+</div>
+
+</div>
+<!-- </div> -->
+
+<div class="footer">
+  <div class="send-bar">
+
+    <!-- <button class="send" type="button" name="button" (click)="sendMessage(input.value)"></button> -->
+    <form>
+      <input  id="input" type="text" #input>
+      <button mat-icon-button color="white" class="send" (click)="sendMessage(input.value, $event)">
+          <mat-icon style="color: white">send</mat-icon>
+      </button>
+      <!-- <input type="submit" value = "submit" class = "send" (click) = "sendMessage(input.value, $event)"> -->
+      <!-- <input type="text" x-webkit-speech> -->
+      <button mat-icon-button (click)="startRecP5($event)" color="white" >
+        <mat-icon style="color: white">mic</mat-icon>
+     </button>
+    </form>
+    <!-- <input type="file" accept="audio/x-waw" #audioIn> -->
+    <!-- <button type="button" name="button" (click)="sendAudio(audioIn.value)">Audio</button> -->
+    <!-- <div class="send" (click)="sendMessage(input.value)"></div> -->
+  </div>
+
+</div>
+</div>
+<div [hidden] = 'searchResult'>
+  <h1 style="color: white">Search Results Found</h1>
+  <div>
+    <ul>
+      <li *ngFor="let item of result">
+        <app-card-fancy  [cardDetails] = item></app-card-fancy>
+      </li>
+    </ul>
+  </div>
+</div>

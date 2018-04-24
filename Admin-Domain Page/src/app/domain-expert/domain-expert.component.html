@@ -1,0 +1,51 @@
+<!-- <button type="button" name="button" (click)="checkResponse()">click</button> -->
+<app-navbar [role] = "role"></app-navbar>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header  (focus) = "checking()">
+      <mat-panel-title>
+        <b> Populate </b>
+      </mat-panel-title>
+      <mat-panel-description>
+        Populate the neo4j graph.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Domain" [matAutocomplete]="auto" [(ngModel)]="domain" (keyup) = "checking()" [formControl]="domainFormControl" [errorStateMatcher]="matcher">
+      <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let domain of newDomainList | async" [value]="domain">
+        {{ domain }}
+      </mat-option>
+    </mat-autocomplete>
+      <mat-hint>Enter Domain</mat-hint>
+      <mat-error *ngIf="domainFormControl.hasError('required')">
+        Enter one <strong>domain</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-hint>Type a concept</mat-hint>
+      <input matInput placeholder="Concept" [matAutocomplete]="autoComplete" [(ngModel)]="concepts" [formControl]="conceptFormControl" (keyup) = "checking()" [errorStateMatcher]="matcher">
+      <mat-autocomplete #autoComplete="matAutocomplete">
+      <mat-option *ngFor="let concept of newConceptList | async" [value]="concept">
+        {{ concept }}
+      </mat-option>
+    </mat-autocomplete>
+        <!-- <mat-option *ngFor="let role of Roles" [value]="role.name"> {{ role.name }}
+        </mat-option> -->
+      <!-- </mat-select> -->
+      <mat-error *ngIf="conceptFormControl.hasError('required')">
+        Enter a <strong>concept</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-action-row>
+      <button class="populatebutton" type="submit" mat-button color="primary" [disabled]="buttondisabled"  (click)="populatebutton()">Populate</button>
+    </mat-action-row>
+    <mat-action-row>
+      <button class="populatebutton" type="submit" mat-button color="primary" [disabled]="buttondisabled"  (click)="populateAllConcepts()">Populate All</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+
+
+</mat-accordion>

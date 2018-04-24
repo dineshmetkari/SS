@@ -1,0 +1,74 @@
+.chat-container {
+  height: 80%;
+  width: 100%;
+}
+
+.cardType {
+  width: auto;
+  padding: 10px;
+  margin: 5px auto;
+  float: right;
+
+
+}
+
+.chat {
+  text-align: left;
+  margin: 0 auto;
+  width: 50%;
+  height: 100%;
+  display: block;
+  padding: 3px;
+}
+
+.footer {
+  margin: 0 auto;
+  /* position: absolute; */
+  /* top: 80%; */
+  height: 10vh;
+  width: 100%;
+  overflow: hidden;
+  float: bottom;
+
+}
+.send-bar {
+  margin: 0 auto;
+  height: 70%;
+  width: 50%;
+}
+input {
+  float: right;
+  margin: 5px auto;
+  height: 30px;
+  padding-left: 10px;
+  border-radius: 15px;
+  font-size: 1.5em;
+}
+.send {
+  /* float: right; */
+  /* background: url("../assets/images/send.png"); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  margin-left: 5px;
+}
+
+.typed {
+  display: block;
+  background: white;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  text-align: right;
+}
+.message {
+  display: block;
+  background-color: lightgreen;
+  border: 1px solid red;
+  /* height: 10px; */
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+}

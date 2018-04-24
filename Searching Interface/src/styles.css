@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+  background: url("./assets/images/walls.jpg");
+/* background: linear-gradient(270deg, #4177e6, #5154ea, #862cdd, #cc2cdd, #881894, #ca0f81, #f37ac4); */
+
+/* background: linear-gradient(270deg, #ff7708, #ff7300, #e68739); */
+/* background-size: 600% 600%;
+
+-webkit-animation: AnimationName 19s ease infinite;
+-moz-animation: AnimationName 19s ease infinite;
+animation: AnimationName 19s ease infinite; */
+}
+
+/* @-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+} */

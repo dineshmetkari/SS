@@ -1,0 +1,29 @@
+<div class="nav" *ngIf = 'loggedIn == "true"'>
+  <mat-toolbar class = "toolbar">
+    <mat-toolbar-row class= "avatar">
+      <button mat-icon-button>
+         <!-- disabled = "value" (click) = "logout()"> -->
+        <mat-icon>whatshot</mat-icon>
+      </button>
+      <!-- </mat-card-actions> -->
+        <h1>{{ role }}</h1>
+      <!-- <mat-card-actions> -->
+      <button class="settings" [disabled] = "value" mat-icon-button [matMenuTriggerFor]="menu"  >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Change Password</span>
+      </button>
+      <button mat-menu-item (click) = "logout()">
+        <mat-icon>person_outline</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+<!-- <div *ngIf = "loggedIn != 'true'"> -->
+  <!-- <router-outlet></router-outlet>
+</div> -->

@@ -1,0 +1,22 @@
+ .settings {
+flex : 1 1 auto;
+}
+/*
+.avatar {
+  float: left;
+} */
+
+.nav {
+  background-color: lightgrey;
+  max-height: 400px;
+  width: 100%;
+  margin: auto;
+}
+h1 {
+  width: 100px;
+}
+
+.toolbar {
+  color : orange;
+  padding: 4%;
+}
