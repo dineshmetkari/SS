@@ -41,12 +41,14 @@ import {
 
 import { CardFancyComponent } from "./card-fancy/card-fancy.component";
 import { CardFancyExample } from "./card-fancy/card-fancy-example";
+import { ChatComponent } from "./chat/chat.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     CardFancyComponent,
-    CardFancyExample
+    CardFancyExample,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

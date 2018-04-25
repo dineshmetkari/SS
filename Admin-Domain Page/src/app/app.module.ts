@@ -60,9 +60,10 @@ import { AdminComponent } from "./admin/admin.component";
 import { AdminService } from "./admin/admin.service";
 
 import "angular2-navigate-with-data";
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
-  { path: "home", component: AppComponent },
+  { path: "home", component: LoginComponent },
   { path: "admin", component: AdminComponent },
   { path: "domain-expert", component: DomainExpertComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     DomainExpertComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   exports: [
     CdkTableModule,
