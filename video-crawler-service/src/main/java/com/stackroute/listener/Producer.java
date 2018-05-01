@@ -27,8 +27,7 @@ public class Producer {
 	    
 	    public String produceMsg(JSONObject obj){
 	    	
-	    	    logger.info("This is an info message");
-				amqpTemplate.convertAndSend(mainApplication.publishQueue, String.valueOf(obj.toString()));
+				amqpTemplate.convertAndSend(VideoCrawlerFinalApplication.publishQueue, String.valueOf(obj.toString()));
 	        
 				System.out.println("Send msg = "+  obj.toString());
 				return obj.toString();
