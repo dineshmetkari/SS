@@ -12,7 +12,14 @@ public class UserInput {
 	private String message;
 	private String sessionId;
 	private boolean illustration;
+	private int moreUrl;
 	
+	public int getMoreUrl() {
+		return moreUrl;
+	}
+	public void setMoreUrl(int moreUrl) {
+		this.moreUrl = moreUrl;
+	}
 	public boolean isIllustration() {
 		return illustration;
 	}

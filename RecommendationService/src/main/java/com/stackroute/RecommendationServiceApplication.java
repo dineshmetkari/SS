@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.stackroute.messaging.Receiver;
 
-@EnableDiscoveryClient
 @SpringBootApplication
 public class RecommendationServiceApplication {
 	

@@ -23,7 +23,7 @@ public class FetchNeoUrl {
 	public ArrayList<FetchUrl> fetchedUrl(String domain,String concept,String intent,boolean illustration){
 		
 	Config config = new Config();
-	config.useSingleServer().setAddress("redis://localhost:6379");
+	config.useSingleServer().setAddress("redis://172.23.238.178:6379");
 	RedissonClient redisson = Redisson.create(config);
 	RBucket<Neo4jUrlModel> bucket = redisson.getBucket("urlModel");
 	ArrayList<FetchUrl> fetchedList=new ArrayList<>();

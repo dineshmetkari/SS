@@ -76,7 +76,11 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 					IntentModel intentModel = new IntentModel();
 					intentModel.setTerm(record.get("term").asString());
 					intentModel.setIntent(record.get("intent").asString());
+					try{
 					intentModel.setWeight(record.get("weight").asString());
+					}catch(Exception e){
+						intentModel.setWeight(record.get("weight").toString());
+					}
 					intentList.add(intentModel);
 				}
 				neo4jIntentModel.setIntentList(intentList);

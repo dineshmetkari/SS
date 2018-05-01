@@ -23,7 +23,7 @@ public class Controller {
 
 	@GetMapping(value = "/user", produces = "application/json")
 	public ResponseEntity <RecommendationModel> addUser(@RequestParam("domain") final String domain,
-			@RequestParam("concept") final String concept, @RequestParam("intent") final String intent) {
+			@RequestParam("concept") final String concept, @RequestParam("intent") final String intent,@RequestParam("sessionId") final String sessionId) {
 
 		//		String Query = "Match(n:url)-[x:" + userInput.getIntent() + "]->(c:concept{name:\"" + userInput.getConcept()
 		//		+ "\""
@@ -31,7 +31,7 @@ public class Controller {
 		//		n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator
 		//		as counterIndicator, x.confidenceScore as confidenceScore";
 
-		final  RecommendationModel recommendationModel = recommendService.Recommendations(domain, concept, intent);
+		RecommendationModel recommendationModel = recommendService.Recommendations(domain, concept, intent,sessionId);
 		System.out.println(recommendationModel.toString());
 		return new ResponseEntity<RecommendationModel>( recommendationModel, HttpStatus.CREATED);
 

@@ -1,29 +1,23 @@
 package com.stackroute.redisson;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class Neo4jConceptModel {
+
 	
-	private ArrayList<String> domainList;
-	private ArrayList<String> conceptList;
-	public ArrayList<String> getDomainList() {
-		return domainList;
-	}
+	private Map<String,ArrayList<String>> conceptList;
 
-	public void setDomainList(ArrayList<String> domainList) {
-		this.domainList = domainList;
-	}
-
-	public ArrayList<String> getConceptList() {
+	public Map<String, ArrayList<String>> getConceptList() {
 		return conceptList;
 	}
 
-	public void setConceptList(ArrayList<String> conceptList) {
+	public void setConceptList(Map<String, ArrayList<String>> conceptList) {
 		this.conceptList = conceptList;
 	}
-
+	
 
 }

@@ -1,6 +1,8 @@
 package com.stackroute.dataLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
@@ -50,10 +52,9 @@ public class DataLoaderConcept implements ApplicationListener<ContextRefreshedEv
 		public void onApplicationEvent(ContextRefreshedEvent arg0) {
 			// TODO Auto-generated method stub
 
-			System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList");
+			System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList bcsbjcbscs");
 			Neo4jConceptModel neoModel = new Neo4jConceptModel();
-			String Query1 = "Match(n:concept) return n.name as concept";
-			String Query2 = "Match(n:Domain) return n.name as domain";
+			String Query1 = "Match(n:concept)-[:SubConceptOf*]->(d:Domain) return n.name as concept,d.name as domain";
 			
 			Config config = new Config();
 			config.useSingleServer().setAddress(redisHost);
@@ -61,8 +62,7 @@ public class DataLoaderConcept implements ApplicationListener<ContextRefreshedEv
 
 			System.out.println("config working");
 			bucket = redisson.getBucket("neoModel");
-			ArrayList<String> conceptList = new ArrayList<>();
-			ArrayList<String> domainList = new ArrayList<>();
+			Map<String,ArrayList<String>> conceptList = new HashMap<>();
 			driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
 			Session session1 = driver.session();
 			String Message1 = session1.writeTransaction(new TransactionWork<String>() {
@@ -72,27 +72,20 @@ public class DataLoaderConcept implements ApplicationListener<ContextRefreshedEv
 
 						Record record = result.next();
 						String concept = record.get("concept").asString();
-						conceptList.add(concept);
+						String domain = record.get("domain").asString();
+						if(conceptList.containsKey(domain)){
+							ArrayList<String> tempList = conceptList.get(domain);
+							tempList.add(concept);
+						}else{
+							ArrayList<String> newList = new ArrayList<>();
+							conceptList.put(domain,newList);
+						}
 					}
 					neoModel.setConceptList(conceptList);
 					return "Neo4j ConceptList Working";
 				}
 			});
 
-			Session session2 = driver.session();
-			String Message2 = session2.writeTransaction(new TransactionWork<String>() {
-				public String execute(Transaction tx) {
-					StatementResult result = tx.run(Query2);
-					while (result.hasNext()) {
-
-						Record record = result.next();
-						String domain = record.get("domain").asString();
-						domainList.add(domain);
-					}
-					neoModel.setDomainList(domainList);
-					return "Neo4jDomainList Working";
-				}
-			});
 			bucket.set(neoModel);
 		}
 		

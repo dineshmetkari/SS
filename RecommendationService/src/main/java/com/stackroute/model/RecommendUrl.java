@@ -16,8 +16,16 @@ public class RecommendUrl {
 	private int counterIndicator;
 	private String titleUrl;
 	private String metaUrl;
+	private String sessionId;
+	
 
 	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 	public String getRecommendationString() {
 		return recommendationString;
 	}

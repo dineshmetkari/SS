@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, Input } from "@angular/core";
 import { MatAutocompleteModule } from "@angular/material";
 import { FormControl } from "@angular/forms";
 
@@ -52,22 +52,23 @@ import {
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppService } from "./app.service";
-import { RequestOptions, HttpModule } from "@angular/http";
+import { RequestOptions, HttpModule, Http } from "@angular/http";
 import { CdkTableModule } from "@angular/cdk/table";
 import { DomainExpertComponent } from "./domain-expert/domain-expert.component";
 import { DomainExpertService } from "./domain-expert/domain-expert.service";
 import { AdminComponent } from "./admin/admin.component";
 import { AdminService } from "./admin/admin.service";
-
-import "angular2-navigate-with-data";
-import { LoginComponent } from './login/login.component';
+import { TermBankComponent } from "./term-bank/term-bank.component";
+import { Observable } from "rxjs/Observable";
+import { TermBankService } from "./term-bank/term-bank.service";
+import { TermBankModel } from "./term-bank/term-bank.model";
 
 const appRoutes: Routes = [
-  { path: "home", component: LoginComponent },
+  { path: "home", component: AppComponent },
   { path: "admin", component: AdminComponent },
   { path: "domain-expert", component: DomainExpertComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  {path: '**', redirectTo: "/home", pathMatch: 'full'}
+  { path: "**", redirectTo: "/home", pathMatch: "full" }
 ];
 
 @NgModule({
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     DomainExpertComponent,
     AdminComponent,
-    LoginComponent
+    TermBankComponent
   ],
   exports: [
     CdkTableModule,
@@ -131,6 +132,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatDialogModule,
     BrowserModule,
+    MatChipsModule,
+    MatCheckboxModule,
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
@@ -151,7 +154,13 @@ const appRoutes: Routes = [
     RouterModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AppService, DomainExpertService, AdminService],
+  providers: [
+    AppService,
+    DomainExpertService,
+    AdminService,
+    TermBankService,
+    TermBankModel
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

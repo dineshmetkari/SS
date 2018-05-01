@@ -32,7 +32,7 @@ public class Receiver {
 	
 	private String json;
 	
-	 public  void receiveMessage(String message) {
+	public  void receiveMessage(String message) {
 	        System.out.println("Received <" + message + ">");
 			String fetchedMessage=message;
 			
@@ -46,12 +46,25 @@ public class Receiver {
 				String sessionId = userInput.getSessionId();
 				String type1 = userInput.getType();
 				boolean illustration = userInput.isIllustration();
-				
+				int n = userInput.getMoreUrl();
 				System.out.println(domain + " " + concept +" "+intent);
 				ArrayList<FetchUrl> fetchList	=fetchNeoUrl.fetchedUrl(domain, concept, intent,illustration);
-	
+				if(n>0){
+					n=n*10;
+					ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
+					for(int i=n; i< n+10;i++){
+						FetchUrl fetchUrl = fetchList.get(i);
+						finalFetchList.add(fetchUrl);
+					}
 				
-				if(fetchList.isEmpty()){
+				}
+				ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
+				for(int i=0;i<10;i++){
+					FetchUrl fetchUrl = fetchList.get(i);
+					finalFetchList.add(fetchUrl);
+				}
+				
+				if(finalFetchList.isEmpty()){
 					json = "{\"message\":\"Urls not populated yet\",\"concept\":\""+concept+"\",\"domain\":\""+domain+"\"}";
 					output.setMessage(json);
 					output.setSessionId(sessionId);
@@ -60,7 +73,7 @@ public class Receiver {
 					output.setIllustration(illustration);
 				
 				}else{
-						output.setResponse(fetchList);
+						output.setResponse(finalFetchList);
 						output.setSessionId(sessionId);
 						output.setType(type1);
 						output.setMessage("Good to Go");

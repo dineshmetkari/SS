@@ -36,8 +36,8 @@ public class Receiver {
 				String domain = userInput.getDomain();
 				String concept = userInput.getConcept();
 				String intent =userInput.getIntent();
-				RecommendationModel recommendationModel	= recommendation.Recommendations(domain, concept, intent);
-				
+				String sessionId = userInput.getSessionId();
+				RecommendationModel recommendationModel	= recommendation.Recommendations(domain, concept, intent,sessionId);
 					String json = gson.toJson(recommendationModel);
 					try {
 						publish.publishMsg(json);

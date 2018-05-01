@@ -96,7 +96,24 @@ public class Service {
 				} 
 
 				Model finalModel =modelMap.get(unique);
+				int imgCount= finalModel.getImgCount();
+				int codeCount =finalModel.getCodecount();
+				int videoCount = finalModel.getVideoCount();
 				JSONObject jo = new JSONObject();
+				int count=0;
+				if(imgCount==-1){
+					imgCount =0;
+					count++;
+					finalModel.setImgCount(imgCount); 
+				} if(codeCount==-1){
+					codeCount=0;
+					count++;
+					finalModel.setCodecount(codeCount);
+				}if(videoCount==-1){
+					videoCount=0;
+					count++;
+					finalModel.setVideoCount(videoCount);
+				}if(count<2){
 				jo.put("concept",finalModel.getConcept());
 				jo.put("domain", finalModel.getDomain());
 				jo.put("url", finalModel.getUrl());
@@ -150,6 +167,7 @@ public class Service {
 						e1.printStackTrace();
 					}
 					
+				}
 				}
 
 			}

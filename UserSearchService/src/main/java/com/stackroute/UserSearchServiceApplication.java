@@ -15,18 +15,18 @@ import org.springframework.context.annotation.Bean;
 
 import com.stackroute.messaging.Receiver;
 
-@EnableDiscoveryClient
+
 @SpringBootApplication
 public class UserSearchServiceApplication {
 
 	@Value("${queueName}")
 	public  String queueName ;
 	
+	
 	@Value("${publishQueue}")
 	public  String publishQueue ;
     public static final String topicExchangeName = "user-search-result.exchange";
-
-   
+    
     @Bean
     SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
             MessageListenerAdapter listenerAdapter) {
@@ -42,6 +42,7 @@ public class UserSearchServiceApplication {
      return new MessageListenerAdapter(receiver, "receiveMessage");
  
     }
+    
     @Bean
     Queue queue() {
         return new Queue(publishQueue, false);
@@ -51,12 +52,14 @@ public class UserSearchServiceApplication {
     TopicExchange exchange() {
         return new TopicExchange(topicExchangeName);
     }
+    
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(publishQueue);
     }
    
+    
 	
 	public static void main(String[] args) {
 		SpringApplication.run(UserSearchServiceApplication.class, args);
