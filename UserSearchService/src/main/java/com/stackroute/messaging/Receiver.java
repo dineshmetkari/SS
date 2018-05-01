@@ -49,19 +49,19 @@ public class Receiver {
 				int n = userInput.getMoreUrl();
 				System.out.println(domain + " " + concept +" "+intent);
 				ArrayList<FetchUrl> fetchList	=fetchNeoUrl.fetchedUrl(domain, concept, intent,illustration);
+				ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
 				if(n>0){
 					n=n*10;
-					ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
 					for(int i=n; i< n+10;i++){
 						FetchUrl fetchUrl = fetchList.get(i);
 						finalFetchList.add(fetchUrl);
 					}
 				
-				}
-				ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
+				}else {
 				for(int i=0;i<10;i++){
 					FetchUrl fetchUrl = fetchList.get(i);
 					finalFetchList.add(fetchUrl);
+				}
 				}
 				
 				if(finalFetchList.isEmpty()){
@@ -69,7 +69,7 @@ public class Receiver {
 					output.setMessage(json);
 					output.setSessionId(sessionId);
 					output.setType(type1);
-					output.setResponse(fetchList);
+					output.setResponse(finalFetchList);
 					output.setIllustration(illustration);
 				
 				}else{

@@ -9,6 +9,7 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.stackroute.redisson.FetchUrl;
@@ -20,10 +21,13 @@ public class FetchNeoUrl {
 	@Autowired
 	Neo4jUrlModel neo4jUrlModel;
 	
+	@Value("${redisHost}")
+	String redisHost;
+	
 	public ArrayList<FetchUrl> fetchedUrl(String domain,String concept,String intent,boolean illustration){
 		
 	Config config = new Config();
-	config.useSingleServer().setAddress("redis://172.23.238.178:6379");
+	config.useSingleServer().setAddress(redisHost);
 	RedissonClient redisson = Redisson.create(config);
 	RBucket<Neo4jUrlModel> bucket = redisson.getBucket("urlModel");
 	ArrayList<FetchUrl> fetchedList=new ArrayList<>();
