@@ -1,12 +1,150 @@
 version: '2.0'
 
 services:
+  redis:
+    image: redis:latest
+    restart: always
+    hostname: 172.23.238.178
+    ports:
+      - 6379:6379
+    volumes:
+      - redis/data:/data
+
+  neo4j:
+    image: neo4j:latest
+    restart: always
+    hostname: 172.23.238.178
+    ports:
+      - 7474:7474
+      -	7373:7373
+      -	7687:7687
+    volumes:
+      - neo4j/data:/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    hostname: 172.23.238.178
+    ports:
+      - 5672:5672
+      - 5671:5671
+      - 4369:4369
+
+  sql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: honey678
+      MYSQL_DATABASE: UserDB
+    volumes:
+      - sql/data:/var/lib/mysql
+    ports:
+      -3306:3306
+
+  api-gateway:
+    restart: always
+    build: ./api-gateway
+    hostname: 172.23.238.178
+    ports:
+      - 8000:8000
+
+  eureka-server:
+    restart: always
+    build: ./eureka-server
+    hostname: 172.23.238.178
+    ports:
+      - 8071:8071
+
+  config-server:
+    restart: always
+    build: ./config-server
+    hostname: 172.23.238.178
+    ports:
+      - 8888:8888
+
+  rabbitmq-service:
+    restart: always
+    build: ./RabbitMq
+    hostname: 172.23.238.178
+    ports:
+      - 8095:8095
+
   image-crawler-service:
     restart: always
     build: ./ImageCrawlerService
     hostname: 172.23.238.178
     ports:
       - 8090:8090
+
+  video-crawler-service:
+    restart: always
+    build: ./VideoCrawlerService
+    hostname: 172.23.238.178
+    ports:
+      - 8083:8083
+
+  code-crawler-service:
+    restart: always
+    build: ./Code-Crawler-Service
+    hostname: 172.23.238.178
+    ports:
+      - 8080:8080
+
+  content-crawler-service:
+    restart: always
+    build: ./Content-Crawler-Service
+    hostname: 172.23.238.178
+    ports:
+      - 8081:8081
+
+  indexer-service:
+    restart: always
+    build: ./Indexer-service
+    hostname: 172.23.238.178
+    ports:
+      - 8051:8051
+
+  authentication-service:
+    restart: always
+    build: ./Authentication-Service
+    hostname: 172.23.238.178
+    ports:
+      - 8090:8093
+
+  pos-tagging-service:
+    restart: always
+    build: ./pos-tagging-service
+    hostname: 172.23.238.178
+    ports:
+      - 8087:8087
+
+  confidence-score-service:
+    restart: always
+    build: ./confidence-score-service
+    hostname: 172.23.238.178
+    ports:
+      - 8084:8084
+
+  lemmatization-service:
+    restart: always
+    build: ./Lemmatization-Service
+    hostname: 172.23.238.178
+    ports:
+      - 9000:9000
+
+  nlp-service:
+    restart: always
+    build: ./NLP-Service
+    hostname: 172.23.238.178
+    ports:
+      - 9001:9001
+
+  search-service:
+    restart: always
+    build: ./search
+    hostname: 172.23.238.178
+    ports:
+      - 8999:8999
 
   orchestra-service:
     restart: always
@@ -36,11 +174,10 @@ services:
     ports:
       - 8096:8096
 
-  redis:
-    image: redis:latest
+  angular-search-interface:
     restart: always
+    build: ./SearchingInterface
     hostname: 172.23.238.178
     ports:
-      - 6379:6379
-    volumes:
-      - $HOME/redis/data:/data
+      - 4200:4200
+
