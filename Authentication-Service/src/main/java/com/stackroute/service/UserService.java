@@ -1,5 +1,7 @@
 package com.stackroute.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -26,5 +28,14 @@ public class UserService {
 	
 	public User searchByEmailId(String emailId) {
 		return userRepository.findByEmailId(emailId);
+	}
+	
+	public List<User> searchByRole(String role) {
+		return userRepository.findByRole(role);
+	}
+	
+	public String deleteDomainExpert(int id) {
+		userRepository.deleteById(id);
+		return "Domain Expert Deleted";
 	}
 }

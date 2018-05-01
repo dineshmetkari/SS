@@ -13,6 +13,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	public int getId() {
+		return id;
+	}
+	
 	@Column(unique = true)
 	private String emailId;
 	private String password;

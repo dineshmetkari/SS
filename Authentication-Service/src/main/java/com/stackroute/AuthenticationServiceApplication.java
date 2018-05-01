@@ -3,9 +3,13 @@ package com.stackroute;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.RestController;
 
+@EnableDiscoveryClient
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class AuthenticationServiceApplication {
 
@@ -19,28 +23,10 @@ public class AuthenticationServiceApplication {
 	}
 }
 
-//@Configuration
-////@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
-//class SecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//  @Override
-//  protected void configure(HttpSecurity http) throws Exception {
-//      // @formatter:off
-//      http
-//          .httpBasic()
-//          .and()
-//          .authorizeRequests()
-//          .antMatchers("/register", "/login", "/").permitAll()
-//          .anyRequest().authenticated()
-//          .and()
-//          .csrf().disable();
-//      //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-//      // @formatter:on
-//  }
-//
-//  @Bean
-//  @Override
-//  public AuthenticationManager authenticationManagerBean() throws Exception {
-//      return super.authenticationManagerBean();
-//  }
-//}
+@RestController
+@RefreshScope
+class RefeshController {
+	
+	
+}
+
