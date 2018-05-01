@@ -19,8 +19,6 @@ public class ConfidenceScoreService {
 	@Autowired
 	private RepositoryCS repositoryCS;
 	
-	List<NeoFetch> wordlist;
-	
 //	@Transactional(readOnly = true)
 //	public List<NeoFetch> graph() {
 //		List<NeoFetch> terms = repositoryCS.graph();
@@ -35,7 +33,7 @@ public class ConfidenceScoreService {
 	
 	@Transactional(readOnly = true)
 	public List<NeoFetch> graph(){
-		wordlist = repositoryCS.graph();
+		List<NeoFetch> wordlist = repositoryCS.graph();
 		return wordlist;
 	}
 	

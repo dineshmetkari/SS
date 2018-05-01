@@ -1,19 +1,21 @@
-package com.stackroute.rabbitmq;
+package com.stackroute.publisher;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stackroute.ConfidenceScoreCalculatorApplication;
+import com.stackroute.PosTaggingServiceApplication;
 
 @Component
 public class Publisher {
-	
 	  AmqpTemplate amqpTemplate;
-	  ConfidenceScoreCalculatorApplication mainApplication = new ConfidenceScoreCalculatorApplication();
+	  
+	  @Autowired
+	  PosTaggingServiceApplication posTaggingServiceApplication;
+	  
 	 private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	 
 	    @Autowired    
@@ -23,13 +25,14 @@ public class Publisher {
 
 
 	    
-	    public String produceMsg(JSONObject obj){
+	    public String produceMsg(JSONObject query){
 	    	
 	    	    logger.info("This is an info message");
-				amqpTemplate.convertAndSend(mainApplication.publishQueue, String.valueOf(obj.toString()));
+				amqpTemplate.convertAndSend(posTaggingServiceApplication.PUBLISH_QUEUE, String.valueOf(query.toString()));
 	        
-				System.out.println("Send msg = "+  obj.toString());
-				return obj.toString();
+				System.out.println("Send msg = "+  query.toString());
+				return query.toString();
 		
 	    }
+
 }

@@ -20,7 +20,7 @@ public class ConfidenceScoreCalculatorApplication {
 	
 	public final static String queueName = "integration";
 	public final static String publishQueue="confidence-queue";
-    public static final String topicExchangeName = "jsa.meghana";
+    public static final String topicExchangeName = "index.exchange";
 	
     @Bean
     SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,

@@ -197,8 +197,8 @@ public class MainService {
 		intentList.add("Illustration");
 
 		for(int i=0;i<probList.size();i++){
-
-			if(probList.get(i)!=0.0)
+			System.out.println(probList.get(i));
+			if(probList.get(i)!=0.0 && probList.get(i)!=null && !probList.get(i).isNaN())
 			{
 				obj.put("domainName",format.getDomain());
 				obj.put("conceptName",format.getConcept());
@@ -221,4 +221,3 @@ public class MainService {
 
 	}
 }
-

@@ -12,7 +12,21 @@ public class IncomingFormat {
 	private int imgCount;
 	private int codeCount;
 	private JSONObject terms;
+	private String titleUrl;
+	private String metaUrl;
 	
+	public String getTitleUrl() {
+		return titleUrl;
+	}
+	public void setTitleUrl(String titleUrl) {
+		this.titleUrl = titleUrl;
+	}
+	public String getMetaUrl() {
+		return metaUrl;
+	}
+	public void setMetaUrl(String metaUrl) {
+		this.metaUrl = metaUrl;
+	}
 	public String getDomain() {
 		return domain;
 	}
