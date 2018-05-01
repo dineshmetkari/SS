@@ -1,7 +1,11 @@
 .example-card {
-  max-width: 960px;
-  align-self: center;
-  margin-bottom: 25px;
+  width: 200px;
+  /* align-self: left; */
+  margin-bottom: 10px;
+  height: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .example-header-image {
@@ -9,58 +13,72 @@
   width: 20px;
   height: 20px;
 }
-app-card-fancy{
 
-}
 mat-card-avatar {
-    height: 40px;
-    width: 40px;
-    border-radius: 100;
+  height: 40px;
+  width: 40px;
+  border-radius: 100;
 }
-.material-icons{
-  flex-shrink: 0;
-width:40px;
-height: 20px;
-
+.material-icons {
 }
 
-ul{
-
+ul {
   list-style-type: none;
-
 }
-mat-chip{
+mat-chip {
   padding-top: 100px;
-
 }
-.icons{
+.icons {
   margin: auto;
-align-content: middle;
-text-align: middle;
-align-items: middle;
-align-self: center;
-
-
-
+  align-content: middle;
+  text-align: middle;
+  align-items: middle;
+  align-self: center;
 }
 .mat-chip-list-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-    margin-top:25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-top: 25px;
 }
-.mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
-    margin: 8px 0 0 2px;
+.mat-chip:not(.mat-basic-chip) + .mat-chip:not(.mat-basic-chip) {
+  margin: 8px 0 0 2px;
 }
-.mat-chip{
-padding-left: 200px;
-}
-.l{
+
+.l {
   align-content: middle;
-text-align: middle;
-align-items: middle;
-align-self: center;
+  text-align: middle;
+  align-items: middle;
+  align-self: center;
+}
+mat-card-header {
+  height: 50px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+mat-card-content {
+  padding-top: 2px;
+  height: 100px;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+mat-card-footer {
+  height: 50px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
+mat-card-title, mat-card-subtitle {
+  text-overflow: ellipsis;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  }
+a{
+  text-decoration: none;
+}

@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Renderer} from "@angular/core";
 import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
 import * as $ from "jquery";
 import { MatIconModule } from "@angular/material";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+
 
 declare var speechObject: any;
 declare function recordAndRecognize(): void;
@@ -11,18 +13,19 @@ declare function getResult(): string;
 declare function clearResult();
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: "app-chat",
+  templateUrl: "./chat.component.html",
+  styleUrls: ["./chat.component.css"]
 })
-
 export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.toggleVisbility = true;
   }
-  toggleVisbility : any;
+  // testparent="hi how";
+  greeting = "Welcome";
+  toggleVisbility: any;
   value: string;
-  private serverUrl = "http://172.23.238.183:8080/socket";
+  private serverUrl = "http://172.23.238.148:8081/socket";
   private title = "ChatBot Interface";
   private stompClient;
   private typedvalue;
@@ -34,23 +37,35 @@ export class ChatComponent implements OnInit {
   leftValue = 0;
   rightValue = 5;
   recommendation: any;
+  date = new Date();
+  messages = [
+    {
+      text: "Hi! I am Moza! How can I help you?",
+      self: false,
+      time: this.date,
+      result: []
+    }
+  ];
+
   resttingTheValue() {
     this.leftValue = 0;
     this.rightValue = 5;
   }
 
   toggleView() {
-    if (this.chatInterface) {
-      this.chatInterface = false;
-      this.searchResult = true;
-    } else {
-      this.chatInterface = true;
-      this.searchResult = false;
-    }
+    // if (this.chatInterface) {
+    //   this.chatInterface = false;
+    //   this.searchResult = true;
+    // } else {
+    //   this.chatInterface = true;
+    //   this.searchResult = false;
+    // }
   }
 
-  constructor() {
+  constructor(private render: Renderer) {
     this.initializeWebSocketConnection();
+
+    this.render.listenGlobal('window','scroll',(evt) => {console.log("scrolled");});
   }
 
   fakeCallBack() {
@@ -76,15 +91,18 @@ export class ChatComponent implements OnInit {
       this.sessionId = /\/([^\/]+)\/websocket/.exec(this.ws._transport.url)[1];
       that.stompClient.subscribe("/chat/" + this.sessionId, message => {
         if (message.body) {
-          var responseDiv = document.createElement("div");
-          responseDiv.className = "message";
-          responseDiv.style.cssText =
-            "display: block; background-color: lightgreen; border: 1px solid red; border-radius: 5px; width: 70%; padding: 10px;  overflow: hidden;";
-          responseDiv.innerHTML =
-            responseDiv.innerHTML + "Bot : " + message.body;
-          document.getElementsByClassName("chat")[0].appendChild(responseDiv);
+          console.log(message);
+          that.addMessage(message.body, false);
+          // var responseDiv = document.createElement("div");
+          // responseDiv.className = "message";
+          // responseDiv.style.cssText =
+          //   "display: block; background-color: lightgreen; border: 1px solid red; border-radius: 5px; width: 70%; padding: 10px;  overflow: hidden;";
+          // responseDiv.innerHTML =
+          //   responseDiv.innerHTML + "Bot : " + message.body;
+          // document.getElementsByClassName("chat")[0].appendChild(responseDiv);
           // $(".message").append("<div>"+'Bot : '+  message.body + "</div>");
           // console.log(message.body);
+
           synthesizeSpeech(message.body);
           console.log("session id " + this.sessionId);
           // if (message.body == "I can help you with that") {
@@ -98,7 +116,8 @@ export class ChatComponent implements OnInit {
         console.log("message received", message);
         that.result = JSON.parse(message.body).response;
         console.log("final result is this", that.result);
-        if(that.chatInterface == false) {
+        that.addResult(that.result);
+        if (that.chatInterface == false) {
           that.toggleView();
           that.toggleVisbility = false;
         }
@@ -116,8 +135,31 @@ export class ChatComponent implements OnInit {
     });
   }
 
+
   ngOnChanges() {
-    console.log("new value ", this.result);
+    this.checkForScroller(event);
+  }
+
+  addMessage(text: string, self: boolean) {
+    this.messages.reverse();
+    this.date = new Date();
+    this.messages = this.messages.concat([
+      {
+        text: text,
+        self: self,
+        time: this.date,
+        result: []
+      }
+    ]);
+    this.messages.reverse();
+    this.scrollToTheBottom();
+  }
+
+  addResult(result: any) {
+    this.messages.reverse();
+    this.messages[this.messages.length - 1].result = result;
+    this.messages.reverse();
+    this.scrollToTheBottom();
   }
 
   public startRecP5(event: Event) {
@@ -130,39 +172,46 @@ export class ChatComponent implements OnInit {
     });
     // this.fakeCallBack();
   }
+  inputValue = "";
 
   sendMessage(message, event: Event) {
-    var userDiv = document.createElement("div");
-    userDiv.className = "typed";
-    userDiv.style.cssText =
-      "display: block;background: white; overflow: hidden; padding: 10px; border: 1px solid red;  border-radius: 5px; margin-left: 30%;  text-align: right; ";
-    userDiv.innerHTML =
-      userDiv.innerHTML +
-      "<span> Me : </span>" +
-      // "<mat-card><mat-card-header><mat-card-subtitle> Me </mat-card-subtitle></mat-card-header><mat-card-content>" +
-      message +
-      "</mat-card-content></mat-card>";
-    document.getElementsByClassName("chat")[0].appendChild(userDiv);
-    // $("#chat1").val + "something";
-    console.log(message);
-    // synthesizeSpeech(message);
-    if (event != null) {
-      event.preventDefault();
+    if (message != "") {
+      this.addMessage(message, true);
+      // synthesizeSpeech(message);
+      // var userDiv = document.createElement("div");
+      // userDiv.className = "typed";
+      // userDiv.style.cssText =
+      //   "display: block;background: white; overflow: hidden; padding: 10px; border: 1px solid red;  border-radius: 5px; margin-left: 30%;  text-align: right; ";
+      // userDiv.innerHTML =
+      //   userDiv.innerHTML +
+      //   "<span> Me : </span>" +
+      //   // "<mat-card><mat-card-header><mat-card-subtitle> Me </mat-card-subtitle></mat-card-header><mat-card-content>" +
+      //   message +
+      //   "</mat-card-content></mat-card>";
+      // document.getElementsByClassName("chat")[0].appendChild(userDiv);
+      // // $("#chat1").val + "something";
+      // console.log(message);
+      // synthesizeSpeech(message);
+      if (event != null) {
+        event.preventDefault();
+      }
+      this.stompClient.send(
+        "/app/send/message",
+        {},
+        '{"message":' +
+          '"' +
+          message +
+          '"' +
+          ',"sessionId":' +
+          '"' +
+          /\/([^\/]+)\/websocket/.exec(this.ws._transport.url)[1] +
+          '"' +
+          "}"
+      );
+      $("input").val("");
+      this.inputValue = "";
     }
-    this.stompClient.send(
-      "/app/send/message",
-      {},
-      '{"message":' +
-        '"' +
-        message +
-        '"' +
-        ',"sessionId":' +
-        '"' +
-        /\/([^\/]+)\/websocket/.exec(this.ws._transport.url)[1] +
-        '"' +
-        "}"
-    );
-    $("#input").val("");
+    document.getElementById("input").focus();
   }
 
   goLeft() {
@@ -179,6 +228,10 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  randomFun() {
+    console.log("scrolled");
+  }
+
   sendRecommendation(number, event: Event) {
     if (event != null) {
       event.preventDefault();
@@ -193,7 +246,8 @@ export class ChatComponent implements OnInit {
         " " +
         this.recommendation[number].conceptRecommend +
         '",' +
-        '"intent": "' + this.recommendation[number].intentRecommend +
+        '"intent": "' +
+        this.recommendation[number].intentRecommend +
         '"' +
         ',"sessionId":' +
         '"' +
@@ -202,5 +256,40 @@ export class ChatComponent implements OnInit {
         "}"
     );
     $("#input").val("");
+  }
+
+  scrollToTheBottom() {
+    let ele = document.getElementById("messageSpace");
+    var scrollpercent = (ele.scrollTop / (ele.scrollHeight - ele.clientHeight))*100;
+    // console.log(scrollpercent);
+    ele.scrollTop = 10000000;
+    ele.scrollLeft = 0;
+    // console.log(this.elem);
+  }
+  // console.log(document.getElementById("messageSpace").onscroll = function() { return "scrolled";});
+  showOrNot: boolean = false;
+
+  // @HostListener('scroll',['$event'])
+  // onScroll(event){
+    // this.checkForScroller(event);
+  // }
+
+// document.getElementById("messageSpace").onscroll = function() {
+//   console.log("anything");
+// };
+
+
+
+  checkForScroller(event: Event) {
+    console.log("method called");
+    // event.preventDefault();
+    let ele = document.getElementById("messageSpace");
+    var scrollpercent = (ele.scrollTop / (ele.scrollHeight - ele.clientHeight))*100;
+    if (scrollpercent > 1) {
+      this.showOrNot = false;
+    } else {
+      this.showOrNot = true;
+    }
+    console.log(this.showOrNot);
   }
 }

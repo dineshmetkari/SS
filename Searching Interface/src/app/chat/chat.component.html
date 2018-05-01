@@ -1,81 +1,96 @@
-<button type="button" name="button" (click) = 'toggleView()' [hidden] = "toggleVisbility" >Toggle</button>
-<div [hidden] = 'chatInterface'>
-  <div style="text-align:center">
-    <h1 style="color: white">
-      Welcome to {{title}}!
-    </h1>
-    <div>
-
-      <div class="chat-container">
-        <!-- <textarea rows="6" cols="100" class="chat1" id="chat1"> -->
-
-        <!-- </textarea> -->
-        <div class="chat">
-          <!-- <mat-card class="cardType">
-          <mat-card-header>
-          <mat-card-title> Me </mat-card-title>
-          <mat-card-subtitle> Me </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-        This is where message will come.
-      </mat-card-content>
-    </mat-card> -->
+<!-- <div class="all" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="randomFun()" [scrollWindow]="false"> -->
+  <div class="navigation">
+    <app-navbar [role]="greeting"></app-navbar>
   </div>
+  <!-- <button type="button" name="button" (click) = 'toggleView()' [hidden] = "toggleVisbility" >Toggle</button> -->
+  <div [hidden] = 'chatInterface' >
+    <div style="text-align:center">
+      <div class="message-space" id = "messageSpace" >
+        <div *ngFor="let message of messages" >
+          <div [class.right]="message.self" [class.left]="!message.self">
+
+            <!-- <img src="../assets/images/bot" class="bot-image" *ngIf="!message.self"> -->
+
+            <div [class.message-background-right]="message.self" [class.message-background-left]="!message.self">
+              {{message.text}}<br>
+              <div [class.time-right]="message.self" [class.time-left]="!message.self">
+                {{message.time | date:"hh:mm"}}
+              </div>
+            </div>
+
+
+            <!-- <img src="../assets/images/blankprofile.png" class="bot-image" *ngIf="message.self" > -->
+
+          </div>
+
+          <div *ngIf="message.result.length != 0">
+            <!-- <h4 style="color: white">Search Results Found</h4> -->
+            <!-- <button type="button" name="button" (click)="goLeft()">Previous Page</button> -->
+            <!-- <button type="button" name="button" (click)="goRight()">Next Page</button> -->
+            <div style="display: flex; height: 25%; width: 100%; overflow-x:scroll; overflow-y: hidden">
+              <div *ngFor="let item of message.result" class="result">
+                <app-card-fancy  [cardDetails] = item></app-card-fancy>
+              </div>
+            </div>
+            <div style="text-align: center; display: flex; overflow-x: scroll; overflow-y:hidden">
+              <mat-chip-list class="mat-chip-list-stacked" *ngFor="let recommend of recommendation; let i = index">
+                <mat-chip style="display: flex; height: 25%; width: 200px; overflow-x:scroll overflow-y: hidden" (click)="sendRecommendation(i, $event)" *ngIf="i<6" selected="false">
+                  {{recommend.recommendationString}}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="toBottom" [hidden]="showOrNot">
+        <button mat-icon-button class="icon" (click)="scrollToTheBottom()">
+          <mat-icon style="color: #fff0ff;">arrow_drop_down_circle</mat-icon>
+        </button>
+      </div>
+      <!-- </div> -->
+      <div class="input-box">
+        <input  id="input" style="width: 70%; height: 30px;" type="text" #input  (keyup.enter) = "sendMessage(input.value, $event)">
+        <button mat-icon-button (click)="startRecP5($event)" color="white" >
+          <mat-icon style="color: white">mic</mat-icon>
+        </button>
+        <button mat-icon-button color="white" class="send" (click)="sendMessage(input.value, $event)">
+          <mat-icon style="color: white">send</mat-icon>
+        </button>
+
+      </div>
+
+
+
+
+      <!-- <footer style="position: bottom;">
+      <div class="chat-input">
+
+      <form>
+      <input  id="input" type="text" #input>
+      <button mat-icon-button color="white" class="send" (click)="sendMessage(input.value, $event)">
+      <mat-icon style="color: white">send</mat-icon>
+    </button>
+    <button mat-icon-button (click)="startRecP5($event)" color="white" >
+    <mat-icon style="color: white">mic</mat-icon>
+  </button>
+</form>
+
 </div>
+</footer> -->
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
 
 </div>
 <!-- </div> -->
-
-<div class="footer">
-  <div class="send-bar">
-
-    <!-- <button class="send" type="button" name="button" (click)="sendMessage(input.value)"></button> -->
-    <form>
-      <input  id="input" type="text" #input>
-      <button mat-icon-button color="white" class="send" (click)="sendMessage(input.value, $event)">
-        <mat-icon style="color: white">send</mat-icon>
-      </button>
-      <!-- <input type="submit" value = "submit" class = "send" (click) = "sendMessage(input.value, $event)"> -->
-      <!-- <input type="text" x-webkit-speech> -->
-      <button mat-icon-button (click)="startRecP5($event)" color="white" >
-        <mat-icon style="color: white">mic</mat-icon>
-      </button>
-    </form>
-    <!-- <input type="file" accept="audio/x-waw" #audioIn> -->
-    <!-- <button type="button" name="button" (click)="sendAudio(audioIn.value)">Audio</button> -->
-    <!-- <div class="send" (click)="sendMessage(input.value)"></div> -->
-  </div>
-
-</div>
-</div>
-<div [hidden] = 'searchResult'>
-  <h1 style="color: white">Search Results Found</h1>
-  <button type="button" name="button" (click)="goLeft()">Previous Page</button>
-  <button type="button" name="button" (click)="goRight()">Next Page</button>
-  <div>
-    <ul>
-      <div *ngFor="let item of result; let i=index">
-        <li *ngIf="i>=leftValue && i<rightValue">
-          <app-card-fancy  [cardDetails] = item></app-card-fancy>
-        </li>
-      </div>
-    </ul>
-  </div>
-  <mat-card style="position: fixed; bottom: 0; width: 100%; margin: 0 auto">
-    <mat-card-header>
-      <mat-card-subtitle> You can also look for: </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <ul>
-        <div *ngFor = "let recommend of recommendation; let i = index">
-          <li *ngIf= "i<3u">
-            <button type="button" (click)="sendRecommendation(i, $event)" >
-              {{recommend.recommendationString}}
-            </button>
-          </li>
-        </div>
-      </ul>
-    </mat-card-content>
-  </mat-card>
-</div>
