@@ -1,6 +1,6 @@
 version: '2.0'
 
-db:
+services:
   redis:
     image: redis:latest
     restart: always
@@ -51,8 +51,13 @@ db:
     ports:
       - 3306:3306
 
-services:
   config-server:
+    depends_on:
+      - neo4j
+      - mongo
+      - rabbitmq
+      - sql
+      - redis
     restart: always
     image: semanticsearch/minerva.config-server:1.0.0
     hostname: localhost
@@ -60,6 +65,8 @@ services:
       - 8888:8888
 
   eureka-server:
+    depends_on:
+      - config-server
     restart: always
     image: semanticsearch/minerva.eureka-server:1.0.0
     hostname: localhost
@@ -67,6 +74,9 @@ services:
       - 8070:8070
 
   api-gateway:
+    depends_on:
+      - config-server
+      - eureka-server
     restart: always
     image: semanticsearch/minerva.api-gateway:1.0.0
     hostname: localhost
@@ -74,6 +84,9 @@ services:
       - 8000:8000
 
   rabbitmq-service:
+    depends_on:
+      - config-server
+      - eureka-server
     restart: always
     image: semanticsearch/minerva.rabbitmq:1.0.0
     hostname: localhost
@@ -81,6 +94,9 @@ services:
       - 8095:8095
 
   neo4j-manager:
+    depends_on:
+      - config-server
+      - eureka-server
     restart: always
     image: semanticsearch/minerva.neo4j-manger:1.0.0
     hostname: localhost
@@ -88,6 +104,10 @@ services:
       - 8096:8096
 
   search-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.search-service:1.0.0
     hostname: localhost
@@ -95,6 +115,9 @@ services:
       - 8999:8999
 
   authentication-service:
+    depends_on:
+      - config-server
+      - eureka-server
     restart: always
     image: semanticsearch/minerva.authentication-service:1.0.0
     hostname: localhost
@@ -102,6 +125,10 @@ services:
       - 8090:8093
 
   image-crawler-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.image-crawler:1.0.0
     hostname: localhost
@@ -109,6 +136,10 @@ services:
       - 6090:8090
 
   video-crawler-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.video-crawler:1.0.0
     hostname: localhost
@@ -116,6 +147,10 @@ services:
       - 8083:8083
 
   code-crawler-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.code-crawler:1.0.0
     hostname: localhost
@@ -123,6 +158,10 @@ services:
       - 8080:8080
 
   content-crawler-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.content-crawler:1.0.0
     hostname: localhost
@@ -130,6 +169,10 @@ services:
       - 6087:8081
 
   orchestra-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.orchestration:1.0.0
     hostname: localhost
@@ -144,6 +187,10 @@ services:
       - 8084:8084
 
   indexer-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.indexer-service:1.0.0
     hostname: localhost
@@ -151,13 +198,21 @@ services:
       - 8051:8051
 
   angular-search-interface:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.angular-search-interface:1.0.0
     hostname: localhost
     ports:
-      - 4200:4200
+      - 80:4200
 
   dialog-manger:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.dialog-manager:1.0.0
     hostname: localhost
@@ -172,6 +227,10 @@ services:
       - 9000:9000
 
   pos-tagging-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.pos-tagging:1.0.0
     hostname: localhost
@@ -179,6 +238,10 @@ services:
       - 8087:8087
 
   nlp-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.nlp-service:1.0.0
     hostname: localhost
@@ -186,6 +249,10 @@ services:
       - 9001:9001
 
   user-search-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.user-search:1.0.0
     hostname: localhost
@@ -193,6 +260,10 @@ services:
       - 8091:8091
 
   recommendation-service:
+    depends_on:
+      - config-server
+      - eureka-server
+      - rabbitmq-service
     restart: always
     image: semanticsearch/minerva.recommendations:1.0.0
     hostname: localhost
