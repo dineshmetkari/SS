@@ -25,7 +25,7 @@ export class ChatComponent implements OnInit {
   greeting = "Welcome";
   toggleVisbility: any;
   value: string;
-  private serverUrl = "http://172.23.238.148:8081/socket";
+  private serverUrl = "http://172.23.238.178:8081/socket";
   private title = "ChatBot Interface";
   private stompClient;
   private typedvalue;

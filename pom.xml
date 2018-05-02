@@ -25,6 +25,15 @@
 		<module>UserSearchService</moduler>
 		<module>Ne04jManager</module>
 		<module>TermBankService</module>
+		<module>authentication</module>
+		<module>Indexer-service</module>
+		<module>lemmatization-service</module>
+		<module>nlp-service</module>
+		<module>orchestraService</module>
+		<module>pos-tagging-service</module>
+		<module>RabbitMq</module>
+		<module>recommendation-service</module>
+		<module>UserSearchService</module>
 	</modules>
 </project>
 
