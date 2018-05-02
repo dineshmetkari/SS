@@ -16,8 +16,8 @@ services:
     hostname: localhost
     ports:
       - 7474:7474
-      -	7373:7373
-      -	7687:7687
+      - 7373:7373
+      - 7687:7687
     volumes:
       - neo4j/data:/data
 
@@ -48,7 +48,7 @@ services:
     volumes:
       - sql/data:/var/lib/mysql
     ports:
-      -3306:3306
+      - 3306:3306
 
   api-gateway:
     restart: always
