@@ -4,7 +4,7 @@ services:
   redis:
     image: redis:latest
     restart: always
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 6379:6379
     volumes:
@@ -13,7 +13,7 @@ services:
   neo4j:
     image: neo4j:latest
     restart: always
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 7474:7474
       -	7373:7373
@@ -21,10 +21,19 @@ services:
     volumes:
       - neo4j/data:/data
 
+  mongo:
+    image: mongo:latest
+    restart: always
+    hostname: localhost
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo/data:/data/db
+
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 5672:5672
       - 5671:5671
@@ -44,140 +53,140 @@ services:
   api-gateway:
     restart: always
     build: ./api-gateway
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8000:8000
 
   eureka-server:
     restart: always
     build: ./eureka-server
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
-      - 8071:8071
+      - 8070:8070
 
   config-server:
     restart: always
     build: ./config-server
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8888:8888
 
   rabbitmq-service:
     restart: always
     build: ./RabbitMq
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8095:8095
 
   image-crawler-service:
     restart: always
     build: ./ImageCrawlerService
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8090:8090
 
   video-crawler-service:
     restart: always
-    build: ./VideoCrawlerService
-    hostname: 172.23.238.178
+    build: ./video-crawler-service
+    hostname: localhost
     ports:
       - 8083:8083
 
   code-crawler-service:
     restart: always
     build: ./Code-Crawler-Service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8080:8080
 
   content-crawler-service:
     restart: always
     build: ./Content-Crawler-Service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8081:8081
 
   indexer-service:
     restart: always
     build: ./Indexer-service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8051:8051
 
   authentication-service:
     restart: always
     build: ./Authentication-Service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8090:8093
 
   pos-tagging-service:
     restart: always
     build: ./pos-tagging-service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8087:8087
 
   confidence-score-service:
     restart: always
     build: ./confidence-score-service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8084:8084
 
   lemmatization-service:
     restart: always
     build: ./Lemmatization-Service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 9000:9000
 
   nlp-service:
     restart: always
     build: ./NLP-Service
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 9001:9001
 
   search-service:
     restart: always
     build: ./search
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8999:8999
 
   orchestra-service:
     restart: always
     build: ./OrchestraService
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8890:8890
 
   user-search-service:
     restart: always
     build: ./UserSearchService
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8091:8091
 
   recommendation-service:
     restart: always
     build: ./RecommendationService
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8092:8092
 
   neo4j-manager:
     restart: always
     build: ./Neo4jManager
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 8096:8096
 
   angular-search-interface:
     restart: always
     build: ./SearchingInterface
-    hostname: 172.23.238.178
+    hostname: localhost
     ports:
       - 4200:4200
 
