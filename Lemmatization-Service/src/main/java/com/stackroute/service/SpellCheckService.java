@@ -35,7 +35,7 @@ public class SpellCheckService {
 	public String calculateDistance(String query){
 		List<String> listAfterCheck = new ArrayList<String>();
 		try {
-			ClassPathResource classPathResource = new ClassPathResource("filter.txt");
+			ClassPathResource classPathResource = new ClassPathResource("dictionaryTechWords.txt");
 			InputStream inputStream = classPathResource.getInputStream();
 			File file = File.createTempFile("test", ".txt");
 			try{

@@ -6,10 +6,15 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.receiver.Receiver;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class LemmatizationServiceApplication {
 	
@@ -48,4 +53,15 @@ public class LemmatizationServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LemmatizationServiceApplication.class, args);
 	}
+}
+
+/**
+ * Dummy Controller
+ *
+ */
+@CrossOrigin
+@RestController
+@RefreshScope
+class RefreshController {
+
 }

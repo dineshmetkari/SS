@@ -7,9 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class lemmatizerServiceTest {
 
-	@RunWith(MockitoJUnitRunner.class)
+	
 	public void setUp() throws Exception {
 	}
 

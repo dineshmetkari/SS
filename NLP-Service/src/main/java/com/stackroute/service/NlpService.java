@@ -26,7 +26,7 @@ import com.stackroute.redisson.IntentModel;
 @Service
 public class NlpService {
 
-	
+
 	Publisher publisher;
 
 	@Autowired
@@ -54,7 +54,7 @@ public class NlpService {
 	List<ConceptNlpModel> concepts = new ArrayList<>();
 	List<String> recommendConcepts = new ArrayList<String>();
 	String finalReturnCN;
-	
+
 	boolean check_ill = false;
 
 	public JSONObject getConceptAndIntent(List<String> query, InputQuery inputQuery){
@@ -123,31 +123,31 @@ public class NlpService {
 			if(finalConcept.isEmpty() && intent.equals("IN")){
 				//return ("CNIN" + "parent nodes");
 				result =new JSONObject();
-				
+
 				Random random = new Random();
 				String recommend = getRecommendations(nouns);
-				
+
 				List<String> parentNodes = fetchConceptIntentService.fetchParentNodes();
-				
-				
+
+
 
 				List<String> parentString = new ArrayList<>();
 				for(int i=0;i<5;i++){
 					int index = random.nextInt(parentNodes.size());
 					parentString.add(parentNodes.get(index));	
 				}
-				
-//				if(recommend.equals("")){
-//					finalReturnCN = parentString.substring(0,parentString.length()-3);
-//				}
-//				
-//				else{
-//					finalReturnCN = recommend;
-//				}
+
+				//				if(recommend.equals("")){
+				//					finalReturnCN = parentString.substring(0,parentString.length()-3);
+				//				}
+				//				
+				//				else{
+				//					finalReturnCN = recommend;
+				//				}
 
 				//char s = parentString.charAt(parentString.length()-2);
-//				parentString = parentString.substring(0,parentString.length()-3);
-//				String str = "Do you mean concepts: " + parentString;
+				//				parentString = parentString.substring(0,parentString.length()-3);
+				//				String str = "Do you mean concepts: " + parentString;
 				result.put("type", "CNIN");
 				result.put("parentNodes", parentString);
 				result.put("sessionId", inputQuery.getSessionId());
@@ -187,19 +187,19 @@ public class NlpService {
 					int index = random.nextInt(parentNodes.size());
 					parentString.add(parentNodes.get(index));	
 				}
-				
-				
-//				if(recommend.equals("")){
-//					finalReturnCN = parentString.substring(0,parentString.length()-3);
-//				}
-//				
-//				else{
-//					finalReturnCN = recommend;
-//				}
+
+
+				//				if(recommend.equals("")){
+				//					finalReturnCN = parentString.substring(0,parentString.length()-3);
+				//				}
+				//				
+				//				else{
+				//					finalReturnCN = recommend;
+				//				}
 
 				//char s = parentString.charAt(parentString.length()-2);
-//				parentString = parentString.substring(0,parentString.length()-3);
-//				String str = "Do you mean concepts: " + parentString;
+				//				parentString = parentString.substring(0,parentString.length()-3);
+				//				String str = "Do you mean concepts: " + parentString;
 				result.put("type", "CNIY");
 				result.put("parentNodes",  parentString);
 				result.put("sessionId", inputQuery.getSessionId());
@@ -226,14 +226,21 @@ public class NlpService {
 					publisher.produceMsgToSearchService(result);
 					publisher.produceMsgToDialogFlow(result);
 				}
-				
+
 			}
 		}
 		catch (JSONException e) {
 			e.printStackTrace();
 		}
 		conceptsFound = new HashSet<ConceptNlpModel>();
+		check_ill = false;
 		conceptFound = "";
+		try {
+			result.put("spelling", inputQuery.getSpelling());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return result;
 
@@ -258,7 +265,9 @@ public class NlpService {
 
 			for(ConceptNlpModel concept : concepts)
 			{
+				//System.out.println(concept.getConcept()+"///");
 				if(concept.getConcept().equalsIgnoreCase(nouns)){
+
 
 					conceptFound = concept.getConcept();
 					flag = 1;
@@ -406,21 +415,21 @@ public class NlpService {
 		else
 			return intent;
 	}
-	
+
 	public String getRecommendations(String nouns){
 		String[] nounList = nouns.split("\\s+");
-		
+
 		String result = "";
 		for(String str:nounList){
 			for(ConceptNlpModel concept1: concepts){
-				
+
 				if(concept1.getConcept().contains(str.trim()) && !str.equalsIgnoreCase("Java")){
 					System.out.println("////recommend"+recommendConcepts.add(concept1.getConcept()));
 				}
-				
+
 			}
 		}
-		
+
 		for(String str:recommendConcepts){
 			result += str+ " ";
 		}
