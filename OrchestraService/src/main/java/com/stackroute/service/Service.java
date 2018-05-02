@@ -154,8 +154,8 @@ public class Service {
 					errorObj.put("imgCount", finalModel.getImgCount());
 					errorObj.put("codeCount",finalModel.getCodecount());
 					errorObj.put("videoCount", finalModel.getVideoCount()); 
-					errorObj.put("titleUrl","Page Not Found" );
-					errorObj.put("metaUrl","Page Not Found" );
+					errorObj.put("titleUrl",finalModel.getUrl() );
+					errorObj.put("metaUrl","No Description" );
 					joList.add(errorObj);
 					String jsonError = errorObj.toString();
 					modelMap.remove(unique);

@@ -50,20 +50,23 @@ public class Receiver {
 				System.out.println(domain + " " + concept +" "+intent);
 				ArrayList<FetchUrl> fetchList	=fetchNeoUrl.fetchedUrl(domain, concept, intent,illustration);
 				ArrayList<FetchUrl> finalFetchList = new ArrayList<>();
+				if(!fetchList.isEmpty()){
 				if(n>0){
 					n=n*10;
-					for(int i=n; i< n+10;i++){
+					int m =Math.min(n+10,fetchList.size());
+					for(int i=n; i< m;i++){
 						FetchUrl fetchUrl = fetchList.get(i);
 						finalFetchList.add(fetchUrl);
 					}
 				
 				}else {
-				for(int i=0;i<10;i++){
+					int m = Math.min(10, fetchList.size());
+				for(int i=0;i<m;i++){
 					FetchUrl fetchUrl = fetchList.get(i);
 					finalFetchList.add(fetchUrl);
 				}
 				}
-				
+				}
 				if(finalFetchList.isEmpty()){
 					json = "{\"message\":\"Urls not populated yet\",\"concept\":\""+concept+"\",\"domain\":\""+domain+"\"}";
 					output.setMessage(json);
