@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ServiceTest" project="ImageCrawlerService" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.stackroute.service.ServiceTest" time="2.12">
+    <testcase name="imgCountTest" classname="com.stackroute.service.ServiceTest" time="2.12"/>
+  </testsuite>
+</testrun>

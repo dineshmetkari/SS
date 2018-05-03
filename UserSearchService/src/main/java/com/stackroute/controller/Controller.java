@@ -23,8 +23,8 @@ import com.stackroute.service.FetchNeoUrl;
 @RequestMapping(value = "/api/v1")
 public class Controller {
 	
-	@Autowired
-	private FetchNeoUrl fetchNeoUrl;
+//	@Autowired
+//	private FetchNeoUrl fetchNeoUrl;
 	
 	
 //	@Value("${uri}")
@@ -50,12 +50,12 @@ public class Controller {
 //		return new ResponseEntity<ArrayList<FetchUrl>>(fetchedUrls, HttpStatus.CREATED);
 //
 //	}
-	@GetMapping(value = "/user", produces = "application/json")
-	public ResponseEntity<ArrayList<FetchUrl>> addUser(@RequestParam("domain") final String domain,
-			@RequestParam("concept") final String concept, @RequestParam("intent") final String intent,@RequestParam("illustration") final boolean illustration) {
-		final ArrayList<FetchUrl> fetchedUrls = fetchNeoUrl.fetchedUrl(domain, concept, intent,illustration);
-		return new ResponseEntity<ArrayList<FetchUrl>>(fetchedUrls, HttpStatus.CREATED);
-
-	}
-	
+//	@GetMapping(value = "/user", produces = "application/json")
+//	public ResponseEntity<ArrayList<FetchUrl>> addUser(@RequestParam("domain") final String domain,
+//			@RequestParam("concept") final String concept, @RequestParam("intent") final String intent,@RequestParam("illustration") final boolean illustration) {
+//		final ArrayList<FetchUrl> fetchedUrls = fetchNeoUrl.fetchedUrl(domain, concept, intent,illustration);
+//		return new ResponseEntity<ArrayList<FetchUrl>>(fetchedUrls, HttpStatus.CREATED);
+//
+//	}
+//	
 }
