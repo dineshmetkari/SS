@@ -11,12 +11,7 @@ services:
     volumes:
       - $PWD/redis-cli/redis-4.0.9/redis.conf:/usr/local/etc/redis/redis.conf
       - $PWD/redis/data:/data
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -28,12 +23,7 @@ services:
     ports:
       - 7474:7474
       - 7687:7687
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     volumes:
       - $PWD/neo4j/data:/data
     healthcheck:
@@ -48,12 +38,7 @@ services:
       - 27017:27017
     volumes:
       - $HOME/mongo/data:/data/db
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -68,7 +53,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_PASS: admin2017
       RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_VHOST: vhost
+      RABBITMQ_DEFAULT_VHOST: /
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -82,12 +68,7 @@ services:
       MYSQL_DATABASE: UserDB
     volumes:
       - $PWD/sql/data:/var/lib/mysql
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     ports:
       - 3306:3306
     healthcheck:
@@ -111,12 +92,7 @@ services:
     hostname: localhost
     ports:
       - 8888:8888
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -130,12 +106,7 @@ services:
     hostname: localhost
     ports:
       - 8070:8070
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -151,12 +122,7 @@ services:
     hostname: localhost
     ports:
       - 8000:8000
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -172,12 +138,7 @@ services:
     hostname: localhost
     ports:
       - 8095:8095
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -193,12 +154,7 @@ services:
     network_mode: "host"
     ports:
       - 8096:8096
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -216,12 +172,7 @@ services:
     network_mode: "host"
     ports:
       - 8999:8999
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -237,12 +188,7 @@ services:
     network_mode: "host"
     ports:
       - 8090:8090
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -260,12 +206,7 @@ services:
     network_mode: "host"
     ports:
       - 6090:6090
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -283,12 +224,7 @@ services:
     hostname: localhost
     ports:
       - 8083:8083
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -306,12 +242,7 @@ services:
     hostname: localhost
     ports:
       - 8080:8080
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -329,12 +260,7 @@ services:
     hostname: localhost
     ports:
       - 6087:6087
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -352,12 +278,7 @@ services:
     hostname: localhost
     ports:
       - 8890:8890
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -375,12 +296,7 @@ services:
     hostname: localhost
     ports:
       - 8084:8084
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -398,12 +314,7 @@ services:
     hostname: localhost
     ports:
       - 8051:8051
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -421,12 +332,7 @@ services:
     hostname: localhost
     ports:
       - 4200:4200
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -444,12 +350,7 @@ services:
     hostname: localhost
     ports:
       - 8081:8081
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -467,12 +368,7 @@ services:
     hostname: localhost
     ports:
       - 9000:9000
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -490,12 +386,7 @@ services:
     hostname: localhost
     ports:
       - 8086:8086
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -513,12 +404,7 @@ services:
     hostname: localhost
     ports:
       - 9001:9001
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -536,12 +422,7 @@ services:
     hostname: localhost
     ports:
       - 8091:8091
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
@@ -559,12 +440,7 @@ services:
     hostname: localhost
     ports:
       - 8092:8092
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-        reservations:
-          memory: 50M
+    mem_limit: 200m
     healthcheck:
       test: "exit 0"
 
