@@ -1,6 +1,0 @@
-package com.stackroute.redisson;
-
-@Component
-public class TermBankSynonyms {
-
-}

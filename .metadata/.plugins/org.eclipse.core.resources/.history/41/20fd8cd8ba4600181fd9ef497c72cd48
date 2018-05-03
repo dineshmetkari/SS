@@ -1,4 +1,0 @@
-#redisHost = redis://172.23.238.178:6379
-#uri = bolt://172.23.238.165
-#username = neo4j
-#password = password

@@ -14,6 +14,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/yaash/workspace/gitLab/Content-Crawler-Service"/>
 			<item value="/home/yaash/workspace/semanticSearchGroup/api-gateway"/>
 			<item value="/home/yaash/workspace/semanticSearchGroup/config-server/src/main/java/com/stackroute/config/ConfigServerApplication.java"/>
 			<item value="/home/yaash/workspace/semanticSearchGroup/config-server"/>
