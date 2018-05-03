@@ -5,6 +5,7 @@ services:
     image: redis:latest
     restart: always
     network_mode: "host"
+    mem_limit: 5000000
     hostname: localhost
     ports:
       - 6379:6379
@@ -18,6 +19,7 @@ services:
     image: neo4j:latest
     restart: always
     network_mode: "host"
+    mem_limit: 5000000
     hostname: localhost
     ports:
       - 7474:7474
@@ -31,6 +33,7 @@ services:
     image: mongo:latest
     restart: always
     network_mode: "host"
+    mem_limit: 5000000
     hostname: localhost
     ports:
       - 27017:27017
@@ -43,6 +46,7 @@ services:
     image: rabbitmq:3-management
     restart: always
     network_mode: "host"
+    mem_limit: 5000000
     hostname: localhost
     ports:
       - 15672:15672
@@ -66,6 +70,7 @@ services:
       - $PWD/sql/data:/var/lib/mysql
     ports:
       - 3306:3306
+    mem_limit: 5000000
     healthcheck:
       test: "exit 0"
 
@@ -87,6 +92,7 @@ services:
     hostname: localhost
     ports:
       - 8888:8888
+    mem_limit: 5000000
     healthcheck:
       test: "exit 0"
 
@@ -100,6 +106,7 @@ services:
     hostname: localhost
     ports:
       - 8070:8070
+    mem_limit: 5000000
     healthcheck:
       test: "exit 0"
 
@@ -113,6 +120,7 @@ services:
     network_mode: "host"
     image: semanticsearch/minerva.api-gateway:1.0.0
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8000:8000
     healthcheck:
@@ -126,6 +134,7 @@ services:
         condition: service_healthy
     restart: always
     network_mode: "host"
+    mem_limit: 5000000
     image: semanticsearch/minerva.rabbitmq:1.0.0
     hostname: localhost
     ports:
@@ -143,6 +152,7 @@ services:
     image: semanticsearch/minerva.neo4j-manger:1.0.0
     hostname: localhost
     network_mode: "host"
+    mem_limit: 5000000
     ports:
       - 8096:8096
     healthcheck:
@@ -160,6 +170,7 @@ services:
     image: semanticsearch/minerva.search-service:1.0.0
     hostname: localhost
     network_mode: "host"
+    mem_limit: 5000000
     ports:
       - 8999:8999
     healthcheck:
@@ -175,6 +186,7 @@ services:
     image: semanticsearch/minerva.authentication-service:1.0.0
     hostname: localhost
     network_mode: "host"
+    mem_limit: 5000000
     ports:
       - 8090:8090
     healthcheck:
@@ -192,6 +204,7 @@ services:
     image: semanticsearch/minerva.image-crawler:1.0.0
     hostname: localhost
     network_mode: "host"
+    mem_limit: 5000000
     ports:
       - 6090:6090
     healthcheck:
@@ -209,6 +222,7 @@ services:
     image: semanticsearch/minerva.video-crawler:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8083:8083
     healthcheck:
@@ -226,6 +240,7 @@ services:
     image: semanticsearch/minerva.code-crawler:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8080:8080
     healthcheck:
@@ -243,6 +258,7 @@ services:
     image: semanticsearch/minerva.content-crawler:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 6087:6087
     healthcheck:
@@ -260,6 +276,7 @@ services:
     image: semanticsearch/minerva.orchestration:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8890:8890
     healthcheck:
@@ -277,6 +294,7 @@ services:
     image: semanticsearch/minerva.confidence-score-service:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8084:8084
     healthcheck:
@@ -293,6 +311,7 @@ services:
     restart: always
     image: semanticsearch/minerva.indexer-service:1.0.0
     network_mode: "host"
+    mem_limit: 5000000
     hostname: localhost
     ports:
       - 8051:8051
@@ -311,6 +330,7 @@ services:
     image: semanticsearch/minerva.angular-search-interface:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 4200:4200
     healthcheck:
@@ -328,6 +348,7 @@ services:
     image: semanticsearch/minerva.dialog-manager:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8081:8081
     healthcheck:
@@ -345,6 +366,7 @@ services:
     image: semanticsearch/minerva.lemmatization-service:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 9000:9000
     healthcheck:
@@ -362,6 +384,7 @@ services:
     image: semanticsearch/minerva.pos-tagging:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8086:8086
     healthcheck:
@@ -379,6 +402,7 @@ services:
     image: semanticsearch/minerva.nlp-service:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 9001:9001
     healthcheck:
@@ -396,6 +420,7 @@ services:
     image: semanticsearch/minerva.user-search:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8091:8091
     healthcheck:
@@ -413,6 +438,7 @@ services:
     image: semanticsearch/minerva.recommendations:1.0.0
     network_mode: "host"
     hostname: localhost
+    mem_limit: 5000000
     ports:
       - 8092:8092
     healthcheck:
