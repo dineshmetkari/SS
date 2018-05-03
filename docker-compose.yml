@@ -9,7 +9,8 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - $HOME/redis/data:/data
+      - $PWD/redis-cli/redis-4.0.9/redis.conf:/usr/local/etc/redis/redis.conf
+      - $PWD/redis/data:/data
     healthcheck:
       test: "exit 0"
 
@@ -23,7 +24,7 @@ services:
       - 7373:7373
       - 7687:7687
     volumes:
-      - $HOME/neo4j/data:/data
+      - $PWD/neo4j/data:/data
     healthcheck:
       test: "exit 0"
 
@@ -49,6 +50,10 @@ services:
       - 5672:5672
       - 5671:5671
       - 4369:4369
+    environments:
+      RABBITMQ_DEFAULT_PASS: admin2017
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_VHOST: vhost
     healthcheck:
       test: "exit 0"
 
@@ -95,8 +100,6 @@ services:
     network_mode: "host"
     image: semanticsearch/minerva.eureka-server:1.0.0
     hostname: localhost
-    links:
-      - config-server"
     ports:
       - 8070:8070
     healthcheck:
@@ -175,7 +178,7 @@ services:
     hostname: localhost
     network_mode: "host"
     ports:
-      - 8090:8093
+      - 8090:8090
     healthcheck:
       test: "exit 0"
 
@@ -192,7 +195,7 @@ services:
     hostname: localhost
     network_mode: "host"
     ports:
-      - 6090:8090
+      - 6090:6090
     healthcheck:
       test: "exit 0"
 
@@ -243,7 +246,7 @@ services:
     network_mode: "host"
     hostname: localhost
     ports:
-      - 6087:8081
+      - 6087:6087
     healthcheck:
       test: "exit 0"
 
@@ -333,6 +336,13 @@ services:
       test: "exit 0"
 
   lemmatization-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
     restart: always
     image: semanticsearch/minerva.lemmatization-service:1.0.0
     network_mode: "host"
