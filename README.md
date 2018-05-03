@@ -1,12 +1,48 @@
-This repository contains three different spring boot project
+#Semantic search engine
 
-1. api-gateway : http://localhost:8000
-2. config-server: http://localhost:8888
-3. restaurant-service: http://localhost:8090
+An application which allows the user to seemlessly and semantically interact with the chat bot
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 
-Put the "configurations" folder in "/home/summer/workspace/configurations" this location.
+### Prerequisites
+Angular and STS installed locally
 
-__ need more corrections though___
+### Installing
+
+## Running the tests
+
+Use the command mvn verify after downloading the docker image
+
+
+### And coding style tests
+
+
+## Deployment
+
+## Built With
+* [Maven](https://maven.apache.org/) - Dependency Management - maven dependencies are added
+* [Spring boot](https://projects.spring.io/spring-boot/)
+* [Angular](https://angular.io/) - For front end development
+* [RabbitMq](https://www.rabbitmq.com/) - For communicating between the services
+* [Neo4J](https://neo4j.com/) - For graph repository
+* [MongoDB](https://www.mongodb.com/)  - For storing data
+
+## Versioning
+
+## Authors
+* **Anand** 
+* **Garima Chaudhary**
+* **Meghana N P**
+* **Nirjhar Roy**
+* **Vaishnavi Nakka**
+* **Yaash Jain**
+
+## License
+
+## Acknowledgments
+
 
 
