@@ -1,4 +1,4 @@
-#Semantic search engine
+# Semantic search engine
 
 An application which allows the user to seemlessly and semantically interact with the chat bot
 
@@ -39,10 +39,12 @@ Use the command mvn verify after downloading the docker image
 * **Nirjhar Roy**
 * **Vaishnavi Nakka**
 * **Yaash Jain**
+* **Ximanta Sarma**
 
 ## License
 
 ## Acknowledgments
+
 
 
 
