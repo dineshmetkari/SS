@@ -65,6 +65,7 @@ public class nlpServiceTest {
 		expectedResult.put("intent", "Beginner");
 		expectedResult.put("sessionId", inputQuery.getSessionId());
 		expectedResult.put("illustration", false);
+		expectedResult.put("spelling", "correct");
 		
 		concepts = new ArrayList<>();
 		ConceptNlpModel concept1 = new ConceptNlpModel();
