@@ -5,13 +5,12 @@ services:
     image: redis:latest
     restart: always
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 50m
     hostname: localhost
     ports:
       - 6379:6379
     volumes:
       - $PWD/redis-cli/redis-4.0.9/redis.conf:/usr/local/etc/redis/redis.conf
-      - $PWD/redis/data:/data
     healthcheck:
       test: "exit 0"
 
@@ -19,7 +18,7 @@ services:
     image: neo4j:latest
     restart: always
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 1500m
     hostname: localhost
     ports:
       - 7474:7474
@@ -33,7 +32,7 @@ services:
     image: mongo:latest
     restart: always
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 200m
     hostname: localhost
     ports:
       - 27017:27017
@@ -46,7 +45,7 @@ services:
     image: rabbitmq:3-management
     restart: always
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 200m
     hostname: localhost
     ports:
       - 15672:15672
@@ -70,7 +69,7 @@ services:
       - $PWD/sql/data:/var/lib/mysql
     ports:
       - 3306:3306
-    mem_limit: 5000000
+    mem_limit: 450m
     healthcheck:
       test: "exit 0"
 
@@ -92,21 +91,21 @@ services:
     hostname: localhost
     ports:
       - 8888:8888
-    mem_limit: 5000000
+    mem_limit: 900m
     healthcheck:
       test: "exit 0"
 
-  eureka-server:
+  eureka-service:
     depends_on:
       config-server:
         condition: service_healthy
     restart: always
     network_mode: "host"
-    image: semanticsearch/minerva.eureka-server:1.0.0
+    image: semanticsearch/minerva.eureka-service:1.0.0
     hostname: localhost
     ports:
       - 8070:8070
-    mem_limit: 5000000
+    mem_limit: 900m
     healthcheck:
       test: "exit 0"
 
@@ -114,13 +113,13 @@ services:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka-server:
+      eureka-service:
         condition: service_healthy
     restart: always
     network_mode: "host"
     image: semanticsearch/minerva.api-gateway:1.0.0
     hostname: localhost
-    mem_limit: 5000000
+    mem_limit: 700m
     ports:
       - 8000:8000
     healthcheck:
@@ -130,11 +129,11 @@ services:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka-server:
+      eureka-service:
         condition: service_healthy
     restart: always
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 900m
     image: semanticsearch/minerva.rabbitmq:1.0.0
     hostname: localhost
     ports:
@@ -146,201 +145,201 @@ services:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka-server:
+      eureka-service:
         condition: service_healthy
     restart: always
-    image: semanticsearch/minerva.neo4j-manger:1.0.0
+    image: semanticsearch/minerva.neo4j-manager:1.0.0
     hostname: localhost
     network_mode: "host"
-    mem_limit: 5000000
+    mem_limit: 1500m
     ports:
       - 8096:8096
     healthcheck:
       test: "exit 0"
 
-  # search-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.search-service:1.0.0
-  #   hostname: localhost
-  #   network_mode: "host"
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8999:8999
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # authentication-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.authentication-service:1.0.0
-  #   hostname: localhost
-  #   network_mode: "host"
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8090:8090
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # image-crawler-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.image-crawler:1.0.0
-  #   hostname: localhost
-  #   network_mode: "host"
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 6090:6090
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # video-crawler-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.video-crawler:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8083:8083
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # code-crawler-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.code-crawler:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8080:8080
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # content-crawler-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.content-crawler:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 6087:6087
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # orchestra-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.orchestration:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8890:8890
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # confidence-score-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.confidence-score-service:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8084:8084
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # indexer-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.indexer-service:1.0.0
-  #   network_mode: "host"
-  #   mem_limit: 5000000
-  #   hostname: localhost
-  #   ports:
-  #     - 8051:8051
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  angular-search-interface:
+  search-service:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka-server:
+      eureka-service:
         condition: service_healthy
       rabbitmq-service:
         condition: service_healthy
     restart: always
-    image: semanticsearch/minerva.angular-search-interface:2.0.0
+    image: semanticsearch/minerva.search-service:1.0.0
+    hostname: localhost
+    network_mode: "host"
+    mem_limit: 600m
+    ports:
+      - 8999:8999
+    healthcheck:
+      test: "exit 0"
+
+  authentication-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.authentication-service:1.0.0
+    hostname: localhost
+    network_mode: "host"
+    mem_limit: 300m
+    ports:
+      - 8090:8090
+    healthcheck:
+      test: "exit 0"
+
+  image-crawler-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.image-crawler:1.0.0
+    hostname: localhost
+    network_mode: "host"
+    mem_limit: 800m
+    ports:
+      - 6090:6090
+    healthcheck:
+      test: "exit 0"
+
+  video-crawler-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.video-crawler:1.0.0
     network_mode: "host"
     hostname: localhost
-    mem_limit: 5000000
+    mem_limit: 900m
+    ports:
+      - 8083:8083
+    healthcheck:
+      test: "exit 0"
+
+  code-crawler-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.code-crawler:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 800m
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"
+
+  content-crawler-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.content-crawler:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 900m
+    ports:
+      - 6087:6087
+    healthcheck:
+      test: "exit 0"
+
+  orchestra-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.orchestration:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 600m
+    ports:
+      - 8890:8890
+    healthcheck:
+      test: "exit 0"
+
+  confidence-score-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.confidence-score-service:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 900m
+    ports:
+      - 8084:8084
+    healthcheck:
+      test: "exit 0"
+
+  indexer-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.indexer-service:1.0.0
+    network_mode: "host"
+    mem_limit: 900m
+    hostname: localhost
+    ports:
+      - 8051:8051
+    healthcheck:
+      test: "exit 0"
+
+  angular-search-interface:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.angular-search-interface:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 200m
     ports:
       - 4200:4200
     healthcheck:
       test: "exit 0"
 
-  dialog-manger:
+  dialog-manager:
     depends_on:
       config-server:
         condition: service_healthy
-      eureka-server:
+      eureka-service:
         condition: service_healthy
       rabbitmq-service:
         condition: service_healthy
@@ -348,99 +347,98 @@ services:
     image: semanticsearch/minerva.dialog-manager:1.0.0
     network_mode: "host"
     hostname: localhost
-    mem_limit: 5000000
+    mem_limit: 800m
     ports:
-      - 80:8081
+      - 8081:8081
     healthcheck:
       test: "exit 0"
-  #
-  # lemmatization-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.lemmatization-service:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 9000:9000
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # pos-tagging-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.pos-tagging:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8086:8086
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # nlp-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.nlp-service:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 9001:9001
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # user-search-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.user-search:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8091:8091
-  #   healthcheck:
-  #     test: "exit 0"
-  #
-  # recommendation-service:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.recommendations:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 8092:8092
-  #   healthcheck:
-  #     test: "exit 0"
-  #
+
+  lemmatization-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.lemmatization-service:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 600m
+    ports:
+      - 9000:9000
+    healthcheck:
+      test: "exit 0"
+
+  pos-tagging-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.pos-tagging:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 1500m
+    ports:
+      - 8086:8086
+    healthcheck:
+      test: "exit 0"
+
+  nlp-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.nlp-service:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 900m
+    ports:
+      - 9001:9001
+    healthcheck:
+      test: "exit 0"
+
+  user-search-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.user-search:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 900m
+    ports:
+      - 8091:8091
+    healthcheck:
+      test: "exit 0"
+
+  recommendation-service:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-service:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.recommendations:1.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 600m
+    ports:
+      - 8092:8092
+    healthcheck:
+      test: "exit 0"
