@@ -318,24 +318,24 @@ services:
   #   healthcheck:
   #     test: "exit 0"
   #
-  # angular-search-interface:
-  #   depends_on:
-  #     config-server:
-  #       condition: service_healthy
-  #     eureka-server:
-  #       condition: service_healthy
-  #     rabbitmq-service:
-  #       condition: service_healthy
-  #   restart: always
-  #   image: semanticsearch/minerva.angular-search-interface:1.0.0
-  #   network_mode: "host"
-  #   hostname: localhost
-  #   mem_limit: 5000000
-  #   ports:
-  #     - 4200:4200
-  #   healthcheck:
-  #     test: "exit 0"
-  #
+  angular-search-interface:
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      rabbitmq-service:
+        condition: service_healthy
+    restart: always
+    image: semanticsearch/minerva.angular-search-interface:2.0.0
+    network_mode: "host"
+    hostname: localhost
+    mem_limit: 5000000
+    ports:
+      - 4200:4200
+    healthcheck:
+      test: "exit 0"
+
   dialog-manger:
     depends_on:
       config-server:
