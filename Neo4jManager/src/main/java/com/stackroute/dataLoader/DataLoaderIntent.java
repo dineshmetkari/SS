@@ -56,7 +56,7 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
-		System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList");
+		System.out.println("ApplicationListener Invoked At Spring Container Startup for intentList");
 		String Query = "Match(w:Word)-[Is_A]->(i:Intent) return w.name as term, i.name as intent, w.weight as weight";
 		
 		Config config = new Config();

@@ -57,7 +57,7 @@ public class DataLoaderParentNlp implements ApplicationListener<ContextRefreshed
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList");
+		System.out.println("ApplicationListener Invoked At Spring Container Startup for ParentList for NLP");
 		String Query = "match(n:concept)-[:SubConceptOf]->(m:Domain) return n.name as parent";
 		
 		Config config = new Config();

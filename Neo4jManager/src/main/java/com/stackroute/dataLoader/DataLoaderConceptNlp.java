@@ -63,7 +63,7 @@ public class DataLoaderConceptNlp implements ApplicationListener<ContextRefreshe
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
 
-		System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList");
+		System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList for Nlp");
 		String Query = "match(n:concept)-[:SubConceptOf*]->(m:Domain) return m.name as domain,n.name as concept";
 
 		Config config = new Config();
