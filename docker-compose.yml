@@ -133,7 +133,7 @@ services:
         condition: service_healthy
     restart: always
     network_mode: "host"
-    mem_limit: 900m
+    mem_limit: 1400m
     image: semanticsearch/minerva.rabbitmq:1.0.0
     hostname: localhost
     ports:
@@ -151,7 +151,7 @@ services:
     image: semanticsearch/minerva.neo4j-manager:1.0.0
     hostname: localhost
     network_mode: "host"
-    mem_limit: 1500m
+    mem_limit: 2000m
     ports:
       - 8096:8096
     healthcheck:
@@ -185,7 +185,7 @@ services:
     image: semanticsearch/minerva.authentication-service:1.0.0
     hostname: localhost
     network_mode: "host"
-    mem_limit: 1200m
+    mem_limit: 1600m
     ports:
       - 8090:8090
     healthcheck:
@@ -203,7 +203,7 @@ services:
     image: semanticsearch/minerva.image-crawler:1.0.0
     hostname: localhost
     network_mode: "host"
-    mem_limit: 1000m
+    mem_limit: 1500m
     ports:
       - 6090:6090
     healthcheck:
@@ -221,7 +221,7 @@ services:
     image: semanticsearch/minerva.video-crawler:1.0.0
     network_mode: "host"
     hostname: localhost
-    mem_limit: 1000m
+    mem_limit: 1600m
     ports:
       - 8083:8083
     healthcheck:
@@ -241,7 +241,7 @@ services:
     hostname: localhost
     mem_limit: 1200m
     ports:
-      - 8080:8080
+      - 6080:8080
     healthcheck:
       test: "exit 0"
 
@@ -308,7 +308,7 @@ services:
       rabbitmq-service:
         condition: service_healthy
     restart: always
-    image: semanticsearch/minerva.indexer-service:1.0.0
+    image: semanticsearch/minerva.indexer-service:1.0.1
     network_mode: "host"
     mem_limit: 1200m
     hostname: localhost
@@ -365,7 +365,7 @@ services:
     image: semanticsearch/minerva.lemmatization-service:1.0.0
     network_mode: "host"
     hostname: localhost
-    mem_limit: 1200m
+    mem_limit: 1500m
     ports:
       - 9000:9000
     healthcheck:
