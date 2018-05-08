@@ -8,6 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.stackroute.service.Service;
 
+
+/**
+ * Rabbitmq is used as pub-sub mechanism.
+ * This service receives message from crawler-service-queue.
+ * 
+ * @author yaash
+ *
+ */
 @Component
 public class Receiver {
 	@Autowired

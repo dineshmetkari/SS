@@ -3,6 +3,12 @@ package com.stackroute.model;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+/**
+ * Model class.
+ * @author yaash
+ *
+ */
+
 @Component
 public class Model {
 	private String domain;

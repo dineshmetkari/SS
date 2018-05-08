@@ -9,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.stackroute.OrchestraServiceApplication;
+
+/**
+ * Rabbitmq is used as pub-sub mechanism here.
+ * This service publishes in integration queue.
+ * @author yaash
+ *
+ */
 @Component
 public class Publish {
 	AmqpTemplate amqpTemplate;

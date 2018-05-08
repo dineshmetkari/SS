@@ -25,6 +25,13 @@ import com.stackroute.redisson.Neo4jUrlModel;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 
+/**
+ * The method of this class is invoked by a rest end point from Indexer Service.
+ * The methods updates the data stored in redis.
+ * It does not refresh the whole data instead update only those urls which are populated by Indexer Service.
+ * @author yaash
+ *
+ */
 @Service
 public class IndexerUpdate {
 	private Driver driver;

@@ -23,6 +23,15 @@ import org.springframework.stereotype.Component;
 import com.stackroute.redisson.IntentModel;
 import com.stackroute.redisson.Neo4jIntentModel;
 
+/**
+ * The class gets all the words in the Intent Graph with intent and weight from Neo4j and puts to redis bucket "intentModel".
+ * The data structure used here is Arraylist<IntentModel>.
+ * Driver class is used to connect to Neo4j.
+ * Transaction class is used to run the query.
+ * @author yaash
+ *
+ */
+
 @Component
 public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -36,15 +45,11 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 	String password;
 	@Value("${redisHost}")
 	String redisHost;
-	
+
 	@Autowired
 	private Neo4jIntentModel neo4jIntentModel;
-	
-	
-	
-	
 	private RBucket<Neo4jIntentModel> bucket;
-	
+
 	public RBucket<Neo4jIntentModel> getBucket() {
 		return bucket;
 	}
@@ -55,14 +60,13 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		
-		System.out.println("ApplicationListener Invoked At Spring Container Startup for intentList");
+
 		String Query = "Match(w:Word)-[Is_A]->(i:Intent) return w.name as term, i.name as intent, w.weight as weight";
-		
+
 		Config config = new Config();
 		config.useSingleServer().setAddress(redisHost);
 		RedissonClient redisson = Redisson.create(config);
-		
+
 		bucket = redisson.getBucket("intentModel");
 		ArrayList<IntentModel> intentList = new ArrayList<>();
 		driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
@@ -71,13 +75,12 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 			public String execute(Transaction tx) {
 				StatementResult result = tx.run(Query);
 				while (result.hasNext()) {
-
 					Record record = result.next();
 					IntentModel intentModel = new IntentModel();
 					intentModel.setTerm(record.get("term").asString());
 					intentModel.setIntent(record.get("intent").asString());
 					try{
-					intentModel.setWeight(record.get("weight").asString());
+						intentModel.setWeight(record.get("weight").asString());
 					}catch(Exception e){
 						intentModel.setWeight(record.get("weight").toString());
 					}
@@ -88,10 +91,7 @@ public class DataLoaderIntent implements ApplicationListener<ContextRefreshedEve
 			}
 		});
 		bucket.set(neo4jIntentModel);
-	
-	
-	
-	
+
 	}
 
 }

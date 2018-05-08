@@ -23,6 +23,15 @@ import com.stackroute.redisson.IntentModel;
 import com.stackroute.redisson.Neo4jIntentModel;
 import com.stackroute.redisson.TermAngularModel;
 
+
+/**
+ * The method of this class is invoked when Domain Expert populates a term in the Intent Graph.
+ * The method is invoked via rest end point.
+ * Driver class is used to connect to Neo4j.
+ * Transaction class is used to run the query. 
+ * @author yaash
+ *
+ */
 @Service
 public class TermPopulation {
 	
@@ -42,6 +51,12 @@ public class TermPopulation {
 	private Neo4jIntentModel neo4jIntentModel;
 	private RBucket<Neo4jIntentModel> bucket;
 	
+	/**
+	 * This method is to populatre the new term in intent graph.
+	 * It uses a Merge Query to avoid duplicates.
+	 * @param termAngularModel
+	 * @return
+	 */
 	public String synonymPopulation(TermAngularModel termAngularModel){
 		
 		ArrayList<IntentModel> synoList =  termAngularModel.getNeo4jList();
@@ -69,7 +84,11 @@ public class TermPopulation {
 				
 		
 	}
-	
+/**
+ * This method gets all the new terms from intent graph.
+ * This method fully refreshes the redis data to give the Domain expert the list of all terms at any moment.
+ * @param synoList
+ */
 	public void refreshIntent(ArrayList<IntentModel> synoList){
 	System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList");
 	Config config = new Config();

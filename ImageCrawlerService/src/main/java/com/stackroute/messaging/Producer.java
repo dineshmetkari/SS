@@ -13,31 +13,37 @@ import org.springframework.stereotype.Component;
 import com.stackroute.ImageCrawlerServiceApplication;
 import com.stackroute.service.Service;
 
+/**
+ * Rabbitmq is used as pub-sub mechanism here.
+ * This service publishes in crawler-service-queue.
+ * @author yaash
+ *
+ */
+
 @Component
 public class Producer {
-	
-	
-	
-	  AmqpTemplate amqpTemplate;
-	  @Autowired
-	 ImageCrawlerServiceApplication mainApplication;
-	    
-	    @Autowired    
-	    public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
-	        this.amqpTemplate = amqpTemplate;
-	    }
 
-	    private final Logger logger = LoggerFactory.getLogger(this.getClass());	
-	    
-	    public void produceMsg(JSONObject jsonObj) throws AmqpException, IOException{
-	
-				amqpTemplate.convertAndSend(mainApplication.publishQueue, jsonObj.toString());        
-				System.out.println("Send msg = "+  jsonObj.toString());
-				logger.info("Message Successfully published");
-	
-		
-	    }
-   
-        
+
+
+	AmqpTemplate amqpTemplate;
+	@Autowired
+	ImageCrawlerServiceApplication mainApplication;
+
+	@Autowired    
+	public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
+		this.amqpTemplate = amqpTemplate;
+	}
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());	
+
+	public void produceMsg(JSONObject jsonObj) throws AmqpException, IOException{
+
+		amqpTemplate.convertAndSend(mainApplication.publishQueue, jsonObj.toString());        
+		logger.info("Message Successfully published");
+
+
+	}
+
+
 }
 

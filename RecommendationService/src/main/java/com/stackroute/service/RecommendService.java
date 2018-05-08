@@ -41,7 +41,6 @@ public class RecommendService implements AutoCloseable {
 
 	@Override
 	public void close() throws Exception {
-		// TODO Auto-generated method stub
 		driver.close();
 	}
 	public ArrayList<RecommendUrl> RecommendationSubConcept (String domain, String concept, String intent){
@@ -102,9 +101,9 @@ public class RecommendService implements AutoCloseable {
 			}
 		});
 
-		subconceptList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
-			return s2.compareTo(s1);
-		}));
+//		subconceptList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+//			return s2.compareTo(s1);
+//		}));
 		System.out.println(Greeting);
 		return subconceptList;
 
@@ -167,9 +166,9 @@ public class RecommendService implements AutoCloseable {
 				return "Working Related-concept of Recommendation";
 			}
 		});
-		relatedList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
-			return s2.compareTo(s1);
-		}));
+//		relatedList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+//			return s2.compareTo(s1);
+//		}));
 		System.out.println(Greeting);
 
 		if(relatedList.isEmpty()){
@@ -204,9 +203,9 @@ public class RecommendService implements AutoCloseable {
 					return "Working Related-concept of Recommendation";
 				}
 			});
-			relatedList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
-				return s2.compareTo(s1);
-			}));
+//			relatedList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+//				return s2.compareTo(s1);
+//			}));
 			System.out.println(Greeting2);
 		}
 
@@ -274,9 +273,9 @@ public class RecommendService implements AutoCloseable {
 				return "Working of Intent Recommendation";
 			}
 		});
-		intentList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
-			return s2.compareTo(s1);
-		}));
+//		intentList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+//			return s2.compareTo(s1);
+//		}));
 		System.out.println(Greeting);
 		return intentList;
 	}
@@ -331,9 +330,9 @@ public class RecommendService implements AutoCloseable {
 				return "Working of Intent Recommendation";
 			}
 		});
-		intentList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
-			return s2.compareTo(s1);
-		}));
+//		intentList.sort(Comparator.comparing(RecommendUrl::getConfidenceScore, (s1, s2) -> {
+//			return s2.compareTo(s1);
+//		}));
 		System.out.println(Greeting);
 		return intentList;
 		

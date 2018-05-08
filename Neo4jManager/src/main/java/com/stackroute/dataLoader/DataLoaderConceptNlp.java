@@ -25,6 +25,15 @@ import com.stackroute.redisson.IntentModel;
 import com.stackroute.redisson.Neo4jConceptNlpModel;
 
 
+/**
+ * The class gets all the list of concepts from Neo4j and puts to redis bucket "conceptNlpModel".
+ * The data structure used here is Arraylist<String>.
+ * Driver class is used to connect to Neo4j.
+ * Transaction class is used to run the query.
+ * @author yaash
+ *
+ */
+
 @Component
 public class DataLoaderConceptNlp implements ApplicationListener<ContextRefreshedEvent>  {
 
@@ -61,25 +70,22 @@ public class DataLoaderConceptNlp implements ApplicationListener<ContextRefreshe
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		// TODO Auto-generated method stub
 
-		System.out.println("ApplicationListener Invoked At Spring Container Startup for ConceptList for Nlp");
 		String Query = "match(n:concept)-[:SubConceptOf*]->(m:Domain) return m.name as domain,n.name as concept";
 
 		Config config = new Config();
 		config.useSingleServer().setAddress(redisHost);
 		RedissonClient redisson = Redisson.create(config);
-		
+
 		bucket = redisson.getBucket("conceptNlpModel");
 		ArrayList<ConceptNlpModel> conceptList = new ArrayList<>();
-		
+
 		driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
 		Session session1 = driver.session();
 		String Message1 = session1.writeTransaction(new TransactionWork<String>() {
 			public String execute(Transaction tx) {
 				StatementResult result = tx.run(Query);
 				while (result.hasNext()) {
-
 					Record record = result.next();
 					ConceptNlpModel conceptNlpModel = new ConceptNlpModel();
 					conceptNlpModel.setConcept(record.get("concept").asString());
@@ -90,9 +96,8 @@ public class DataLoaderConceptNlp implements ApplicationListener<ContextRefreshe
 				return "Neo4j ConceptList Working";
 			}
 		});
-		
 		bucket.set(neo4jConceptNlpModel);
-		
+
 	}
 
 }

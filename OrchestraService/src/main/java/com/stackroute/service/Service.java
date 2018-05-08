@@ -19,7 +19,15 @@ import org.springframework.stereotype.Component;
 import com.stackroute.messaging.Publish;
 import com.stackroute.model.Model;
 
-
+/**
+ * The integration() method integrates the 4 messages with same Url.
+ * It does by  matching a unique string i.e domain+concept +url.
+ * The messages in the queue are random and are not in sync, thus a count is put to keep track of the messages.
+ * The count will track the messages have the same unigue string and that will be 4 in this case as due to four crawler services.
+ * As soon as the count becomes 3, the 4th message is synced and is published with outputs of all the four crawler services.
+ * @author yaash
+ *
+ */
 
 @Component
 public class Service {
@@ -144,7 +152,6 @@ public class Service {
 				uniqueList.remove(unique);
 				publish.publishMsg(json);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Page Not Found");
 					JSONObject errorObj = new JSONObject();
 					errorObj.put("concept",finalModel.getConcept());
@@ -163,7 +170,6 @@ public class Service {
 					try {
 						publish.publishMsg(jsonError);
 					} catch (AmqpException | IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
