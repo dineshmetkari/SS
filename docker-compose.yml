@@ -450,3 +450,5 @@ services:
     network_mode: "host"
     restart: always
     mem_limit: 15m
+    healthcheck:
+      test: "exit 0"
