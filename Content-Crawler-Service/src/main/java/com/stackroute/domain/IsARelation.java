@@ -4,7 +4,11 @@ import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @RelationshipEntity(type="Is_A")
+@Getter @Setter
 public class IsARelation {
 	
 	
@@ -13,22 +17,6 @@ public class IsARelation {
 	
 	@EndNode
 	private Intent intent;
-
-	public Word getWord() {
-		return word;
-	}
-
-	public void setWord(Word word) {
-		this.word = word;
-	}
-
-	public Intent getIntent() {
-		return intent;
-	}
-
-	public void setIntent(Intent intent) {
-		this.intent = intent;
-	}
 
 }
 

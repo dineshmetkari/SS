@@ -1,13 +1,20 @@
 package com.stackroute;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.rabbitmq.listener.MessageListener;
 import com.stackroute.service.TermService;
@@ -17,6 +24,7 @@ import com.stackroute.service.TermService;
  * @author Michael Hunger
  * @author Mark Angrish
  */
+@EnableDiscoveryClient
 @SpringBootApplication
 @EntityScan("com.stackroute.domain")
 public class ContentCrawlerServiceApplication {
@@ -43,4 +51,11 @@ public class ContentCrawlerServiceApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(ContentCrawlerServiceApplication.class, args);
 		context.getBean(TermService.class).graph();
 	}
+}
+
+@RestController
+@RefreshScope
+class RefeshController {
+	
+	
 }

@@ -10,23 +10,29 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 @RestController
-public class CustomException extends ResponseEntityExceptionHandler{
+public class CustomException extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
-	  public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
-	    ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
-	    exceptionResponse.setMessage("DB is down!");
-	    return new ResponseEntity<>(exceptionResponse, HttpStatus.OK);
-	  }
+	public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+		exceptionResponse.setMessage("DB is down!");
 
-	  @ExceptionHandler(UserNotFoundException.class)
-	  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
-	    ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
-	    return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-	  }
-	  @ExceptionHandler(UserAlreadyExistsException.class)
-	  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserAlreadyExistsException ex, WebRequest request) {
-	    ExceptionResponse exceptionResponse = new ExceptionResponse( ex.getMessage());
-	    return new ResponseEntity<>(exceptionResponse, HttpStatus.OK);
-	  }
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.OK);
+	}
+
+	@ExceptionHandler(UserNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserNotFoundException ex,
+			WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(UserAlreadyExistsException.class)
+	public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserAlreadyExistsException ex,
+			WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.OK);
+	}
 }

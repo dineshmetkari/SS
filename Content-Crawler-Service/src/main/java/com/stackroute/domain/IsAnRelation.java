@@ -4,7 +4,11 @@ import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @RelationshipEntity(type="Is_An")
+@Getter @Setter
 public class IsAnRelation {
 	
 	@StartNode
@@ -12,22 +16,6 @@ public class IsAnRelation {
 	
 	@EndNode
 	private Root root;
-
-	public Intent getIntent() {
-		return intent;
-	}
-
-	public void setIntent(Intent intent) {
-		this.intent = intent;
-	}
-
-	public Root getRoot() {
-		return root;
-	}
-
-	public void setRoot(Root root) {
-		this.root = root;
-	}
-
+	
 }
 

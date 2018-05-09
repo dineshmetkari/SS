@@ -8,7 +8,11 @@ import org.neo4j.ogm.annotation.Relationship;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @NodeEntity
+@Getter @Setter
 public class Intent {
 	
 	@GraphId
@@ -22,30 +26,4 @@ public class Intent {
 	@Relationship(type="Is_An")
 	private Root root;
 	
-	public Root getRoot() {
-		return root;
-	}
-	public void setRoot(Root root) {
-		this.root = root;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public List<IsARelation> getIndicators() {
-		return indicators;
-	}
-	public void setIndicators(List<IsARelation> indicators) {
-		this.indicators = indicators;
-	}
-	
-
 }

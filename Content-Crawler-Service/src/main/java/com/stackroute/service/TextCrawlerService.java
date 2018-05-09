@@ -29,19 +29,23 @@ import com.stackroute.rabbitmq.publisher.Publisher;
 @Service
 public class TextCrawlerService {
 
-	@Autowired 
 	TermService termService;
+
+	@Autowired 
+	public void setTermService(TermService termService) {
+		this.termService = termService;
+	}
 
 	@Autowired
 	AmqpTemplate amqpTemplate;
-	
+
 	Publisher publisher;
 
 	@Autowired
 	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
-	
+
 	public List<JSONObject> getAppearanceScore(Result result){
 		JSONObject json = new JSONObject();
 		JSONObject jsonOutput = new JSONObject();
@@ -50,17 +54,13 @@ public class TextCrawlerService {
 		List<JSONObject> jsonList = new ArrayList<JSONObject>();
 
 		try {
-//			Resource resource = resourceLoader.getResource("classpath:tag-weights.json");
-//			File file = resource.getFile();
-//			FileReader fr = new FileReader(file);
 			ClassPathResource classPathResource = new ClassPathResource("tag-weights.json");
-
 			InputStream inputStream = classPathResource.getInputStream();
 			File file = File.createTempFile("test", ".txt");
 			try {
-			    FileUtils.copyInputStreamToFile(inputStream, file);
+				FileUtils.copyInputStreamToFile(inputStream, file);
 			} finally {
-			    IOUtils.closeQuietly(inputStream);
+				IOUtils.closeQuietly(inputStream);
 			}
 			FileReader fr = new FileReader(file);
 			weights =  (JSONObject)parser.parse(fr);
@@ -76,7 +76,7 @@ public class TextCrawlerService {
 		String[] keys = {"title","meta[name=keywords]","meta[name=description]","h1","h2","h3","h4","h5","h6","p","li"};
 
 		for(String url: result.getUrls()) {
-		try {
+			try {
 				Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
 				HashMap<String, HashMap<String, Integer>> appearanceMatrix = new HashMap<>();
 				for(int i =0; i<keys.length; ++i) {
@@ -133,25 +133,21 @@ public class TextCrawlerService {
 				jsonOutput.put("concept", result.getConcept());
 				jsonOutput.put("terms", json);
 				publisher.produceMsg(jsonOutput);
-				jsonList.add(json);
+				jsonList.add(jsonOutput);
 
 			} 
-		catch (IOException e) {
-			System.out.println("Page Not Found");
-			for(String term: terms){
-				json.put(term, 0);
-			}
-			jsonOutput.put("url", url);
-			jsonOutput.put("domain", result.getDomain());
-			jsonOutput.put("concept", result.getConcept());
-			jsonOutput.put("terms", json);
-			publisher.produceMsg(jsonOutput);
-		} 
-		
+			catch (IOException e) {
+				System.out.println("Page Not Found");
+				for(String term: terms){
+					json.put(term, 0);
+				}
+				jsonOutput.put("url", url);
+				jsonOutput.put("domain", result.getDomain());
+				jsonOutput.put("concept", result.getConcept());
+				jsonOutput.put("terms", json);
+				publisher.produceMsg(jsonOutput);
+			} 
 		}
 		return jsonList;
 	}
-
-
-
 }

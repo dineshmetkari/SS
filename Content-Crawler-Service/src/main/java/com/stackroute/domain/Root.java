@@ -1,12 +1,15 @@
 package com.stackroute.domain;
 
 import java.util.List;
-
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @NodeEntity
+@Getter @Setter
 public class Root {
 	
 	@GraphId
@@ -16,27 +19,5 @@ public class Root {
 	@Relationship(type="Is_An", direction = Relationship.INCOMING)	 
     private List<IsAnRelation> intents;
 	
-	
-	public List<IsAnRelation> getIntents() {
-		return intents;
-	}
-	public void setIntents(List<IsAnRelation> intents) {
-		this.intents = intents;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
-
 }
 
