@@ -17,11 +17,13 @@ public class FetchingService {
 	private String username;
 	@Value("${spring.data.neo4j.password}")
 	private String password;
+	@Value("${redisUri}")
+	private String redisUri;
 
 	public void fetch(String json) {
 		Confidence confidence = gson.fromJson(json, Confidence.class);
 
-		ExecutingService.executeQuery(confidence, neo4juri, username, password);
+		ExecutingService.executeQuery(confidence, neo4juri, username, password, redisUri);
 
 	}
 }

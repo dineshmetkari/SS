@@ -114,6 +114,9 @@ public class NlpService {
 			else
 				domain = str;
 		}
+		
+		if(inputQuery.getConcept()!=null && !finalConcept.equalsIgnoreCase(inputQuery.getConcept()))
+			finalConcept = inputQuery.getConcept();
 
 		String intent = getIntent(queryString);
 		System.out.println(intent);
@@ -151,6 +154,7 @@ public class NlpService {
 				result.put("type", "CNIN");
 				result.put("parentNodes", parentString);
 				result.put("sessionId", inputQuery.getSessionId());
+				result.put("spelling", inputQuery.getSpelling());
 				publisher.produceMsgToDialogFlow(result);
 
 			}
@@ -165,11 +169,13 @@ public class NlpService {
 				result.put("intent", inputQuery.getIntent());
 				result.put("sessionId", inputQuery.getSessionId());
 				result.put("illustration", check_ill);
+				result.put("spelling", inputQuery.getSpelling());
 				if(inputQuery.getSpelling().equals("correct")){			
 					publisher.produceMsgToSearchService(result);				
 				}
 				else{
 					String queryCheck = "Do you mean this: " + queryString;
+					
 					result.put("message", queryCheck);
 					publisher.produceMsgToSearchService(result);
 					publisher.produceMsgToDialogFlow(result);
@@ -200,6 +206,7 @@ public class NlpService {
 				//char s = parentString.charAt(parentString.length()-2);
 				//				parentString = parentString.substring(0,parentString.length()-3);
 				//				String str = "Do you mean concepts: " + parentString;
+				result.put("spelling", inputQuery.getSpelling());
 				result.put("type", "CNIY");
 				result.put("parentNodes",  parentString);
 				result.put("sessionId", inputQuery.getSessionId());
@@ -217,11 +224,13 @@ public class NlpService {
 				result.put("intent", intent);
 				result.put("sessionId", inputQuery.getSessionId());
 				result.put("illustration", check_ill);
+				result.put("spelling", inputQuery.getSpelling());
 				if(inputQuery.getSpelling().equals("correct")){			
 					publisher.produceMsgToSearchService(result);				
 				}
 				else{
 					String queryCheck = "Do you mean this: " + queryString;
+					result.put("spelling", inputQuery.getSpelling());
 					result.put("message", queryCheck);
 					publisher.produceMsgToSearchService(result);
 					publisher.produceMsgToDialogFlow(result);
@@ -235,12 +244,7 @@ public class NlpService {
 		conceptsFound = new HashSet<ConceptNlpModel>();
 		check_ill = false;
 		conceptFound = "";
-		try {
-			result.put("spelling", inputQuery.getSpelling());
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		return result;
 

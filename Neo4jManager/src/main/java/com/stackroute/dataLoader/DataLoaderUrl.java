@@ -55,15 +55,25 @@ public class DataLoaderUrl implements ApplicationListener<ContextRefreshedEvent>
 		this.bucket = bucket;
 	}
 
+	/**
+	 * The class gets all the urls of concepts of each  Domain from Neo4j and puts to redis bucket "urlModel".
+	 * The data structure used here is Map<String,Map<String,ArrayList<FetchUrl>>>.
+	 * Fetchurl contains all the details of the Urls.
+	 * ArrayList of fetchUrl objects is mapped with intent; mapped to concept;mapped to domain.
+	 * Driver class is used to connect to Neo4j.
+	 * Transaction class is used to run the query.
+	 * @author yaash
+	 *
+	 */
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("ApplicationListener Invoked At Spring Container Startup for UrlList");
-		String Query1="Match(n:url)-[x:Advance]->(c:concept),(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
-		String Query2= "Match(n:url)-[x:Illustration]->(c:concept),(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";	
-		String Query3 = "Match(n:url)-[x:Intermediate]->(c:concept),(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
-		String Query4 = "Match(n:url)-[x:Advance]->(c:concept),(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
+		String Query1="Match(n:url)-[x:Advance]->(c:concept)-[:SubConceptOf*]->(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
+		String Query2= "Match(n:url)-[x:Illustration]->(c:concept)-[:SubConceptOf*]->(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";	
+		String Query3 = "Match(n:url)-[x:Intermediate]->(c:concept)-[:SubConceptOf*]->(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
+		String Query4 = "Match(n:url)-[x:Beginner]->(c:concept)-[:SubConceptOf*]->(d:Domain)return n.titleUrl as titleUrl,n.metaUrl as metaUrl,n.imgCount as imgCount,n.videoCount as videoCount,n.codeCount as codeCount,n.url as url,n.counterIndicator as counterIndicator, c.name as conceptName,x.confidenceScore as confidenceScore, d.name as domainName";
 
 		Config config = new Config();
 		config.useSingleServer().setAddress(redisHost);
@@ -81,14 +91,14 @@ public class DataLoaderUrl implements ApplicationListener<ContextRefreshedEvent>
 
 
 		Map<String,ArrayList<FetchUrl>> conceptMapAdvance = mapping(fetchListAdvance);
-		
+
 		Map<String,ArrayList<FetchUrl>> conceptMapIllustration = mapping(fetchListIllustration);
 
 		Map<String,ArrayList<FetchUrl>> conceptMapIntermediate = mapping(fetchListIntermediate);
-		
+
 		Map<String,ArrayList<FetchUrl>> conceptMapBeginner = mapping(fetchListBeginner);
-		
-		
+
+
 		Map<String,Map<String,ArrayList<FetchUrl>>> conceptfetchMap = new HashMap<>();
 		for (Entry<String, ArrayList<FetchUrl>> entry : conceptMapBeginner.entrySet()){
 			String concept= entry.getKey();
@@ -104,7 +114,12 @@ public class DataLoaderUrl implements ApplicationListener<ContextRefreshedEvent>
 
 
 	}
-
+	/**
+	 * This method gets the list of the Urls linked to a specific concept and a particular Intent.
+	 * @param Query
+	 * @param intent
+	 * @return
+	 */
 	public ArrayList<FetchUrl> runQuery(String Query, String intent){
 
 		ArrayList<FetchUrl> fetchList = new ArrayList<>();
@@ -138,7 +153,11 @@ public class DataLoaderUrl implements ApplicationListener<ContextRefreshedEvent>
 		return fetchList;
 
 	}
-
+	/**
+	 * this method maps the Intent to all the Urls(of a specific concept+domain) of that intent .
+	 * @param fetchList
+	 * @return
+	 */
 	public Map<String,ArrayList<FetchUrl>> mapping (ArrayList<FetchUrl> fetchList){
 
 		Map<String,ArrayList<FetchUrl>> conceptMap = new HashMap<>();

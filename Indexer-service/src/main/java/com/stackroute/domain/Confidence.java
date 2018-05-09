@@ -101,9 +101,4 @@ public class Confidence {
 		return metaUrl;
 	}
 
-	
-
-
-
-
 }
