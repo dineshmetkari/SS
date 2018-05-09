@@ -17,23 +17,21 @@ import com.stackroute.receiver.Receiver;
 @EnableDiscoveryClient
 @SpringBootApplication
 public class LemmatizationServiceApplication {
-	
+
 	/**
 	 * Name of the queue to publish output
 	 */
 	@Value("${publishqueue}")
 	public String PUBLISH_QUEUE;
-	
+
 	@Value("${subscribequeue}")
 	public String SUBSCRIBE_QUEUE;
-	
-	
+
 	@Bean
 	SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
 			MessageListenerAdapter listenerAdapter) {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		System.out.println(SUBSCRIBE_QUEUE);
 		container.setQueueNames(SUBSCRIBE_QUEUE);
 		container.setMessageListener(listenerAdapter);
 		return container;
@@ -41,6 +39,7 @@ public class LemmatizationServiceApplication {
 
 	/**
 	 * Bean which receives message from message queue
+	 * 
 	 * @param receiver
 	 * @return
 	 */

@@ -1,11 +1,5 @@
 package com.stackroute;
 
-
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
-
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
@@ -26,19 +20,23 @@ import com.stackroute.listener.MessageListener;
  *
  */
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+/**
+ * 
+ * @author vaishnavi
+ *
+ */
 public class CodeCrawlerServiceApplication {
 	/**
 	 * Name of the exchange
 	 */
-	
-	
-	public String topicExchange="integration.exchange";
-	
+
+	public String topicExchange = "integration.exchange";
+
 	/**
 	 * Name of the queue to fetch input
 	 */
-	
+
 	@Value("${subscribequeue}")
 	public String SUBSCRIBE_QUEUE;
 	/**
@@ -47,11 +45,9 @@ public class CodeCrawlerServiceApplication {
 	@Value("${publishqueue}")
 	public String PUBLISH_QUEUE;
 
-	
-
-
 	/**
 	 * Bean which creates container for Message Listener
+	 * 
 	 * @param connectionFactory
 	 * @param listenerAdapter
 	 * @return
@@ -61,7 +57,6 @@ public class CodeCrawlerServiceApplication {
 			MessageListenerAdapter listenerAdapter) {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		System.out.println(SUBSCRIBE_QUEUE);
 		container.setQueueNames(SUBSCRIBE_QUEUE);
 		container.setMessageListener(listenerAdapter);
 		return container;
@@ -69,6 +64,7 @@ public class CodeCrawlerServiceApplication {
 
 	/**
 	 * Bean which receives message from message queue
+	 * 
 	 * @param receiver
 	 * @return
 	 */

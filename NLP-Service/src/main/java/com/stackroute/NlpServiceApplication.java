@@ -16,12 +16,17 @@ import com.stackroute.receiver.Receiver;
 
 @EnableDiscoveryClient
 @SpringBootApplication
+/**
+ * 
+ * @author vaishnavi
+ *
+ */
 public class NlpServiceApplication {
-	
+
 	/**
 	 * Name of the queue to fetch input
 	 */
-	
+
 	@Value("${subscribequeue}")
 	public String SUBSCRIBE_QUEUE;
 	/**
@@ -29,16 +34,16 @@ public class NlpServiceApplication {
 	 */
 	@Value("${publishqueue}")
 	public String PUBLISH_QUEUE;
-	
+
 	@Value("${exchange}")
 	public String EXCHANGE;
-	
+
 	@Value("${key}")
 	public String KEY;
 
-
 	/**
 	 * Bean which creates container for Message Listener
+	 * 
 	 * @param connectionFactory
 	 * @param listenerAdapter
 	 * @return
@@ -56,6 +61,7 @@ public class NlpServiceApplication {
 
 	/**
 	 * Bean which receives message from message queue
+	 * 
 	 * @param receiver
 	 * @return
 	 */
@@ -80,4 +86,3 @@ public class NlpServiceApplication {
 class RefreshController {
 
 }
-

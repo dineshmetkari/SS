@@ -12,7 +12,10 @@ import com.google.gson.reflect.TypeToken;
 import com.stackroute.domain.Result;
 import com.stackroute.service.CodeOccuranceCounterService;
 
-
+/**
+ * Rabbit MQ Listener Class
+ *
+ */
 @Component
 public class MessageListener {
 	
@@ -30,6 +33,10 @@ public class MessageListener {
 		return message;
 	}
        
+    /**
+     * message fetched from the rabbit mq
+     * @param message
+     */
     
     public void receiveMessage(String message) {
     	this.message = message;
