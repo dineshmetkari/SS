@@ -65,8 +65,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: honey678
       MYSQL_DATABASE: UserDB
-    volumes:
-      - $PWD/sql/data:/var/lib/mysql
+   # volumes:
+    #  - $PWD/sql/data:/var/lib/mysql
     ports:
       - 3306:3306
     mem_limit: 600m
@@ -87,7 +87,7 @@ services:
         condition: service_healthy
     restart: always
     network_mode: "host"
-    image: semanticsearch/minerva.config-server:1.0.0
+    image: semanticsearch/minerva.config-server:1.0.1
     hostname: localhost
     ports:
       - 8888:8888
@@ -326,7 +326,7 @@ services:
       rabbitmq-service:
         condition: service_healthy
     restart: always
-    image: semanticsearch/minerva.angular-search-interface:1.0.0
+    image: semanticsearch/minerva.angular-search-interface:4.0.1
     network_mode: "host"
     hostname: localhost
     mem_limit: 100m
@@ -444,7 +444,7 @@ services:
       test: "exit 0"
 
   nginx-server:
-    image: semanticsearch/minerva.ngnix-service:1.0.0
+    image: semanticsearch/minerva.ngnix-service:1.0.8
     ports:
       - 80:80
     network_mode: "host"
@@ -452,3 +452,25 @@ services:
     mem_limit: 15m
     healthcheck:
       test: "exit 0"
+
+	grafana:
+		ports:
+			- "3000:3000"
+		user: "472"
+		links:
+			- prometheus
+		image: semanticsearch/minerva.grafana:1.0.3
+		mem_limit: 1000m
+		healthcheck:
+			test: "exit 0"
+		
+	prometheus:
+		ports:
+			- "9090:9090"
+		command:
+			- '--config.file=/etc/prometheus/prometheus.yml'
+		image: semanticsearch/minerva.prometheus:1.0.5
+		mem_limit: 1000m
+		healthcheck:
+			test: "exit 0"
+

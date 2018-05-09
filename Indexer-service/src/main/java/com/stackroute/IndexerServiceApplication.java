@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Bean;
 
 import com.stackroute.messaging.Receiver;
 
+/**
+ * 
+ * main Class of Indexer Service ,intialise Beans for RabbitMq
+ * 
+ */
 @EnableDiscoveryClient
 @SpringBootApplication
 public class IndexerServiceApplication {

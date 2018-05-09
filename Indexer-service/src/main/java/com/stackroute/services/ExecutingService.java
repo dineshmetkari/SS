@@ -9,6 +9,11 @@ import org.neo4j.driver.v1.TransactionWork;
 
 import com.stackroute.domain.Confidence;
 
+/**
+ * create database connection with neo4j database, execute query to insert url
+ * nodes into the concept-domain graph,inform neo4j manager about the graph
+ * update
+ */
 public class ExecutingService implements AutoCloseable {
 	private final Driver driver;
 	private String redisUri;
@@ -45,6 +50,7 @@ public class ExecutingService implements AutoCloseable {
 					// + confidence.getDomainName() + "\" }";
 					// RestTemplate restTemplate = new RestTemplate();
 					// restTemplate.postForObject(redisUri, ack, String.class);
+
 					postRequest = new PostRequest();
 					postRequest.postMethod(confidence, redisUri);
 					return "Inserted: " + confidence.toString();
@@ -63,7 +69,6 @@ public class ExecutingService implements AutoCloseable {
 			greeter.createConfidenceNode(confidence);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

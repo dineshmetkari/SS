@@ -5,6 +5,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.stackroute.domain.Confidence;
 
+/**
+ * notifies the changes in graph neo4j Manager through http get request
+ * 
+ */
 @Service
 public class PostRequest {
 
