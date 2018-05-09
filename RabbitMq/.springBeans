@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.stackroute.SpringBootHelloWorldApplication</config>
+		<config>java:com.stackroute.service.SpringBootHelloWorldApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

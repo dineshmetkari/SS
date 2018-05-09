@@ -44,6 +44,9 @@ public class Receiver {
 			result.put("spelling", inputQuery.getSpelling());
 			result.put("query", queryAfterPOSTagging);
 			result.put("sessionId", inputQuery.getSessionId());
+			result.put("domain", inputQuery.getDomain());
+			result.put("concept", inputQuery.getConcept());
+			result.put("intent", inputQuery.getIntent());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
