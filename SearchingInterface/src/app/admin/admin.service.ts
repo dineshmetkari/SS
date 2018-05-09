@@ -18,16 +18,22 @@ export class AdminService {
       let headers = new Headers({'Content-Type':'application/json'})
       let options = new RequestOptions({headers : headers})
 
-      return this.http.post('http://172.23.238.148:8090/register', credentials, options);
+      return this.http.post('http://minerva.stackroute.in/apigateway/register', credentials, options);
   }
 
   getAllDomainExperts() : Observable<IDomainExpert[]> {
-    return this.httpClient.get<IDomainExpert[]>('http://172.23.238.148:8090/showAll');
+    return this.httpClient.get<IDomainExpert[]>('http://minerva.stackroute.in/apigateway/showAll');
   }
 
   deleteDomainExpert(emailId : String) : Observable<any> {
-
-    return this.http.get('http://172.23.238.148:8090/delete/'+ emailId);
+    let myparams = {
+      password: "",
+      role: "Domain Expert",
+      emailId : emailId
+    };
+    let headers = new Headers({'Content-Type':'application/json'})
+    let options = new RequestOptions({headers : headers})
+    return this.http.post('http://minerva.stackroute.in/apigateway/delete', myparams,  options);
   }
 
 

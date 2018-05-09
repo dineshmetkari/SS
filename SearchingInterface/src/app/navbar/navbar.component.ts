@@ -17,12 +17,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = "true";
-    // if(loginStatus)
-  //   if(this.role == null) {
-  //   this.role = "Welcome";
-  // }
-    // this.role = "Welcome";
-    if(this.role === "Welcome") {
+    if(this.role === "Minerva") {
       this.loginStatus = "login";
     } else if(this.role === "Login") {
       this.loginStatus = "Home";
@@ -30,10 +25,7 @@ export class NavbarComponent implements OnInit {
       this.loginStatus = "logout";
     }
   }
-
   loginStatus = "login";
-
-
 
   perform() {
     if(this.loginStatus === "login") {
@@ -44,8 +36,5 @@ export class NavbarComponent implements OnInit {
     } else {
       this.router.navigate(['login']);
     }
-
-
-    // this.router.navigateByUrl("/home");
   }
 }

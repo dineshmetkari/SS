@@ -64,6 +64,7 @@ mat-card-content {
   text-overflow: ellipsis;
   white-space: pre-wrap;
   overflow: hidden;
+  text-align: justify;
 }
 mat-card-footer {
   height: 50px;

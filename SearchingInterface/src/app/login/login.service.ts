@@ -8,7 +8,7 @@ export class LoginService  implements CanActivate {
   constructor(private loginStatusCheck : LoginComponent, private router: Router) { }
 
   canActivate() {
-    if(this.loginStatusCheck.getLoginStatus()) {
+    if(localStorage.getItem(localStorage.getItem('sessionId'))==='success') {
       return true;
     }
     else {

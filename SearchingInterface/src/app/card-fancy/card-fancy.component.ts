@@ -40,9 +40,6 @@ Title:string
     this.imageCount = this.cardDetails.imgCount;
     this.videoCount = this.cardDetails.videoCount;
     this.codeCount = this.cardDetails.codeCount;
-    // this.Title = this.cardDetails.Title;
-    //
-
   }
 
 }

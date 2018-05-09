@@ -3,11 +3,8 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header  (focus) = "checking()">
         <mat-panel-title>
-          <b> Admin </b>
+          <b>Add Domain Expert</b>
         </mat-panel-title>
-        <mat-panel-description>
-          Add domain Expert
-        </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
         <input matInput type="email" placeholder="Email" [(ngModel)]="emailId" (keyup) = "checking()" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
@@ -37,33 +34,29 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header  (focus) = "checking()">
         <mat-panel-title>
-          <b> Admin </b>
+          <b>Show All Domain Experts</b>
         </mat-panel-title>
-        <mat-panel-description>
-          Show All Domain Experts
-        </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <mat-action-row>
-        <button class="showAllButton" type="submit" mat-button color="primary" (click)="showAllButton()">Show All Domain Experts</button>
-      </mat-action-row>
-
 
       <mat-form-field class="mat-chip-list-stacked">
         <mat-chip-list #chipList>
-        <mat-chip *ngFor="let domainExpert of domainExperts" [selectable]="selectable"
-               [removable]="removable" (remove)="remove(domainExpert)">
-         {{ domainExpert.emailId}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          <mat-chip *ngFor="let domainExpert of domainExperts" [selectable]="selectable"
+          [removable]="removable" (remove)="remove(domainExpert)">
+          {{ domainExpert.emailId}}
+          <mat-icon matChipRemove *ngIf="removable" title="Delete this Domain Expert">cancel</mat-icon>
         </mat-chip>
-        <input [readonly]="true" placeholder="Domain Experts......"
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)" />
-        </mat-chip-list>
-      </mat-form-field>
+        <input [readonly]="true" placeholder="List of all the Domain Experts"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)" />
+      </mat-chip-list>
+    </mat-form-field>
 
-    </mat-expansion-panel>
+    <mat-action-row>
+      <button class="showAllButton" type="submit" mat-button color="primary" (click)="showAllButton()">Show All Domain Experts</button>
+    </mat-action-row>
+
+  </mat-expansion-panel>
 
   </mat-accordion>

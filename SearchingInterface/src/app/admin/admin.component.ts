@@ -72,6 +72,7 @@ export class AdminComponent implements OnInit {
       password: this.password,
       role: "Domain Expert"
     };
+
     this._adminService
       .postAddDomainExpertCredentials(this.credentials)
       .subscribe(data => {
@@ -81,7 +82,6 @@ export class AdminComponent implements OnInit {
   }
 
   show() {
-    // console.log(this.register);
     let value = this.register;
     if(JSON.parse(this.register).message != null )
       value = JSON.parse(this.register).message;
@@ -91,15 +91,7 @@ export class AdminComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     let input = event.input;
     let value = event.value;
-
-    // Add our fruit
-    // if ((value || '').trim()) {
-    //   this.concepts1.push({ value.trim() });
-    // }
-
-    // Reset the input value
     if (input) {
-      input.value = '';
     }
   }
 

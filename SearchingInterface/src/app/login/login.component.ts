@@ -36,6 +36,7 @@ export class LoginComponent  implements OnInit {
   login: string;
   ngOnInit(){
     this.login = "start";
+    localStorage.setItem(localStorage.getItem('sessionId'),'none');
     // console.log("app-component visited ");
   }
   greeting = "Login";
@@ -79,7 +80,6 @@ export class LoginComponent  implements OnInit {
       password: this.password,
       role: this.role
     };
-
     this._appService.postLoginCredentials(this.credentials).subscribe(data => {
       this.response = JSON.parse(data._body);
       this.show();
@@ -115,11 +115,14 @@ export class LoginComponent  implements OnInit {
   routing() {
     // console.log("token value is ", this.token);
     if (this.login === "success") {
+      localStorage.setItem(localStorage.getItem('sessionId'),'success');
       if (this.role === "Admin") this.router.navigate(["/admin"]);
       else if (this.role === "Domain Expert")
         this.router.navigate(["/domain-expert"], {
           queryParams: { token: this.token }
         });
     }
+    else
+      localStorage.setItem(localStorage.getItem('sessionId'),'none');
   }
 }

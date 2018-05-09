@@ -143,12 +143,12 @@ float: left;
 }
 .time-left{
   color: white ;
-  font-size: 9px;
+  font-size: 12px;
   float: right;
 }
 .time-right{
   color: black ;
-  font-size: 9px;
+  font-size: 12px;
   float: right;
 }
 

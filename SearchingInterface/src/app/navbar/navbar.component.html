@@ -2,21 +2,13 @@
   <mat-toolbar class = "toolbar">
     <mat-toolbar-row>
       <button mat-icon-button class = "avatar" [routerLink] = "['/home']">
-         <!-- disabled = "value" (click) = "logout()"> -->
         <mat-icon>whatshot</mat-icon>
       </button>
-      <!-- </mat-card-actions> -->
         <h1 class="heading">{{ role }}</h1>
-      <!-- <mat-card-actions> -->
       <button class="settings" [disabled] = "value" mat-icon-button [matMenuTriggerFor]="menu"  >
         <mat-icon>account_circle</mat-icon>
       </button>
     <mat-menu #menu="matMenu">
-      <!-- <button mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span>Change Password</span>
-      </button> -->
-      <!-- <button mat-menu-item (click) = "perform()" > -->
       <button mat-menu-item (click) = "perform()">
         <mat-icon>person_outline</mat-icon>
         <span>{{ loginStatus }}</span>
@@ -25,6 +17,3 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
-<!-- <div *ngIf = "loggedIn != 'true'"> -->
-  <!-- <router-outlet></router-outlet>
-</div> -->

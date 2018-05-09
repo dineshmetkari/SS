@@ -14,18 +14,14 @@ export class DomainExpertService {
     let headers = new Headers({ token: token });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(
-      "http://172.23.238.171:8999/api/v1/search",
+      "http://minerva.stackroute.in/apigateway/search-service",
       populate,
       options
     );
-    // return this.http.post(
-    //   "http://172.23.238.165:8000/search-service/",
-    //   populate,
-    //   options
-    // );
+
   }
 
   getDomainConceptList(): Observable<any> {
-    return this.http.get("http://172.23.238.178:8096/api/v1/neo4jConcept");
+    return this.http.get("http://minerva.stackroute.in/apigateway/neo4jConcept");
   }
 }

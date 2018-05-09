@@ -96,15 +96,15 @@ export class TermBankComponent implements OnInit {
   flag:boolean= false;
   ngOnInit() {
     this.termbankService.getIndicators().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.result = data._body;
       this.intentList = JSON.parse(this.result).intentList;
       for (var i = 0; i < this.intentList.length;i++) {
-        console.log(this.intentList[i].term + "  bhisa");
+        // console.log(this.intentList[i].term + "  bhisa");
         this.options.push(this.intentList[i].term);
         this.intent.push(this.intentList[i].intent);
         this.weight.push(this.intentList[i].weight);
-        console.log(this.options.length);
+        // console.log(this.options.length);
       }
       this.filteredOptions = this.indicatorControl.valueChanges.pipe(
         startWith(""),
@@ -182,7 +182,7 @@ populateNeo4j(){
       console.log("The term is incorrect");
       this.check = true;
     } else {
-    
+
       this.check = false;
       this.flag=true;
       this.termbankService.getWordApi(this.term).subscribe(data1 => {

@@ -1,16 +1,11 @@
 <div class="herosection" *ngIf = "login !== 'success'">
   <app-navbar [role]="greeting"></app-navbar>
-  <!-- <h1 class="title-text">Welcome</h1> -->
-  <!-- <button class="fasdfsa" color="primary" (click)="show()">show</button> -->
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header  (focus) = "checking()">
         <mat-panel-title>
-          <b> Login </b>
+          <b>Enter your login details</b>
         </mat-panel-title>
-        <mat-panel-description>
-          Enter your login details
-        </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-error *ngIf = "login === 'Invalid EmailId'"> Invalid EmailId </mat-error>
       <mat-error *ngIf = "login === 'Incorrect Password'"> Incorrect Password </mat-error>
@@ -52,14 +47,3 @@
 
   </mat-accordion>
 </div>
-<!-- <div *ngIf = "login === 'success'">
-  <router-outlet></router-outlet>
-</div> -->
-  <!--
-  <div *ngIf = "role === 'Admin'">
-  <app-admin></app-admin>
-</div> -->
-<!-- <div *ngIf = "role === 'Domain Expert'">
-<app-domain-expert [response] = "response"></app-domain-expert>
-</div> -->
-<!-- <router-outlet></router-outlet> -->

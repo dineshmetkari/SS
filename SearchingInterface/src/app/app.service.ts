@@ -15,7 +15,7 @@ export class AppService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(
-      "http://172.23.238.148:8090/login",
+      "http://minerva.stackroute.in/apigateway/login",
       credentials,
       options
     );

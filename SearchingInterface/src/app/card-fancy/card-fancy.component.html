@@ -16,19 +16,16 @@
     <mat-divider></mat-divider>
     <mat-card-footer class ="icons">
       <mat-chip-list class ="l">
-        <mat-chip>
+        <mat-chip *ngIf="imageCount != 0" style="background: #00ffff">
           <i class="material-icons">collections</i><font>{{imageCount}}</font>
         </mat-chip>
-        <mat-chip>
+        <mat-chip *ngIf="videoCount != 0" style="background: #fd8970">
           <i class="material-icons">videocam</i> <font>{{videoCount}}</font>
         </mat-chip>
-        <mat-chip><i class="material-icons">code</i><font>{{codeCount}}</font></mat-chip>
+        <mat-chip *ngIf="codeCount != 0" style="background: lightblue">
+          <i class="material-icons">code</i><font>{{codeCount}}</font>
+        </mat-chip>
       </mat-chip-list>
     </mat-card-footer>
   </mat-card>
 </a>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license -->
